@@ -1,0 +1,19 @@
+{
+  "primary": "Unweighted average of both schedules, orientations, two objects and two directional surface laws. Fixed v34 model index 0 for all cells. All other fits sensitivity only.",
+  "objects": ["sinusoid", "quartic"],
+  "primary_surfaces": ["atan", "algebraic"],
+  "negative_control": "isotropic on each object, sign + placeholder only; excluded from primary mean",
+  "family_order": ["sinusoid_atan", "sinusoid_algebraic", "quartic_atan", "quartic_algebraic", "sinusoid_isotropic", "quartic_isotropic"],
+  "base_seed": 1351000000, "family_step":1000000, "block_step":10000,
+  "blocks":8, "alphas_source":"v34 policy_design34.json", "signs":[1,-1],
+  "schedules":["same","alternating"], "starts":"even -1, odd +1",
+  "timing_blocks":[0,1], "timed_surfaces":["atan","algebraic"],
+  "timing":"One warm-up per schedule and method then three randomized interleaved repeats each; 8 x 128 deployment worlds per call, one sensor realization. Full CPU+GPU wall time bracketed by CUDA synchronize.",
+  "Brier":"8 x 128 worlds/block/sign, 32 paired sensor realizations per world, identical chosen action, predictions paired by world/draw",
+  "latency_practical_threshold_ratio":1.02,
+  "selector":"v34 ActionConditionedDetector + posterior predictive K256 with exact fixed 4 and 13 probes per 128 worlds",
+  "decoder":"v34 Engine(pair,*alpha), using true proxy correlation hyperparameters in both arms, no target contact law, identity or sign supplied",
+  "primary_classifier":"diag_models.json raw_probability['rounded_fine'][schedule]['4']",
+  "primary_beta":0.8289760825845313,
+  "physical_time":"excluded; both methods use the same four paid calibration probes and deployment action"
+}

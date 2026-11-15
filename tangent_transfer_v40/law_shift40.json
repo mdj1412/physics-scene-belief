@@ -1,0 +1,50 @@
+{
+  "shelf": {
+    "fourth_speed": {
+      "n": 192,
+      "minimum": 0.7474206671680218,
+      "maximum": 1.3882996392934788,
+      "mean": 1.1002646721064853,
+      "fraction_abs_below_crossover": 0.0,
+      "fraction_negative": 0.0
+    },
+    "query_speed": {
+      "n": 24576,
+      "minimum": 0.07750273049895484,
+      "maximum": 0.7851923712418678,
+      "mean": 0.45004290695911386,
+      "fraction_abs_below_crossover": 0.754150390625,
+      "fraction_negative": 0.0
+    },
+    "fourth_saturating": 0.04861111111111111,
+    "fourth_crossover": 0.046875,
+    "fourth_disagree": 0.003472222222222222,
+    "query_saturating": 0.4368489583333333,
+    "query_crossover": 0.4465806749131944,
+    "query_disagree": 0.053460015190972224
+  },
+  "ridge": {
+    "fourth_speed": {
+      "n": 192,
+      "minimum": 0.6556758089363148,
+      "maximum": 1.3475698348092198,
+      "mean": 1.0262499599642172,
+      "fraction_abs_below_crossover": 0.125,
+      "fraction_negative": 0.0
+    },
+    "query_speed": {
+      "n": 24576,
+      "minimum": 0.0006320946940186568,
+      "maximum": 0.7302894054646165,
+      "mean": 0.375041658220084,
+      "fraction_abs_below_crossover": 0.8965657552083334,
+      "fraction_negative": 0.0
+    },
+    "fourth_saturating": 0.07118055555555555,
+    "fourth_crossover": 0.0685763888888889,
+    "fourth_disagree": 0.004340277777777778,
+    "query_saturating": 0.5955742730034722,
+    "query_crossover": 0.5815904405381944,
+    "query_disagree": 0.039984809027777776
+  }
+}

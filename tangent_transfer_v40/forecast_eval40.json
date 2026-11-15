@@ -1,0 +1,85 @@
+{
+  "metrics": {
+    "delta": {
+      "mae": 0.0004807743596651032,
+      "mae_full_minus_this_ci": [
+        0.0,
+        0.0
+      ],
+      "rho": 0.9160839160839163,
+      "point_correct": 11
+    },
+    "pooled_prior": {
+      "mae": 0.0010511298718879837,
+      "mae_full_minus_this_ci": [
+        -0.0007608200855935568,
+        -0.00038435328751236384
+      ],
+      "rho": null,
+      "point_correct": 5
+    },
+    "tangent_only": {
+      "mae": 0.0009599457377225926,
+      "mae_full_minus_this_ci": [
+        -0.0007119607843785882,
+        -0.0003063001388358799
+      ],
+      "rho": 0.5310850045437944,
+      "point_correct": 5
+    },
+    "law_replay_no_contour": {
+      "mae": 0.0007041301444423235,
+      "mae_full_minus_this_ci": [
+        -0.0003398107061484086,
+        -0.00013631041530697295
+      ],
+      "rho": 0.7557086549031783,
+      "point_correct": 10
+    }
+  },
+  "verdicts": {
+    "shelf_base_saturating": "unresolved",
+    "shelf_base_crossover": "confirmed",
+    "shelf_hollow_saturating": "confirmed",
+    "shelf_hollow_crossover": "confirmed",
+    "shelf_bulge_saturating": "confirmed",
+    "shelf_bulge_crossover": "confirmed",
+    "ridge_base_saturating": "confirmed",
+    "ridge_base_crossover": "unresolved",
+    "ridge_hollow_saturating": "unresolved",
+    "ridge_hollow_crossover": "confirmed",
+    "ridge_bulge_saturating": "confirmed",
+    "ridge_bulge_crossover": "unresolved"
+  },
+  "selected_loss": 0.11338730513622912,
+  "chosen_vs_fixed": {
+    "mean": -0.00035694941127657986,
+    "ci": [
+      -0.0004903740613119467,
+      -0.00022352476124121298
+    ]
+  },
+  "chosen_vs_optimizer": {
+    "mean": -0.0005653694632285154,
+    "ci": [
+      -0.0007167312151374289,
+      -0.00041400771131960184
+    ]
+  },
+  "mean_forecast": 0.0003521640611517044,
+  "actual_mean": 0.00020842005195192785,
+  "equal_cell_win_rate": [
+    0.5,
+    0.0,
+    0.9166666666666666,
+    0.08333333333333333,
+    0.08333333333333333,
+    0.0,
+    1.0,
+    0.5,
+    0.8333333333333334,
+    0.0,
+    1.0,
+    0.75
+  ]
+}

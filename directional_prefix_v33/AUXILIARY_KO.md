@@ -1,0 +1,5 @@
+같은 규칙을 비교할 다른 환경 없이 사용할 수 있는지도 확인했다. A에서만 정한 절대 threshold 0.0873699를 B로 옮겼을 때 대상 71개, 나머지 57개였다. 대상 gain은 -0.00051 [-0.00170, +0.00078], 반대 집단 대비 차이는 -0.00149 [-0.00313, +0.00029]였다. 이 보조 분석의 구간은 pointwise이며 primary 판정을 대체하지 않는다. [전체 threshold 검증](results_prefix/prefix_gain33.json) 두 측정에서 이 population SD는 |v₁−v₂|/2다. 따라서 threshold에 해당하는 두 tangential velocity의 간격은 0.17474이다. 단위는 simulator의 velocity 좌표계다.
+
+선택 집단에서 관측한 2×2 평균 gain은 35/64개 환경에서 양수였고, median +0.00075 (IQR -0.00388~+0.00372)였다. 반대 절반에서 관측한 2×2 평균 gain은 32/64개 환경에서 양수였고, median -0.00014 (IQR -0.00310~+0.00248)였다. 이는 두 futures·두 batches의 관측 통계이며, 각 환경의 true expected gain이 양수일 확률의 추정치가 아니다.
+
+**발견된 규칙으로 실제 예산을 배정하면?** 실험자가 plus 방향임을 알고 있을 때, 선택된 한 단계에서만 해당 규칙을 적용하고 나머지는 uncertainty-only로 배정했다. 같은 32-probe budget에서 이 정책의 Brier는 0.125418, fixed 4 대비 -0.00028 [-0.00101, +0.00045], uncertainty-only 대비 +0.00023 [-0.00021, +0.00067]였다. 여덟 환경 중 같은 횟수의 접촉을 받을 곳이 바뀐 비율은 uncertainty-only 대비 29.3%였다. 이 진단 정책은 표면 방향이라는 추가 정보를 받으므로 네 primary policies의 공정한 대체 baseline은 아니다. 별도 GPU p90은 측정하지 않았다. [규칙을 임의로 바꾸지 않기 위한 사전 설계](SHADOW_PLAN_KO.md) · [실제 trajectory의 재계산](shadow33.json)

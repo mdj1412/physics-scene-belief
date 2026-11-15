@@ -1,0 +1,50 @@
+{
+  "shelf_hollow_saturating": {
+    "frozen_delta": -0.0006666782379049223,
+    "disjoint_delta": -0.0006975497199862876,
+    "frozen_contour_difference": -0.0010602462050165096,
+    "disjoint_contour_difference": -0.0010911176870978749
+  },
+  "shelf_hollow_crossover": {
+    "frozen_delta": 0.00020692563001521624,
+    "disjoint_delta": 0.00018120396883867054,
+    "frozen_contour_difference": -0.0009932989850891802,
+    "disjoint_contour_difference": -0.0010190206462657259
+  },
+  "shelf_bulge_saturating": {
+    "frozen_delta": 0.0012137850318665762,
+    "disjoint_delta": 0.0012130361011309734,
+    "frozen_contour_difference": 0.000820217064754989,
+    "disjoint_contour_difference": 0.0008194681340193863
+  },
+  "shelf_bulge_crossover": {
+    "frozen_delta": 0.0019386168229683718,
+    "disjoint_delta": 0.0019353972278100128,
+    "frozen_contour_difference": 0.0007383922078639754,
+    "disjoint_contour_difference": 0.0007351726127056163
+  },
+  "ridge_hollow_saturating": {
+    "frozen_delta": 0.00030209779486259266,
+    "disjoint_delta": 0.00034051521751834405,
+    "frozen_contour_difference": 0.0005733009912746588,
+    "disjoint_contour_difference": 0.0006117184139304102
+  },
+  "ridge_hollow_crossover": {
+    "frozen_delta": 0.0009629700266688126,
+    "disjoint_delta": 0.0010130164765205167,
+    "frozen_contour_difference": 0.0004953262943027457,
+    "disjoint_contour_difference": 0.0005453727441544497
+  },
+  "ridge_bulge_saturating": {
+    "frozen_delta": -0.0011598712493514722,
+    "disjoint_delta": -0.0011688162041445182,
+    "frozen_contour_difference": -0.0008886680529394061,
+    "disjoint_contour_difference": -0.0008976130077324521
+  },
+  "ridge_bulge_crossover": {
+    "frozen_delta": -0.0003621102034747074,
+    "disjoint_delta": -0.00038107294988009,
+    "frozen_contour_difference": -0.0008297539358407744,
+    "disjoint_contour_difference": -0.0008487166822461569
+  }
+}

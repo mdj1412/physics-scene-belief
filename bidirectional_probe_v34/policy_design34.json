@@ -1,0 +1,85 @@
+{
+  "laws": [
+    "rounded_fine_plus",
+    "rounded_fine_minus",
+    "rounded_coarse_plus",
+    "rounded_coarse_minus",
+    "ridged_fine_plus",
+    "ridged_fine_minus",
+    "ridged_coarse_plus",
+    "ridged_coarse_minus"
+  ],
+  "alphas": [
+    [
+      -0.65,
+      -0.85
+    ],
+    [
+      -0.65,
+      0.85
+    ],
+    [
+      0.35,
+      -0.65
+    ],
+    [
+      0.35,
+      0.65
+    ],
+    [
+      -0.2,
+      -0.35
+    ],
+    [
+      -0.2,
+      0.35
+    ],
+    [
+      0.72,
+      -0.92
+    ],
+    [
+      0.72,
+      0.92
+    ]
+  ],
+  "blocks_per_law": 8,
+  "timed_blocks_per_cell": 2,
+  "objects": {
+    "rounded": {
+      "curvature_scale": 0.9,
+      "cubic_query_slope": -0.06
+    },
+    "ridged": {
+      "curvature_scale": 1.1,
+      "cubic_query_slope": 0.06
+    }
+  },
+  "surfaces": {
+    "fine": {
+      "reference_multiplier": 0.98,
+      "asymmetry": 0.17,
+      "speed_scale": 0.34
+    },
+    "coarse": {
+      "reference_multiplier": 1.04,
+      "asymmetry": 0.22,
+      "speed_scale": 0.5
+    }
+  },
+  "methods": [
+    "broad",
+    "fixed4",
+    "uncertainty"
+  ],
+  "schedules": [
+    "same",
+    "alternating"
+  ],
+  "incoming_magnitude": 1.1,
+  "initial_sign": "-1 even blocks, +1 odd blocks",
+  "policy_seeds": "901000000 + 1000000 * family + 10000 * block",
+  "external_head_family_split": "leave-object-surface-family-out",
+  "invariants": "orientation and schedule share objects, banks and noise; fixed deployment probe remains incoming -1.10. Source Coulomb contact uses exact signed incoming and score sensors reflected for positive motion.",
+  "primary": "Seven simultaneous contrasts: three alternating minus same and four broad minus fixed4/uncertainty within schedule. Equal weight over four families and signs; paired independent blocks resampled within family and starting sign; absolute Brier margin .003. Report single preselected frozen v32 broad training pair as primary. Timing full synchronized p90 first two blocks each law, 3 repeats + separate warmup randomized across schedules and policies."
+}

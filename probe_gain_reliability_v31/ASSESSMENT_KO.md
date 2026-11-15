@@ -1,0 +1,15 @@
+**환경 순위를 맞히는 문제의 실질적 크기.** 단일 stage에서 여덟 환경에 대한 실제 기대 gain을 μ, 네 곳에 probe를 주는 indicator를 w라 두면 균등 무작위 기준을 넘는 기대 이득은 여덟 환경에 대한 평균 (w−0.5)(μ−평균 μ)다. Cauchy–Schwarz로 이는 0.5 × √[(7/8) × 환경 간 sample variance] 이하다. Block·law에 같은 가중치를 주고 Jensen 부등식을 적용해도 성립한다. 이때의 variance는 finite grid noise를 뺀 기대 gain의 환경 간 분산이다.
+
+그 분산의 pointwise 95% bootstrap interval 상단을 대입한 **탐색적 상한**은 새 물체 0.00063·0.00060 / 기존 물체 0.00044·0.00054 Brier였다(2→4·4→8). 제한된 block에서 추정한 interval에 의존하므로 엄밀한 보장이나 모든 stopping policy의 상한으로 쓸 수 없다. 완벽한 기대 순위를 알면 이득이 반드시 이 상한에 도달한다는 뜻도 아니다. 실현된 단일 cell에서 상위 네 곳을 고른 낙관적 이득이 왜 그대로 배포 목표가 되기 어려운지를 크기까지 설명하는 진단이다. [분산과 상한](results/finite_gain_ceiling31.json) · [계산 코드](finite_gain_ceiling31.py)
+
+**무엇을 더 반복할지.** 두 panel 모두 batch main effect가 future main effect보다 컸으므로 같은 cell 수에서 batches를 먼저 늘리는 편이 평균 gain의 sampling variance를 더 줄인다. 다만 interaction도 커서 동일 future만 계속 쓰면 독립 미래 접촉에 대한 검증은 부족해진다. 기존 물체 panel에서 한 prefix의 gain 추정 RMS를 0.002로 낮추려면 이 분산 모형의 plug-in 외삽으로는 각 축을 같은 수로 늘릴 때 10×10 및 10×10 수준이 필요하다. 이는 4×4 밖의 미검증 외삽이며, 물리 로봇이 사용해야 할 probe 수나 순위가 보장되는 표본 수로 해석해서는 안 된다. [RMS 외삽 코드와 결과](results/precision31.json)
+
+**논문에서 검증할 가설.** 추가 접촉이 posterior를 바꿔도, 한 번의 배포 집단에서 관측한 risk reduction이 그대로 다른 집단의 우선순위를 알려 주는지는 별개의 문제다. 특정 calibration 경로에서만 결정을 바꾸는지, 선택이 바뀐 배포 물체에서만 효용이 생기는지, 두 축을 모두 바꿔도 남는 순서가 있는지를 분리해서 보일 수 있다. 이 실험으로 물리 모형 전체의 Bayes-optimal value of information이나 모든 scorer의 성능 한계를 주장하기에는 근거가 부족하다. 현재 frozen scorer의 training과 model class도 제한되어 있다. [V30 실험](../learned_probe_value_v30/REPORT_KO.md) · [EVSI의 정의](https://journals.sagepub.com/doi/pdf/10.1177/0272989X15575286)
+
+**다음 논문 실험의 우선순위.**
+
+1. Source training labels부터 바꾼다. 같은 training GPU 시간에서 (a) prefix를 많이 뽑아 각각 1×1 label을 만드는 방법과 (b) prefix 수를 줄이고 각 label을 여러 futures·batches로 평균하는 방법을 비교한다. 같은 features, ridge family, grouping, tuning budget을 사용하고, 독립 source validation에서만 반복 수를 고른다. 그런 다음 새 contact law와 새 prefixes에서 같은 총 calibration budget의 fixed 4·uncertainty-only를 포함한 **전체 stopping policy**를 비교한다. 평가에는 training 비용, deployment GPU p90, held-out Brier를 모두 포함한다. 기존 0.003의 기대 이득이 목표라면 그 margin과 선택 규칙을 결과를 보기 전에 선언한다.
+2. 이번에 관측한 interaction의 원인을 분리한다. 같은 worlds에서 common decoder·quota와 selector의 bank를 하나씩 교체하고, sensor noise만 재표집하는 cell-level replication을 추가한다. 고정한 numerical bank가 posterior 변경에 따라 particle 구성을 불연속적으로 바꿀 수 있다. 더 큰 bank와 부드러운 reweighting을 사용한 acquisition으로도 같은 교차 패턴이 생기는지 확인해야 이를 물리적 ambiguity에 귀속할 수 있다. [현재 predictive bank 구현](../calibration_probe_v28/estimator28.py)
+3. 실물 또는 독립 simulator에서 물성·표면을 environment 단위로 고정한 뒤, 이미 관측한 물체에 대한 calibration 반복과 별도 물체에서의 deployment 반복을 분리한다. 같은 표면을 오래 쓰면 drift가 생길 수 있으므로 순서와 시간을 기록한다. 기존 planar pushing data에는 반복 contact가 있지만 v31의 query view 및 probe에 대응하는 두 potential outcomes와 stick label의 존재 여부를 먼저 확인해야 한다. [Yu et al., §§V–VII](https://arxiv.org/pdf/1604.04038)
+
+**논문 진행 결정.** 동일 비용에서 새 policy가 fixed allocation보다 risk를 줄였다는 주장은 별도 held-out 실험에서 확인되어야 한다. 지금의 제출 가능한 주장은 세 synthetic laws, 정해진 여덟 coupling, 128-world batch, quota 13, source common decoder에 한정된 gain-label 재현성 진단이다. 다른 simulator에서도 독립 순위와 배분 손익이 같이 재현되면 evaluation 중심 논문의 근거가 강해진다. 반복 label로 학습한 정책이 추가로 실용적 Brier margin을 넘기면 방법 논문까지 확장할 수 있다.

@@ -1,0 +1,6 @@
+# v35: query contact law를 바꾼 secondary falsification
+Primary 결과를 열기 전에 정한 분석이다. Primary는 고정된 새 물체 × 표면 조합에서 calibration과 deployment가 같은 contact law를 따른다. Secondary에서는 main archive의 paid prefix, original p, corrected p, observation, action, factual state와 noise를 그대로 두고 deployment query의 directional friction amplitude만 수정한다. Full amplitude(1), 절반(0.5), isotropic(0), 역전(-1)을 사전 지정한다. 가능한 경우 물리적으로 측정된 약한 amplitude를 query에 대입하는 조건을 탐색적으로 추가한다. 이때 calibration에서 읽은 cue와 deployment law의 결합이 깨질 수 있다. 이 조건은 자연 발생 빈도나 실제 물체 검증으로 해석하지 않는다.
+ 
+먼저 amplitude=1의 새 binary outcome이 해당 archive와 모두 일치하는지를 검사한다. 불일치하면 분석을 중단한다. 관측 예측이 달라지지 않으므로 각 조건별 corrected-minus-original Brier를 직접 짝지으며, correction shift d와 base residual r=y-p로 Δ=E[d²]−2E[dr]를 확인한다. Confidence interval은 paired mirrored orientation과 schedule을 같은 block 안에 두고 object × surface 별로 resample한다. 4개 cell의 조건부 추정이므로 무한한 새 물체에 대한 population interval로 해석하지 않는다. Primary 결과, 통제 해석, 시간 측정과 분리한다.
+
+공개 자료를 사용한 추가 비교는 S1의 20개 |μ_against−μ_along|/(μ_against+μ_along) 값을 하나도 선별하지 않고 같은 가중치로 사용한다. 방향은 각 paired world의 calibration과 일치시키고 query의 amplitude만 교체한다. 이는 방향 예측에 유리한 가정이다. 원자료에는 역방향 표면도 있지만 진행축이 여기서의 양·음 방향과 같다는 증거는 없다. 이 결과를 실제 표면이나 전체 simulator의 새 성능값으로 부르지 않는다.

@@ -1,0 +1,31 @@
+{
+  "catalog_splits": 192,
+  "unique_prototypes": 393216,
+  "duplicate_prototypes": 0,
+  "independent_collision_recalculations": 28311552,
+  "complete_blocks": 288,
+  "raw_deployment_draws": 24576,
+  "distinct_deployment_prototypes": 23078,
+  "distinct_paid_prototypes": 767,
+  "distinct_calibration_pool_prototypes": 124205,
+  "archived_stick_labels": 1769472,
+  "max_absolute_errors": {
+    "support_pairing": 0.0,
+    "visual_profile": 5.204170427930421e-18,
+    "slope_of_profile": 5.551115123125783e-17,
+    "shape_offset": 4.336808689942018e-19,
+    "velocity_basis_transform": 1.5543122344752192e-15,
+    "contact_states": 0.0,
+    "alpha_order": 0.0,
+    "paid_pool_ids": 0.0,
+    "far_directions": 0.0,
+    "paid_factual": 5.551115123125783e-16,
+    "first_three_velocity": 6.661338147750939e-16,
+    "fourth_velocity": 8.881784197001252e-16,
+    "fourth_state": 0.0,
+    "archived_stick_label": 0.0
+  },
+  "tolerance": 3e-12,
+  "host": "node56",
+  "job": "2744471"
+}

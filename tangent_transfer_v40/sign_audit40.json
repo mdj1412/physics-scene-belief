@@ -1,0 +1,195 @@
+{
+  "tolerance": 1e-12,
+  "by_cell": {
+    "shelf_base_saturating": {
+      "positive_contribution": 0.00828173483006384,
+      "negative_contribution": -0.008240378087286882,
+      "net_delta": 4.1356742776959014e-05,
+      "n": 4718592,
+      "ties_exact": 720994,
+      "ties_tolerance": 2203501,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 41360,
+      "reported_base_outside_unit_interval": 397623
+    },
+    "shelf_hollow_saturating": {
+      "positive_contribution": 0.008080351487520789,
+      "negative_contribution": -0.009218637838438348,
+      "net_delta": -0.0011382863509175583,
+      "n": 4718592,
+      "ties_exact": 692595,
+      "ties_tolerance": 2206282,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 44260,
+      "reported_base_outside_unit_interval": 437943
+    },
+    "shelf_bulge_saturating": {
+      "positive_contribution": 0.008334568076233161,
+      "negative_contribution": -0.0074056935504078596,
+      "net_delta": 0.0009288745258252992,
+      "n": 4718592,
+      "ties_exact": 728996,
+      "ties_tolerance": 2187133,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 35810,
+      "reported_base_outside_unit_interval": 340290
+    },
+    "shelf_base_crossover": {
+      "positive_contribution": 0.010183851738918132,
+      "negative_contribution": -0.008288308279470543,
+      "net_delta": 0.0018955434594475924,
+      "n": 4718592,
+      "ties_exact": 714462,
+      "ties_tolerance": 2205832,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 50365,
+      "reported_base_outside_unit_interval": 398103
+    },
+    "shelf_hollow_crossover": {
+      "positive_contribution": 0.009987804939836033,
+      "negative_contribution": -0.009118234599715776,
+      "net_delta": 0.0008695703401202581,
+      "n": 4718592,
+      "ties_exact": 685797,
+      "ties_tolerance": 2208697,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 53585,
+      "reported_base_outside_unit_interval": 438351
+    },
+    "shelf_bulge_crossover": {
+      "positive_contribution": 0.0101578792441137,
+      "negative_contribution": -0.007555043872801596,
+      "net_delta": 0.0026028353713121043,
+      "n": 4718592,
+      "ties_exact": 723740,
+      "ties_tolerance": 2189604,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 44375,
+      "reported_base_outside_unit_interval": 340890
+    },
+    "ridge_base_saturating": {
+      "positive_contribution": 0.006272194290054208,
+      "negative_contribution": -0.007120563565427267,
+      "net_delta": -0.0008483692753730598,
+      "n": 4718592,
+      "ties_exact": 781507,
+      "ties_tolerance": 2189696,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 42897,
+      "reported_base_outside_unit_interval": 456930
+    },
+    "ridge_hollow_saturating": {
+      "positive_contribution": 0.00619036291950487,
+      "negative_contribution": -0.006426064187252661,
+      "net_delta": -0.0002357012677477882,
+      "n": 4718592,
+      "ties_exact": 775075,
+      "ties_tolerance": 2167504,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 44126,
+      "reported_base_outside_unit_interval": 452007
+    },
+    "ridge_bulge_saturating": {
+      "positive_contribution": 0.006278243047473435,
+      "negative_contribution": -0.007954030478143184,
+      "net_delta": -0.0016757874306697455,
+      "n": 4718592,
+      "ties_exact": 809648,
+      "ties_tolerance": 2196518,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 42621,
+      "reported_base_outside_unit_interval": 463011
+    },
+    "ridge_base_crossover": {
+      "positive_contribution": 0.007528197988999115,
+      "negative_contribution": -0.00743510074753918,
+      "net_delta": 9.309724145993326e-05,
+      "n": 4718592,
+      "ties_exact": 772750,
+      "ties_tolerance": 2192699,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 31543,
+      "reported_base_outside_unit_interval": 458388
+    },
+    "ridge_hollow_crossover": {
+      "positive_contribution": 0.007369531191456388,
+      "negative_contribution": -0.006780674045908674,
+      "net_delta": 0.0005888571455477135,
+      "n": 4718592,
+      "ties_exact": 768918,
+      "ties_tolerance": 2170799,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 32353,
+      "reported_base_outside_unit_interval": 453606
+    },
+    "ridge_bulge_crossover": {
+      "positive_contribution": 0.007569072227632082,
+      "negative_contribution": -0.00819002210599066,
+      "net_delta": -0.0006209498783585783,
+      "n": 4718592,
+      "ties_exact": 799921,
+      "ties_tolerance": 2199362,
+      "expected_sign_mismatch_above_tolerance": 0,
+      "raw_expected_sign_mismatch_nonzero": 31435,
+      "reported_base_outside_unit_interval": 464019
+    }
+  },
+  "compared_to_base": {
+    "shelf_hollow_saturating": {
+      "total": 4718592,
+      "opposite_sign_raw": 11866,
+      "opposite_sign_both_above_tolerance": 0,
+      "exactly_one_within_tolerance": 2869,
+      "both_within_tolerance": 2203457
+    },
+    "shelf_bulge_saturating": {
+      "total": 4718592,
+      "opposite_sign_raw": 12925,
+      "opposite_sign_both_above_tolerance": 0,
+      "exactly_one_within_tolerance": 18128,
+      "both_within_tolerance": 2186253
+    },
+    "shelf_hollow_crossover": {
+      "total": 4718592,
+      "opposite_sign_raw": 16158,
+      "opposite_sign_both_above_tolerance": 0,
+      "exactly_one_within_tolerance": 2949,
+      "both_within_tolerance": 2205790
+    },
+    "shelf_bulge_crossover": {
+      "total": 4718592,
+      "opposite_sign_raw": 17276,
+      "opposite_sign_both_above_tolerance": 0,
+      "exactly_one_within_tolerance": 17884,
+      "both_within_tolerance": 2188776
+    },
+    "ridge_hollow_saturating": {
+      "total": 4718592,
+      "opposite_sign_raw": 13191,
+      "opposite_sign_both_above_tolerance": 0,
+      "exactly_one_within_tolerance": 44868,
+      "both_within_tolerance": 2156166
+    },
+    "ridge_bulge_saturating": {
+      "total": 4718592,
+      "opposite_sign_raw": 12944,
+      "opposite_sign_both_above_tolerance": 0,
+      "exactly_one_within_tolerance": 10314,
+      "both_within_tolerance": 2187950
+    },
+    "ridge_hollow_crossover": {
+      "total": 4718592,
+      "opposite_sign_raw": 10495,
+      "opposite_sign_both_above_tolerance": 0,
+      "exactly_one_within_tolerance": 44738,
+      "both_within_tolerance": 2159380
+    },
+    "ridge_bulge_crossover": {
+      "total": 4718592,
+      "opposite_sign_raw": 10619,
+      "opposite_sign_both_above_tolerance": 0,
+      "exactly_one_within_tolerance": 10159,
+      "both_within_tolerance": 2190951
+    }
+  }
+}

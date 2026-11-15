@@ -1,0 +1,21 @@
+{
+  "cells":["sinusoid_atan","sinusoid_algebraic","quartic_atan","quartic_algebraic"],
+  "regimes":["strong","weak","null","global_null"],
+  "local_near_amplitudes":[1,0.3,0],
+  "paired_orientations":["plus","minus"],
+  "schedule":"alternating; signs [-1,+1,-1,+1] on even blocks and its reflection on odd blocks; near fourth always +0.50 at .023 m",
+  "blocks_per_cell":8,
+  "target_base_seed":1461000000,
+  "cell_stride":1000000,
+  "block_stride":10000,
+  "input_environments":8,
+  "worlds_per_environment":128,
+  "sensor_draws":32,
+  "methods":["far_original","far_v35","near_original","near_always","near_gate3","near_gate4"],
+  "timing":"Eight independent family x block clusters. One representative signed regime in each of first two blocks per cell, allocated cyclically. Four regimes represented twice each, near direction has fixed positive speed. One full warmup per method then three interleaved repeats. P90 synchronized CPU and GPU including action-specific likelihood, acquisition, chosen sensor decoder, reader and gate.",
+  "timed_cell_block0":["strong_plus","weak_minus","null_plus","global_null_plus"],
+  "timed_cell_block1":["global_null_plus","null_minus","weak_plus","strong_minus"],
+  "noise_sd":[0.027,0.027],
+  "curve":"amplitude_multiplier(h)=1+(strength-1)*smoothstep(clip(abs(h)/0.023,0,1)); for global_null multiplier=0 at every height",
+  "beta":0.8289760825845313
+}

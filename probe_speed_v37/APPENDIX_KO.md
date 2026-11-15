@@ -1,0 +1,5 @@
+- **Source와 target의 차이.** 이전 source simulator에서 세 속도의 density를 확인하고 +0.50 예측값을 v36과 원소별로 검산했다. [Source 검증표](SOURCE_KO.md) · [Source 결과](source37.json)
+- **같은 물체에서의 gate 선택.** Local regime의 결정만 서로 바꾸어 배정한 대조와 항상 선택·건너뛰기의 비용, 방향 판독이 맞았을 때와 틀렸을 때의 결과를 비교했다. [선택 효과 및 Brier 분해](ROUTING_KO.md)
+- **후보 표면과 보정량의 수.** Weak와 local null만 후보라고 알려준 likelihood 판별기와, 기존 utility table에 세 가지 보정량을 허용한 offline 정책을 분석했다. [두 후보 판별](BINARY_KO.md) · [세 행동 대조](TERNARY_KO.md)
+- **실제 slip 상태와 예측 손실.** 같은 물체가 두 속도에서 보인 slip 전이를 기준으로 Brier 변화량을 분해했다. [Slip 집단별 결과](SLIP_KO.md)
+- **물리 요인.** Incoming kinematics에 들어가는 속도와 friction modulation에 들어가는 속도를 simulator 안에서 각각 바꿔 clean velocity의 구별 가능성을 평가했다. [물리 요인 분해](PHYSICS_FACTOR_KO.md)

@@ -1,0 +1,5 @@
+### 속도 변화의 물리 경로를 확인하는 보조 분석
+
+Held-out loss를 보지 않고 정한 simulator 진단이다. 각 네 번째 물체에 대해 높은 속도(.75 또는 1.10)와 .50의 두 값을 (a) Newton impulse 계산의 kinematics, (b) effective friction coefficient 안에서 velocity-dependent directional modulation을 평가하는 입력에 독립적으로 넣는다. 같은 물체·orientation·noise standard deviation(.027)의 weak 대 local null 및 strong 대 local null을 사용한다.
+
+속도 u(kinematics), v(modulation)의 cell mean을 A(u,v)로 둔다. 각 물체의 두 noiseless outgoing velocity mean 사이 거리 D에 대해 equal-prior privileged Bayes accuracy Φ(D/(2σ))를 계산한다. 두 역할이 같은 A(.50,.50)와 A(high,high)는 실제 target law를 사용하고 archive의 matched clean velocity와 stick 판정을 재현해야 한다. 교차한 두 조건은 수학적 반사실이다. 전체 증가분을 kinematics를 먼저 바꾼 경우와 modulation을 먼저 바꾼 경우의 평균으로 두 항에 배정한다. 두 항의 합은 전체 변화이며 각 경로의 순서에 의존하는 정도는 interaction으로 함께 기록한다. Kinematics에는 tangential demand와 normal impulse가 함께 들어가므로 slip 사건만의 인과 효과로 부르지 않는다. Surface 및 최초 방향별 paired block bootstrap 12,000회로 두 regime pair, 두 속도, 두 성분에 대한 simultaneous interval을 계산한다. 이 진단은 sampling strategy나 gate를 재학습하지 않으며 실제 deployment Brier를 추정하지 않는다.

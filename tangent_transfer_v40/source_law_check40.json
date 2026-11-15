@@ -1,0 +1,46 @@
+{
+  "cells": [
+    {
+      "shape": "shelf",
+      "source_law": "weakening",
+      "target_law": "strengthening",
+      "retention": 1.0,
+      "transferred": 3.349580384379064e-05,
+      "target": -0.0001811859505762512,
+      "copy": 3.349580384378927e-05
+    },
+    {
+      "shape": "shelf",
+      "source_law": "strengthening",
+      "target_law": "weakening",
+      "retention": 0.6865393227344027,
+      "transferred": 7.285483337011034e-05,
+      "target": 3.349580384378927e-05,
+      "copy": -0.0001811859505762512
+    },
+    {
+      "shape": "ridge",
+      "source_law": "weakening",
+      "target_law": "strengthening",
+      "retention": 1.0,
+      "transferred": -0.0004777998811817949,
+      "target": -0.0009202419406805369,
+      "copy": -0.00047779988118179864
+    },
+    {
+      "shape": "ridge",
+      "source_law": "strengthening",
+      "target_law": "weakening",
+      "retention": 0.6865393227344027,
+      "transferred": -0.0006887243894176689,
+      "target": -0.00047779988118179864,
+      "copy": -0.0009202419406805369
+    }
+  ],
+  "mae_signed_transfer_vs_copy": [
+    0.00022685183792024377,
+    0.0003285619069593893
+  ],
+  "historical_source": "probe_transfer_v39",
+  "v39_completion_hash": "8fa27ada5525d5e249d64b971eeba363f46c20c7d16631129694abcfba372ca4"
+}

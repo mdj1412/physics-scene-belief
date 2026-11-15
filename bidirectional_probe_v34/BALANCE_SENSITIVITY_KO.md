@@ -1,0 +1,2 @@
+# 평균 효과가 서로 상쇄되는지 확인하는 보조 분석
+최종 policy 결과가 모두 생성되기 전에 정했다. 단방향 혹은 양방향 중 하나를 미리 고정하는 정책과, 별도의 실험으로 friction orientation을 안다고 가정한 정책을 구분한다. 각 held-out family에서 원래 물체 및 표면이 모두 다른 family의 8개 독립 block으로만 두 schedule의 mean Brier를 추정한다. 같은 정책·첫 운동 방향과 표면 방향의 상대 관계(첫 속도가 높은 마찰을 만나는지/낮은 마찰을 만나는지)가 주어졌을 때 평균 Brier가 작은 schedule을 한 개 고정한다. Test family에서는 outcome이나 선별한 성능을 보지 않고 평가한다. 상대 방향을 모르는 조건에서는 이 분기 자체를 구현할 수 없으므로 privileged 진단이다. Frozen, fixed4, uncertainty 모두 보고하고 어떤 대비도 primary로 교체하지 않는다. 또한 relative direction별 alternating−same 차이를 따로 보고한다.

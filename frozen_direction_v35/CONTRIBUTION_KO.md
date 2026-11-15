@@ -1,0 +1,9 @@
+## 논문 기여 가능성: 무엇을 주장할 수 있나
+
+가장 설득력 있는 결과는 단순한 보정식 자체가 아니다. 이미 지불한 네 번의 접촉에서 읽은 정보를, 나중에 다른 물체가 stick할 확률에 어느 조건에서 옮길 수 있는지 prospective transfer와 실패 대조로 함께 검증했다는 점이다. Shape와 surface response를 바꾸고도 같은 reader와 계수를 썼고, 원래 decoder와 동일한 actions 및 실제 service boundary를 사용했다. Query에서 정보의 의미를 바꾸면 이득이 어떻게 사라지는지도 같은 예측으로 검증할 수 있다.
+
+일반적인 확률 보정과의 구분이 기여의 핵심이다. 한 방향: frozen signed 0.11284, temperature 0.11808, temperature 뒤 같은 signed correction 0.11393. 마지막 두 방법의 차이는 -0.00414 [-0.00547, -0.00281]. 양방향 교대: frozen signed 0.11270, temperature 0.11766, temperature 뒤 같은 signed correction 0.11410. 마지막 두 방법의 차이는 -0.00357 [-0.00486, -0.00228]. 여기서 temperature는 target 결과를 보기 전에 v34에서만 fit했다. 원래 physics에 이긴 결과와 이미 보정된 강한 baseline 위에 남은 결과를 구분해서 보고해야 한다. 합성 모델의 결과는 secondary이고 그 모델의 전체 GPU p90을 별도로 측정하지 않았다.
+
+**현재 증거의 한계.** 낮은 Brier는 held-out event probability가 더 정확했다는 증거다. 그것만으로 reliability 자체의 개선, 실제 friction mechanism의 식별, 더 나은 observation selection을 보인 것은 아니다. Acquisition과 budget은 고정했고 base decoder에는 실제 population coupling을 주었다. 하나의 simulator, 두 contour, 두 directional response와 고정된 query 방향을 사용했다. 마찰의 부호가 query의 접선 운동과 결합하는 방식은 그대로다. 실물에서의 성능 및 로봇 전체 cycle time도 측정하지 않았다.
+
+**제가 논문을 계속 쓴다면:** 지금 결과를 재현·반증이 가능한 핵심 simulation figure로 쓰겠다. 독립적인 robotics 방법 논문의 중심 주장으로 삼기에는 실물 transfer와 강한 물리 baseline이 아직 비어 있다. 다음 실험에서는 (1) 같은 네 번의 force·velocity로 directional friction의 연속크기와 isotropic 가능성을 함께 추정하는 physics decoder를 만든다. (2) probe와 다른 높이·속도에서 새 물체의 stick/slip을 관측하고 object ID와 surface session을 동시에 hold out한다. (3) 원래 네 번의 budget 안에서 query-matched probe 한 번을 쓰는 방법, frozen correction, temperature, 연속 physics model을 비교한다. 실험 전 event 판정과 Brier margin, paired session 수, sensor/reset 포함 latency를 고정한다. 물리 baseline 위에 남는 이득 또는 query-matched probe만이 해소하는 실패가 독립 자료에서도 재현될 때 알고리즘 기여 주장을 강화할 수 있다. 기존 공개 pulling 표에는 이 평가에 필요한 짝지어진 impact outcome이 없다.

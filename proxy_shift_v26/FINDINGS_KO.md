@@ -1,0 +1,5 @@
+**V25의 factual gate와 고정 K256이 모두 기존 prior를 사용하면, 어느 조건에서도 gate의 선행 실패를 검출하지 못했다.** 36개 조건 중 relative failure는 0개였다. 대신 두 방법의 held-out Brier loss가 함께 상승했다. Profile 관계만 바꾼 실험에서는 αc=0.75(중심값을 12.5% 확률로 뒤집음)부터, velocity 관계만 바꾼 실험에서는 αf=0.5(25%)부터 양쪽 모두 원본 대비 +0.003을 넘는 악화가 검출됐다. 두 관계를 동시에 바꾸면 각각 12.5%인 첫 단계부터 양쪽이 악화됐다.
+
+**K256·fallback·공통 decoder에 변화된 모집단 prior를 알려 주자, frozen gate의 상대 실패가 드러났다.** 같은 256개 worlds에서 두 관계를 동시에 75% 확률로 뒤집은 조건이 첫 검출점이었다. Gate 0.14473, K256 0.10441로 차이는 +0.04032였다. Profile만 바꾸면 100% 반전에서 처음 검출됐고 차이는 +0.07064였다. Velocity만 100% 뒤집었을 때도 gate가 평균 +0.02748 나빴지만 simultaneous lower bound가 +0.00174여서 사전 margin +0.003에 못 미쳤다. 두 실험 모두 ‘K256 자체 악화가 +0.003 이내’까지 요구하는 더 엄격한 판정은 36개 조건 모두에서 성립하지 않았다.
+
+**배포 관점에서 gate의 confidence는 shift를 경고하지 못했다.** 두 관계를 완전히 뒤집자 gate가 fallback 없이 직접 선택한 비율은 80.6%에서 83.6%로 늘었고, 이 branch에서 realized winner와 다른 선택은 13.2%에서 49.5%로 늘었다. Source prior에서 이 조건의 GPU p90은 gate 3.954 ms, K256 3.834 ms였다. 같은 decoder를 쓴 always-query의 Brier는 0.17529로 두 adaptive 방법(0.27549, 0.27200)보다 낮았다.

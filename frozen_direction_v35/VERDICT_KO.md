@@ -1,0 +1,3 @@
+**새 synthetic 물체 두 종류와 directional surface law 두 종류를 교차한 결과, fixed 4의 held-out Brier는 원래 physics decoder 0.11860에서 v34의 frozen correction 0.11277로 0.00583 낮아졌다.** 두 schedule을 같은 비중으로 둔 paired Δ의 95% interval은 [-0.00637, -0.00532]다. 양쪽 schedule에서 사전에 정한 실용적 개선도 재현됐다.
+
+비교한 두 모델은 probe도 observation도 같은 것을 사용했다. 달라진 것은 다음 충돌에서 stick할 확률뿐이다. 방향성이 없는 별도의 표면에서는 오히려 pooled Brier가 0.00607 높아졌다. 따라서 보고할 수 있는 주장은 probe로 읽은 방향이 query 충돌에도 이어지는 조건에서의 **terminal prediction** 개선이다. 아래에 일반적인 score 보정만으로 설명되는 부분과, 같은 evidence가 있어도 보정이 실패하는 조건을 분리했다.

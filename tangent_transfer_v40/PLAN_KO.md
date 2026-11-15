@@ -1,0 +1,15 @@
+# v40 사전 검증 계획
+
+2026-11-15. 새 target의 observation, stick label, loss를 만들기 전에 이 계획, 예측표, generator, 실행 코드의 SHA-256을 서버에 기록한다. V38 continuous gain optimizer, source table, shrinkage 0.325, signed cue, decoder, 보정식, fixed 4와 네 번째 calibration probe(23 mm, +1.10), deployment query(25 mm, +0.425)를 고정한다. 두 정책은 같은 추가 관측과 acquisition budget을 사용한다. 비교는 실제 stick 여부에 대한 held-out Brier loss다. Δ = optimizer loss − fixed loss로 정의한다.
+
+**질문.** 같은 물체의 contour에서 0, 23, 25 mm의 위치와 tangent를 맞춰도 다른 곳의 contour와 unseen contact law가 보정의 승패를 바꾸는가? Target를 관찰하기 전의 shape/law 조건별 forecast가 새 표본에서 그 방향과 크기를 맞히는가? 실험자는 명세를 알지만 실행 정책에는 shape·law 이름, latent state, 정답을 주지 않는다. 주어진 두 가지 law는 v38 optimizer의 source와 v39 검증에 없던 함수로 설계한다. 새 law와 달라지지 않은 contact mechanics의 범위는 별도 기록한다.
+
+**표본.** 두 tangent family(shelf/ridge) × 세 contour(base/hollow/bulge) × 두 law(saturating/crossover), 12개 조건을 시험한다. 같은 panel 안에서 모든 조건은 같은 latent catalog, 물체 추출·noise, QMC bank seed, 입력 환경, 두 시작 방향을 공유한다. Calibration과 deployment는 서로 다른 support다. 독립 단위는 전체 12개 catalog panel이다. Panel마다 두 block, block마다 8개 환경 × 128개 deployment 물체를 사용한다. 각각의 orientation 두 가지, near-field regime 세 가지와 32회 sensor noise는 paired 반복이다. Cell, noise 또는 환경 행을 독립 표본으로 계산하지 않는다.
+
+**주 판정.** Cell별로 두 block, 환경과 반복을 먼저 평균한다. 독립 panel 평균 12개, df=11의 two-sided Bonferroni–t 95% simultaneous interval(12개 비교)을 사용한다. 구간 전체가 사전 부호 쪽이면 확인, 반대편이면 반증, 0 포함은 미확정이다. Point sign, 확인·반증·미확정 수를 따로 제시한다. 적어도 한 예상 이득 조건과 한 예상 손해 조건이 각각 확인되어야 양방향 예측에 성공했다고 판정한다. 같은 family·law 안에서 contour별로 이득·손해가 뒤집혔다는 주장은 그 쌍의 구간이 0의 반대쪽에 있을 때로 한정한다. 전체 Δ는 각 panel 안에서 12개 cell을 균등 가중한 후 t 95% interval을 구한다. 전체 통계적 우위는 상한 <0, 실용 우위는 상한 <−0.003이다. 모든 구간은 지정된 조건을 고정하고 새 catalog가 주는 불확실성을 추정한다.
+
+**수치 예측.** Cell별 Δ에 대한 MAE와 순위(Spearman, tie 허용)를 기록한다. 동일하게 적용하는 historical pooled forecast와 tangent만 쓰는 historical forecast를 비교한다. 동일 panel을 공동 재표집한 paired bootstrap(16,000회)으로 baseline과의 MAE 차이의 pointwise 95% interval을 계산한다. 실제 승패를 본 뒤 forecast를 수정하지 않는다. 사전 forecast의 부호로 정책을 선택한 Brier도 두 항상 적용 정책과 비교한다.
+
+**기하 및 contact 진단.** 각 family × law에서 두 변형과 base 간 Δ 차이를 같은 panel 안에서 계산하고 8개 비교의 Bonferroni–t 구간을 낸다. 같은 고정 위치의 contact tangent가 같고 같은 prototype이 query에 쓰인 쌍에서 실제 deployment stick label이 같은지 전수 비교한다. 형상 변형은 factual 시야 바깥에만 있으므로, 같은 family·law에서 첫 세 cue, 네 번째 측정과 보정량, deployment sensor 선택은 같고 query view를 받은 물체의 base probability만 달라질 것으로 예상한다. Probe를 받은 물체는 negative control로 확률과 Brier가 동일해야 한다. 같은 label이 보장된 쌍에서는 base probability와 calibration 보정(z,w)을 교환한 네 조합으로 Brier 차이를 다시 채점한다. 두 요인을 교환하는 두 순서를 평균해 총 Δ 변화에서 각 요인이 설명하는 양을 산출한다. 이는 simulator 안의 경로별 진단이다. 관측을 물리적으로 교환한 외부 실험은 아니다. 두 law 사이에서 stick label과 네 번째 probe의 stick 빈도가 얼마나 달라지는지도 기술한다.
+
+**비용.** 유휴 GPU 한 장에서 두 방법의 full online 경로를 동기화해 시간을 잰다. 8×128개 물체에 대한 acquisition, decoder, 보정 선택, host 반환을 포함한다. 센서 측정·reset 및 one-time bank 구축은 제외한다. 12개 cell에 두 개씩, 총 24개 timing cluster에서 warmup 후 두 방법을 임의 순서로 각 3회 실행한다. 같은 catalog에서 실행한 시간쌍을 함께 재표집해 p90 ratio의 95% 구간을 구한다. 상한 ≤1.02이면 latency 비용이 사전 허용치 이내다. 원자료 hash, 물리의 결정 조건, Brier, optimizer 원본 및 선택된 가중치, GPU worker 종료를 검산한다.

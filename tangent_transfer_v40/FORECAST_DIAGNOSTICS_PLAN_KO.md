@@ -1,0 +1,3 @@
+주 예측표를 동결한 직후 관측된 target 점수를 열기 전에 작성한 보조 분석이다. 각 사전 forecast의 Δ가 음수일 때만 optimizer를 사용하는 규칙을 12개 matched panel에서 적용한 것으로 재채점한다. 이 비교에 필요한 tangent·contour·법칙 이름은 실험자가 안다. 두 고정 정책 대비 구간은 각각의 예측 방법에서 두 대조에 대해 Bonferroni–t를 쓴다. Shape·law를 모르는 실제 로봇의 online router 성능으로 읽을 수 없다.
+
+Law 간 forecast가 틀린 이유를 진단하기 위해 같은 물체·noise에서 얻은 두 법칙의 (base probability, 환경별 z와 w, stick label) 세 묶음을 서로 바꾼 8가지 대조를 계산한다. 세 묶음을 교체하는 여섯 가지 순서에서 marginal change를 평균하면, 각 묶음에 배분된 Brier 차이의 합이 실제 law 간 차이가 된다. 이 수치는 offline diagnostic attribution이며, 서로 다른 법칙의 변수를 조합해 만든 분포가 물리적으로 실현된다는 가정은 필요하지 않다. 또한 crossover의 label이 saturating에서 방향만 바꾼 label과 얼마나 맞는지, 같은 방향 그대로의 label과 어느 정도 맞는지 비교한다.

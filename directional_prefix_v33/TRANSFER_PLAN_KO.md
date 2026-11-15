@@ -1,0 +1,2 @@
+# Prefix 규칙의 제3 집단 검증
+Cohort A outcome이나 winner를 열기 전에 추가한다. A가 고른 하나의 규칙과 높은 posterior SD 규칙을, cohort B와 별도로 생성한 policy evaluation worlds에도 그대로 적용한다. 부호 반전 두 조건은 paired cluster로 취급한다. Policy 자료에 저장된 R2−R4 또는 R4−R8을 읽으면 해당 prefix에서 한 continuation·한 deployment batch의 realized gain이다. B의 2×2 평균과 달리 측정 noise가 크고 전체 8개 환경을 대상으로 한 조건이다. 4개 endpoints의 95% simultaneous interval은 각 object–surface 조합 안의 8개 paired blocks를 복원추출해 계산한다. 이 재검증은 B의 사전 판정을 바꾸지 않으며 학습·선택·배분 정책에 입력하지 않는다.

@@ -1,0 +1,45 @@
+## 문헌 검토 · 한 번의 preload가 다른 접촉을 예측하는 조건
+
+기준 질문은 *같은 예산에서 접촉할 위치를 미리 가볍게 누르면, 다른 위치를 눌렀을 때보다 이후 별도의 full-load 사건을 더 정확히 예측하는가*이다. 아래 여섯 편은 실물에서 확인된 접촉 신호, 반복 측정의 해석, 독립 solver 검증을 다룬다. 같은 접촉 중의 slip detection과 reset 뒤 다른 접촉의 slip forecasting은 시간 순서와 예측 대상이 다르므로 수치를 합산하지 않았다.
+
+| 연구 | Research question과 methodology | 표본·측정 단위 | 핵심 결과와 결론 | v49로 옮길 때의 한계 |
+|---|---|---|---|---|
+| Yu et al., IROS 2016 | 마찰이 위치·방향·접촉 조건에 따라 얼마나 달라지는가? Robot planar pushing에서 pose와 force를 기록했다. | object·surface 조합당 약 6,000 pushes, push당 평균 약 200 time samples | 공간과 반복에 걸친 friction 변동을 관찰했다. 제목의 million은 push 수가 아니라 motion·force records를 센 것이다. | Pushing trajectory에서 별도의 weak-to-full 변형 방향을 측정하지 않았다. [원문](https://arxiv.org/pdf/1604.04038) |
+| Ma & Rodriguez, RA-L 2018 | 반복 push의 결과가 여러 군집으로 나뉘는 이유는 무엇인가? 앞 연구의 데이터를 다시 분석하고 anisotropic friction simulation과 대조했다. | 같은 자료 중 2,000회 반복한 push sequence. 독립적인 두 번째 실물 cohort로 세면 안 된다. | 시작 orientation과 수집 순서의 편향, material heterogeneity, friction anisotropy를 조합하면 관측된 구조의 상당 부분을 설명할 수 있었다. | 같은 관측을 설명할 수 있는 원인을 좁힌 결과다. 새 물체의 국소 부호나 모든 변동의 결정론적 원인을 확정하지 않는다. [원문](https://arxiv.org/pdf/1802.10089) |
+| du Bois de Dunilac et al., J. R. Soc. Interface 2023 | Normal force가 torsional slip을 어떻게 바꾸는가? 유리판을 눌러 회전하며 optical imaging으로 피부 표면을 추적했다. | 성인 7명의 오른쪽 집게손가락, normal force 0.5–10 N, 별도의 speed sweep | 가장자리부터 slip이 진행됐다. Normal force가 높으면 대체로 full slip에 도달하기 위한 회전각이 커졌고 개인 간 차이도 컸다. | 사람 피부와 유리의 한 contact patch 안에서 본 현상이다. 두 station 간 transfer나 물체의 weak/full polarity 전환율을 측정하지 않았다. [원문](https://pmc.ncbi.nlm.nih.gov/articles/PMC10113816/) |
+| Willemet et al., ICRA 2024 | Tactile deformation으로 slip까지 남은 safety margin을 추정해 grasp force를 조절할 수 있는가? 82개 marker의 3D 변형에서 CNN을 학습했다. | 실물 gripper, 제어 실증은 딸기·귤·바나나 세 종류. 실험 grasp force 범위 0.25–3.2 N | 같은 접촉에서 safety margin을 연속 추정해 낮은 grasp force를 유지했다. 작은 contact와 미끄러운 표면에서는 정확도가 제한됐다. | Direct prediction 자체의 선행 사례다. Dense observation과 지속적 feedback을 쓰므로 one-shot scalar에서 미래 충돌의 Brier 개선을 보장하지 않는다. [원문](https://pure.tudelft.nl/ws/portalfiles/portal/220701333/Learning_to_estimate_incipient_slip_with_tactile_sensing_to_gently_grasp_objects.pdf) |
+| Li et al., 2025 공개 원고 | 국소 strain rate로 incipient slip의 위치와 시점을 알 수 있는가? Finite-element simulation, Tac3D bench, robot grasp에서 strain-rate extrema를 평가했다. | Tac3D 20×20 지점, 30 fps. Bench에서 다섯 tangential speed에 각 10회 반복 | Tangential load가 역전될 때 stick 영역이 일시적으로 회복되고 다시 바뀌는 과정까지 포착했다. | 외부에서 shear 방향을 역전한 조건이다. 같은 방향의 preload에서 full load로 바뀔 때 물체의 변형 부호가 저절로 역전되는 증거로 사용할 수 없다. [원문](https://arxiv.org/pdf/2502.17335) |
+| Acosta et al., RA-L 2022 | Contact solver가 실제 impact를 얼마나 재현하는가? Drake·MuJoCo·Bullet의 contact parameter를 실물 trajectory에 맞추고 비교했다. | acrylic cube toss 550개 trajectory, Cassie jump 22개 | 거의 inelastic한 cube impact와 Cassie의 큰 동작을 재현했지만 elastic impact에는 한계가 있었다. Cassie 기록 중 slip regime이 없어 friction을 잘 식별하기 어려웠다. | 독립 solver의 일치와 실제 stick/slip 검증의 차이를 보여준다. 서로 다른 하중에서 같은 변형 방향을 추적한 자료는 없다. [원문](https://dair.seas.upenn.edu/assets/pdf/Acosta2022.pdf) |
+
+### 연구 흐름과 근거의 강도
+
+**공통되는 관찰.** Contact patch 안에서는 위치와 하중에 따라 slip이 동시에 일어나지 않는다. Skin 영상과 Tac3D에서 각기 다른 방식으로 관찰됐다. 수집한 위치나 초기 상태에 따라 반복 데이터의 분포가 달라질 수 있다는 점도 planar pushing 실험과 그 재분석에서 확인된다. 두 연구가 같은 pushing dataset을 사용했다는 점은 독립 재현 횟수를 셀 때 중요하다. [du Bois de Dunilac et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC10113816/) · [Li et al.](https://arxiv.org/pdf/2502.17335) · [Yu et al.](https://arxiv.org/pdf/1604.04038) · [Ma & Rodriguez](https://arxiv.org/pdf/1802.10089)
+
+**조건부 근거.** Tactile deformation에서 편리한 scalar를 학습해 제어하는 방법과, deformation field에 mechanics를 적용해 stick 영역을 추적하는 방법은 모두 실제 접촉에서 성과가 있었다. 전자는 grasp safety margin, 후자는 현재 local slip field를 측정한다. 어느 접근이 향후 독립 충돌에 더 잘 전달되는지는 이 결과들로 판정할 수 없다. v49의 projection gate는 이 논문들이 실제로 시험한 baseline과 동일한 알고리즘이 아니다. [Willemet et al.](https://pure.tudelft.nl/ws/portalfiles/portal/220701333/Learning_to_estimate_incipient_slip_with_tactile_sensing_to_gently_grasp_objects.pdf) · [Li et al.](https://arxiv.org/pdf/2502.17335)
+
+**엇갈리는 해석.** 같은 동작의 결과가 여러 무리로 갈라지면 재현 불가능한 noise처럼 보일 수 있다. Yu et al.은 변동 자체를 기록했고 Ma & Rodriguez는 같은 데이터에서 초기 orientation과 reset 절차를 따로 조사했다. 이를 독립된 반대 결과로 세는 것보다 두 번째 분석이 첫 번째 관측의 대안 설명을 제시한 것으로 읽는 편이 타당하다. V49에서 두 station의 차이를 해석할 때도 station 순서, 접근 경로, reset에 의한 residual strain이 위치와 함께 바뀌는지 살펴야 한다. [Yu et al.](https://arxiv.org/pdf/1604.04038) · [Ma & Rodriguez](https://arxiv.org/pdf/1802.10089)
+
+**지식 지도와 미해결 관계.** Spatial heterogeneity와 reset history는 측정할 때 마주치는 접촉 상태를 바꾼다. Normal load와 local geometry는 strain 및 partial slip을 바꾸고, sensor와 estimator는 이 분포를 일부 요약한다. V49에 필요한 마지막 연결은 *약한 접촉에서 얻은 signed scalar → reset → full-load의 deformation → stick 확률*이다. 이 여섯 편에는 이 연결을 두 station에서 같은 비용으로 비교한 실물 측정이 없다. Solver를 바꿔 얻는 결과는 contact formulation에 대한 민감도를 평가한다. 실제 material에서의 방향 보존율은 별도로 추정해야 한다. [Ma & Rodriguez](https://arxiv.org/pdf/1802.10089) · [du Bois de Dunilac et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC10113816/) · [Willemet et al.](https://pure.tudelft.nl/ws/portalfiles/portal/220701333/Learning_to_estimate_incipient_slip_with_tactile_sensing_to_gently_grasp_objects.pdf) · [Acosta et al.](https://dair.seas.upenn.edu/assets/pdf/Acosta2022.pdf)
+
+### 결과를 읽는 데 필요한 연구 검토
+
+- *약한 접촉에서 이미 slip을 검출했다*고 쓰려면 preload 동안의 slip ground truth가 필요하다. 이번 질문의 endpoint는 이후 full-load 결과다. 실물에서 이 둘을 구별하려면 optical marker와 contact force를 각각 기록하고, reset 이후의 full-load label은 별도 판독해야 한다. [Li et al.](https://arxiv.org/pdf/2502.17335) · [du Bois de Dunilac et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC10113816/)
+- *Query-local이 물리적으로 항상 우월하다*는 주장에는 근거가 부족하다. Frozen direct calibration이 손해를 봐도 관측 자체의 정보가 사라졌다고 단정할 수 없다. 방향 관계가 일관되게 바뀌면 측정은 여전히 informative이고 predictor가 잘못 해석했을 수 있다. Source-only와 별도로 표기한 diagnostic refit을 비교하면 두 가능성을 좁힐 수 있다. 이 해석은 distribution shift에 대한 가설이다. 실물 접촉에서 위치·방향·수집 절차의 효과가 함께 나타난 사례가 있다. [Ma & Rodriguez](https://arxiv.org/pdf/1802.10089)
+- *독립 solver가 실물 결과를 검증했다*는 주장은 현재 근거를 넘는다. 실물에서 필요한 주요 비교는 같은 물체를 같은 예산으로 local와 fixed에 무작위 배정한 뒤, 반복 순서·마모·reset 시간까지 남기는 것이다. 특히 stick과 slip이 모두 생기는 물체·속도 범위에서 접촉을 관찰해야 한다. [Acosta et al.](https://dair.seas.upenn.edu/assets/pdf/Acosta2022.pdf) · [Yu et al.](https://arxiv.org/pdf/1604.04038)
+
+### 다음 연구 질문 열 가지
+
+아래는 문헌이 실증한 결론이 아니라, 각 결과와 현재 endpoint 사이의 간격을 좁히는 후속 실험 제안이다.
+
+| 질문 | 필요한 이유 | 변수와 검증 방법 |
+|---|---|---|
+| 1. 실제 물체에서 weak-to-full 부호가 몇 번 유지되는가? | 기존 strain 측정은 주로 같은 contact 중의 변화다. | 물체·station별 weak/full signed displacement를 독립 영상으로 읽고 sign agreement와 near-zero 비율을 함께 보고한다. [du Bois de Dunilac et al.](https://pmc.ncbi.nlm.nih.gov/articles/PMC10113816/) |
+| 2. 국소성은 어느 거리에서 사라지는가? | 두 위치만으로 실제 spatial correlation length를 알 수 없다. | Station 간 거리와 방향을 교차하고 물체별 semivariogram과 out-of-object Brier를 추정한다. [Yu et al.](https://arxiv.org/pdf/1604.04038) |
+| 3. Reset의 잔류 효과가 위치 이득처럼 보이는가? | 자동화된 반복 절차가 다음 trial의 초기조건을 바꿀 수 있다. | Local-first/fixed-first와 대기시간을 무작위화하고 baseline displacement 및 Brier의 순서 효과를 분석한다. [Ma & Rodriguez](https://arxiv.org/pdf/1802.10089) |
+| 4. 0.4 N에서 물체 변형과 sensor 자체 변형을 분리할 수 있는가? | Tactile marker는 sensor skin의 변형도 읽는다. | 강체 fixture와 물체 표면의 독립 marker를 함께 기록하고, 두 signal로부터 방향별 bias와 noise floor를 구한다. [Willemet et al.](https://pure.tudelft.nl/ws/portalfiles/portal/220701333/Learning_to_estimate_incipient_slip_with_tactile_sensing_to_gently_grasp_objects.pdf) |
+| 5. 부호 반전은 어느 load 범위에 집중되는가? | 일정한 방향의 load 증가와 외부 shear reversal은 다른 조작이다. | Preload–full-load ramp를 여러 force에 걸쳐 촬영하고 loading/unloading, sign change와 slip onset을 따로 채점한다. [Li et al.](https://arxiv.org/pdf/2502.17335) |
+| 6. 같은 touch의 짧은 동영상이 scalar의 실패를 복원하는가? | 접촉 중 strain rate에는 단일 시점이 놓칠 수 있는 정보가 있다. | 총 dwell time을 고정하고 scalar·frame pair·strain-rate sequence를 비교해 Brier와 GPU p90을 함께 잰다. [Li et al.](https://arxiv.org/pdf/2502.17335) |
+| 7. Source에서 고정한 decoder가 부호만 잘못 해석하는가? | 강한 변형 신호와 calibration transfer 실패는 동시에 일어날 수 있다. | Frozen direct, source mixture, 소량의 별도 labeled calibration을 허용한 diagnostic을 구분해 probability calibration을 비교한다. [Willemet et al.](https://pure.tudelft.nl/ws/portalfiles/portal/220701333/Learning_to_estimate_incipient_slip_with_tactile_sensing_to_gently_grasp_objects.pdf) |
+| 8. 동일 초기조건에서 solver끼리 label이 다른 접촉이 순위를 좌우하는가? | 실제 impact의 재현 정도가 regime에 따라 달랐다. | 같은 incoming state를 여러 solver에 넣고 contact duration·post-impact tangent speed·label disagreement와 policy 차이를 비교한다. [Acosta et al.](https://dair.seas.upenn.edu/assets/pdf/Acosta2022.pdf) |
+| 9. 실물에서 몇 초까지 preload를 정당화할 수 있는가? | 실시간 제어에서의 sensor rate는 reset 후 한 번 더 누르는 비용을 알려주지 않는다. | 물체별 approach·readout·retract·reset failure를 timing하고 Brier와 시간의 Pareto frontier를 계산한다. [Willemet et al.](https://pure.tudelft.nl/ws/portalfiles/portal/220701333/Learning_to_estimate_incipient_slip_with_tactile_sensing_to_gently_grasp_objects.pdf) |
+| 10. 물체가 아니라 session을 바꿔도 경계가 재현되는가? | Surface, humidity, 시작 상태의 변화로 조건별 결과가 달라질 수 있다. | Object family·surface·day 단위 holdout에 대해 예측한 부호와 Brier 순위를 사전 등록하고 session 단위로 재표집한다. [Ma & Rodriguez](https://arxiv.org/pdf/1802.10089) · [Willemet et al.](https://pure.tudelft.nl/ws/portalfiles/portal/220701333/Learning_to_estimate_incipient_slip_with_tactile_sensing_to_gently_grasp_objects.pdf) |

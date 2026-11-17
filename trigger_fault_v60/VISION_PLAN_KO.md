@@ -1,0 +1,7 @@
+# v60 광학 검증 사전 명세
+
+24개 catalog, catalog당 새 material 2개, material당 512개의 4×2 paired pilot을 새 seed로 생성한다. Scope는 이미 정한 물리적 지속(P)·전자 common-mode fault(C)·A/B 손익과 frozen v59 router다. 물체당 1 reference와 1 impact, 16회 mechanical reset이며 둘째 물체 전에 무작위 electronic reset 또는 sham을 적용한다. 각 원인과 환경에 같은 무작위 물체 순서, visibility, 변위·노이즈, reset target, trigger 지연을 짝짓는다.
+
+Camera는 1,000 fps에서 timestamp −2~9 ms의 optical field를 생성한다. 한 번의 기록에 소비 가능한 연속 버퍼는 8 frames다. 정시와 2 ms 지연에서 확보하는 구간은 각각 −2~5 ms, 0~7 ms다. 부호 판독에는 여섯 frame이 필요하다. 독립 LED ROI는 contact의 물리 동기 신호 근방 0 ms에서 한 frame 동안 점등한다. 전체 marker 누락 확률 4%와 밝기·pixel noise를 부여한다. Nominal reader는 항상 버퍼의 세 번째 frame부터 읽는다. Corrected reader는 LED의 contrast로 0 ms 위치를 검출하고 그 frame부터 여섯 장을 읽는다. 유효한 표식이나 완전한 구간이 없으면 그 clip을 결측 처리한다. Trigger 메타데이터·표면 이름·true sign은 reader 입력에서 제외한다. 각 물체에서 두 부호가 모두 유효해야 camera mismatch bit가 부여된다. Trigger 지연은 impact에만 독립 할당하며 2 ms 지연 확률 0%, 20%, 100%를 실험한다. 주 비교에 추가할 사전 지정 음성 대조는 LED 차폐와 4 ms 지연(버퍼 시작 전 LED)이다.
+
+Reference와 impact의 변형은 upper marker와 같은 화면의 고정 marker 간 상대 이동으로 모사한다. 밝기 중심의 signed shift가 최소 0.5 pixel이어야 한다. Source 연동 A/B에서는 common fault 발생률이 각각 29.58%, 4.08%이며, surface별 독립 reassignment, reversal, constant low/high를 별도로 채점할 수 있다. Reader와 router는 발생률의 target reassignment를 보지 못한다. Source likelihood, loss-weighted threshold, marker detection 기준을 target 점수에 맞게 바꾸지 않는다. 12-frame timeline, cropped ticket, 추정 부호 사이의 일치를 검증한 뒤 결과를 배포한다.

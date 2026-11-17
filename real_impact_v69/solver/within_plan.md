@@ -1,0 +1,3 @@
+# Within-campaign diagnostic
+
+Added after the transfer comparison, before running this diagnostic. Use four folds in each campaign. The zero-based contiguous 24-row block index modulo 4 defines the fold. For heldout fold f, the next cyclic fold is reserved for residual calibration and the other two folds fit each model. Preserve model classes, search grid, thresholds and scoring from the transfer comparison. Summarize by concatenated out-of-fold test rows in each campaign. A 24-row block contains four full A launch settings; B has variable repeats so some same-setting neighbors can straddle boundaries. This diagnostic tests same-campaign interpolation, not new ball identity or new surface.

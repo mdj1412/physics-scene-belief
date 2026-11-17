@@ -1,0 +1,33 @@
+## 선행연구와 v50의 기여 범위
+
+검토 질문은 *새 표면에서 소수의 paired load 측정으로 이후 다른 물체의 예측 방향을 결정할 수 있는가*이다. 아래 여섯 원논문에서 측정 대상, 실험 단위, 방법과 한계를 비교했다.
+
+| 연구 | 질문·방법 | 표본 또는 데이터 | 결과·결론 | v50에서 남는 간격 |
+|---|---|---|---|---|
+| Su et al., 2012 | Robot이 normal force를 제어하며 변위를 측정하면 compliance를 구분할 수 있는가? | 실물 aluminum plate와 서로 다른 rubber 4종, 목표 10 N | 하중과 tactile signal의 관계로 material을 구분했다. 작은 힘에서 sensor skin·joint cable 변형이 섞였다. | 0.4 N에서 관측한 변위가 물체 자체의 변형임을 별도 계측해야 한다. [원문](https://www.frontiersin.org/journals/neurorobotics/articles/10.3389/fnbot.2012.00007/full) |
+| Fishel & Loeb, 2012 | Exploratory movement를 어떻게 고르면 접촉 횟수를 줄일 수 있는가? Force·velocity를 조절해 posterior를 갱신했다. | 117개 등록 texture와 세 종류의 sliding movement | 등록된 texture 식별에서 median 5회, 정확도 95.4%를 보고했다. | 이미 등록한 texture의 identity와 새 environment의 연속적인 κ는 서로 다른 endpoint다. [원문](https://www.frontiersin.org/journals/neurorobotics/articles/10.3389/fnbot.2012.00004/full) |
+| Ma & Rodriguez, 2018 | 어떤 요인이 반복 push 결과의 여러 군집을 설명하는가? 기존 실물 자료를 재분석하고 anisotropic friction simulation과 비교했다. | 2,000회 push sequence, 네 가지 support material을 논의 | 초기 자세와 수집과정의 편향 및 anisotropic friction이 상당 부분을 설명했다. | Reset 뒤 상태가 달라지면 동일한 κ를 공유한다는 가정도 흔들린다. 실물 연구의 반복 수는 독립 session 수와 다르다. [원문](https://arxiv.org/pdf/1802.10089) |
+| Boonstra·Willemet et al., ICRA 2024 | Dense tactile marker로 같은 접촉의 slip safety margin을 학습해 힘을 제어할 수 있는가? | 82개 marker, 딸기·귤·바나나 grasp 평가, 조건당 5회 | Safety-margin target을 높이면 대체로 grasp force가 커지고 무거운 과일의 slip이 줄었다. | 현재 접촉의 feedback을 사용했다. 다른 물체의 reset 이후 충돌은 검증 범위 밖이다. [원문](https://pure.tudelft.nl/ws/portalfiles/portal/220701333/Learning_to_estimate_incipient_slip_with_tactile_sensing_to_gently_grasp_objects.pdf) |
+| Wong & Zhu, 2026 | 물체별 calibration 없이 현재 slip에 대응할 수 있는가? 손가락별 tri-axial force 변화로 보정했다. | 실물 aluminum rod·sponge·water bottle, rod의 세 lifting speed | 세 물체에서 slip recovery를 보였다. 가장 높은 속도에서는 control setpoint를 조절했다. | 현재 slip 이후 반응할 수 있을 때 쓸 수 있는 강한 대안이다. v50의 미래 충돌 전 확률 예측과 endpoint가 다르다. [원문](https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2026.1735467/full) |
+| Hui & Walter, 1980 | 불완전한 두 측정의 오류와 잠재 상태 비율을 함께 식별할 수 있는가? Latent-class likelihood 분석. | Prevalence가 다른 두 모집단의 paired Mantoux/Tine test 자료 | 두 모집단, 공통 error rate 및 조건부 독립과 같은 조건 아래 식별할 수 있음을 보였다. | 통계적 유추다. 로봇 연구가 아니며, 실제 시스템에서 두 sensor error 또는 그 독립성이 보장된다는 근거는 없다. [원문](https://jhanley.biostat.mcgill.ca/bios601/CandH-ch0102/HuiWalter1980.pdf) |
+
+**연구 지도와 근거의 강도.** 재료와 계측기의 compliance → load별 displacement → 짝지은 관측으로 환경의 관계 추정 → 별도 물체의 action이라는 흐름에서, 실물에서 상대적으로 근거가 강한 부분은 탐색 동작·접촉 하중이 읽을 수 있는 물리 정보를 바꾼다는 점이다. 약한 구간에서는 sensor 자체가 신호를 차지할 수 있다. 몇 번의 접촉으로 식별이 가능하다는 근거는 이미 관측한 texture를 재식별하는 상황에 강하다. 다른 물체·session의 weak-to-full polarity transfer까지 보장하는 근거는 이 문헌군에서 부족하다. [Su et al.](https://www.frontiersin.org/journals/neurorobotics/articles/10.3389/fnbot.2012.00007/full) · [Fishel & Loeb](https://www.frontiersin.org/journals/neurorobotics/articles/10.3389/fnbot.2012.00004/full) · [Ma & Rodriguez](https://arxiv.org/pdf/1802.10089)
+
+**엇갈리는 결과를 읽는 법.** 촉각으로 slip을 배울 수 있다는 결과와 물체별 calibration 없이 slip을 제어할 수 있다는 결과는 현재 grasp에 feedback을 허용한 실험에서 나왔다. 전자는 safety margin을 연속 추정하고 후자는 slip 이후 손가락 단위로 대응한다. V50은 독립 물체에 사고가 일어나기 전에 stick 확률을 내야 한다. 이 시간 차이를 맞추기 전에는 어느 정책이 더 보편적으로 우수하다고 할 수 없다. [Boonstra·Willemet et al.](https://pure.tudelft.nl/ws/portalfiles/portal/220701333/Learning_to_estimate_incipient_slip_with_tactile_sensing_to_gently_grasp_objects.pdf) · [Wong & Zhu](https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2026.1735467/full)
+
+**현재 연구에 대한 반론.** Paired reading은 상태 자체가 아니라 오차가 있는 두 계측값이다. 둘의 부호가 같이 틀릴 때 높은 일치율을 얻을 수 있다. Reference channel의 polarity, 약한 힘에서의 분해능, reset 순서를 각각 검산해야 한다. 센서 bias와 κ까지 같은 소수 관측에서 자유롭게 추정한 것처럼 쓰면 식별성 가정을 숨기게 된다. 또한 비교 정책이 calibration을 사지 않아도 되는 현장에서는 추가 contact의 총비용을 청구해야 한다. [Hui & Walter](https://jhanley.biostat.mcgill.ca/bios601/CandH-ch0102/HuiWalter1980.pdf) · [Su et al.](https://www.frontiersin.org/journals/neurorobotics/articles/10.3389/fnbot.2012.00007/full) · [Wong & Zhu](https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2026.1735467/full)
+
+### 후속 연구 질문 10개
+
+| 질문 | 간격과 필요성 | 변수·시험 방법 |
+|---|---|---|
+| 1. 0.4 N에서 실제 물체 부호를 읽는가? | Apparatus deformation이 물체 변형과 섞일 수 있다. | 강체 reference와 독립 카메라로 force–displacement curve와 error floor를 측정한다. [Su et al.](https://www.frontiersin.org/journals/neurorobotics/articles/10.3389/fnbot.2012.00007/full) |
+| 2. 2 N reference 부호가 실제 impact 부호인가? | 정적 compliance와 다른 충돌의 transfer는 검증할 간격이다. | 같은 station에 sacrificial specimen을 배정해 reference gauge와 high-speed impact 영상을 비교한다. [Su et al.](https://www.frontiersin.org/journals/neurorobotics/articles/10.3389/fnbot.2012.00007/full) |
+| 3. 두 계측기의 오류 상관이 κ를 과대추정하는가? | Conditional independence는 스스로 검증되지 않는다. | Fiducial을 독립 교정하고 공통 optical bias를 주입해 추정 변화를 잰다. [Hui & Walter](https://jhanley.biostat.mcgill.ca/bios601/CandH-ch0102/HuiWalter1980.pdf) |
+| 4. κ가 날마다 유지되는가? | 반복 실험의 수집 과정이 초기 조건을 바꿀 수 있다. | 동일 surface를 날짜·마모 session으로 나누고 cross-session Brier를 잰다. [Ma & Rodriguez](https://arxiv.org/pdf/1802.10089) |
+| 5. Probe 순서와 reset 시간이 방향을 바꾸는가? | 자동 reset은 물체를 특정 자세로 모을 수 있다. | Weak-first와 reference-first, 짧고 긴 reset을 별도 specimen에 무작위 배정한다. [Ma & Rodriguez](https://arxiv.org/pdf/1802.10089) |
+| 6. Inert trial이 많을 때 probe 위치나 힘을 고르면 이득인가? | 등록 texture에서는 탐색 선택에 따라 필요한 움직임 수가 달랐다. | Fixed vs adaptive 위치·하중을 같은 contact budget에서 비교하고 손상률을 기록한다. [Fishel & Loeb](https://www.frontiersin.org/journals/neurorobotics/articles/10.3389/fnbot.2012.00004/full) |
+| 7. 같은 budget에서 여러 물체와 한 물체 반복 중 어느 쪽이 낫나? | 한 표본에 반복된 관측과 환경 내 이질성은 구분해야 한다. | 4개 × 1쌍 대 1개 × 4쌍의 out-of-object 오차를 비교한다. [Ma & Rodriguez](https://arxiv.org/pdf/1802.10089) |
+| 8. 짧은 tactile trajectory가 scalar의 부호 모호성을 해소하는가? | 현재 접촉에서 dense deformation으로 관측 가능한 정보가 있다. | 동일 dwell time에서 단일 scalar·marker trajectory의 Brier와 latency를 비교한다. [Boonstra·Willemet et al.](https://pure.tudelft.nl/ws/portalfiles/portal/220701333/Learning_to_estimate_incipient_slip_with_tactile_sensing_to_gently_grasp_objects.pdf) |
+| 9. 사전 forecast와 reactive feedback 중 언제 어느 쪽의 비용이 낮은가? | Slip 후 복구가 가능한 과업에서는 사전 probe 예산의 가치가 달라진다. | 낙하 비용·복구 허용시간을 바꾼 실물 과업에서 총 contact·손실을 센다. [Wong & Zhu](https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2026.1735467/full) |
+| 10. 새로운 sensor나 다른 손가락에도 readout sign을 옮길 수 있는가? | 하나의 platform에서 조정한 threshold와 계측 축이 장비 간에 달라질 수 있다. | Device holdout에서 zero check·축 교정·reference 횟수를 분리한다. [Wong & Zhu](https://www.frontiersin.org/journals/robotics-and-ai/articles/10.3389/frobt.2026.1735467/full) · [Hui & Walter](https://jhanley.biostat.mcgill.ca/bios601/CandH-ch0102/HuiWalter1980.pdf) |

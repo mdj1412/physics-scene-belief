@@ -1,0 +1,13 @@
+# 새로운 contour family와 target dynamics
+
+**Terrace**는 높이가 +0.90, −0.70 mm만큼 차례로 달라지는 shelf다. Ramp 안의 변위를 S(u)=10u³−15u⁴+6u⁵로 두고 u를 [0,1]로 제한했다. 두 ramp의 중심은 18.3·31.8 mm, 폭은 6.2·5.0 mm다. Variant s=−1,0,+1에서 중심을 +1.20s·−0.85s mm, 폭을 각각 (1+0.18s)·(1−0.22s) 배로 바꾼다. Ramp 사이에는 평탄한 구간이 있다.
+
+**Dimple**은 중심 19.7·30.3 mm, 표준 폭 2.00·2.75 mm, 깊이 0.68·0.95 mm의 두 국소 Gaussian depression이다. 같은 세 variant에 따라 각 중심은 −0.65s·+0.90s mm, 폭은 (1+0.28s)·(1−0.17s) 배, 깊이는 (1+0.35s)·(1−0.22s) 배로 바꾼다. 이 합에서 x=0의 높이와 접선을 빼 factual 원점을 맞췄다. 두 family 모두 v45의 fold·ripple과 독립된 높이·변형 함수를 사용한다. Family 내부의 세 variant는 별개 family로 세지 않는다. 해당 식과 표본 수는 새 target 충돌 결과를 계산하기 전에 정했다.
+
+공통 latent slope·curvature는 additive geometry에 더한다. 높이는 mm, derivative는 무차원이다. 영상 생성기와 query view 생성기, pressure solver, PyBullet surface mesh가 같은 analytic profile을 읽고, online 선택기에는 생성기 내부 geometry를 전달하지 않는다. 새 catalog 12개에서 환경당 128개씩 총 6,144번 물체를 추출하며 2 surface·2 contact law·3 variant·2 nominal height를 교차한다. 같은 물체마다 ±0.5 mm와 0 mm offset 및 세 pressure 조건을 대응한다. 재질과 속도 조건은 v45와 같다. 따라서 새로운 family의 geometry에 대한 평가이며, 새 재료나 새로운 camera에 대한 증거는 별도로 필요하다. [Geometry](geometry46.py)
+
+**Primary pressure model.** V45의 pressure impulse와 동일하게, 회전 없는 1 kg의 물체에서 최초 접촉 좌표와 scalar normal impulse를 맞춘다. Incoming velocity는 수평 +0.425 m/s, 수직 −1 m/s다. Point 및 peak 반지름이 0.25·2 mm인 원형 pressure distribution을 사용하고, 한 번의 gross tangential residual speed가 0.020 m/s 이하일 때 stick proxy로 판정한다. 운영 평가의 두 유한 면적을 주 평가에 쓰고 point는 진단용이다. 전체 2,654,208개 조건에서 12×6 Gauss quadrature를 24×12로 두 배 높여 수치 오차를 측정한다. Pressure 분포를 지정했으므로 자연적으로 생기는 elastic patch의 실물 검증과 구별한다. [Pressure·solver 구현](mechanics46.py) · [기반 식](../image_pressure_v45/PRESSURE_PROTOCOL_KO.md)
+
+**Independent rigid solver.** 동일한 12개 catalog 전체에서 0.5 mm 반지름의 rigid sphere를 새로운 triangulated profile에 충돌시킨다. 각 환경 8개 단위로 collision lane을 분리해 새 물체 128개 전부를 측정한다. 표면 간격 0.10 mm, dt 20 µs, horizon 0.4 ms다. 각 목표 x에서 접선구를 역산하여 sphere를 초기화하고, 실제 첫 positive-force contact manifold의 x를 읽는다. 최종 양의 하중 접선 방향에 대한 0.4 ms 잔류 속도로 동일 threshold를 적용한다. Rigid 결과는 pressure 면적 실험과 별도로 분석한다. Target 접촉 위치·label이 부정확하면 이를 검산하여 보고한다. 동일 synthetic 영상은 pin 접근을 보여주는 대리 센서로 재사용한다. [기반 rigid solver와 계측](../image_pressure_v45/BULLET_PROTOCOL_KO.md)
+
+**Prelabel control.** −10~45 mm 2,201개 위치에서 두 family·세 variant의 analytic derivative와 finite difference, 그리고 mesh의 예상 미분을 비교했다. 평면·일정 friction에서 pressure area를 바꿔도 같은 residual을 내는지, quadratic friction field에서 반지름 의존도가 계산과 맞는지 대조했다. Rigid sphere도 무마찰·높은 마찰의 평면과 두 경사에서 접촉과 잔류 속도를 검사했다. 이 절차에서 새 target label을 생성하지 않았다. [Derivative 검산](geometry_checks46.json) · [Pressure fixtures](pressure_neutral46.json) · [Bullet fixtures](bullet_neutral46.json)

@@ -1,0 +1,7 @@
+# 후속 확인 실험 · 새 contour family에 고정한 source readout 적용
+
+V45 fold/ripple의 support 500–511에서 fit/epoch 선택을 끝낸 exp_fit.json의 9개 checkpoint와 기존 높이별 source axis, input normalization, 3 seeds를 그대로 적용한다. 새로운 두 family 이름 wendland, dispersive와 기본 geometry 정의만 알고 예측을 사전 고정한다. 각 family에 동일한 source readout을 적용하며 알려진 높이와 구매 action 이외의 target metadata는 predictor에 넣지 않는다. 12개 신규 catalog, 2 surface·2 law·3 variant·2 height, 기존 3 offset·두 finite radius, 4 noise draw, 13/128 probe 및 115/128 query. 예측은 두 retained 표현(full, restored) 모두 dropped보다 평균 held-out Brier가 낮아진다는 것이다. Family별 효과 방향과 크기에는 사전 확신을 두지 않는다.
+
+Frozen forecast 분석과 같게 두 primary 비교는 restored−dropped, full−dropped다. 부호를 사전 예측했어도 두-sided 95% paired catalog t interval을 두 primary에 Bonferroni 보정한다. Seed당 risk를 먼저 계산하고 3개 seed risk를 평균한 뒤 12개 catalog를 독립 단위로 삼는다. Simultaneous upper bound가 0 아래일 때 방향 재현, 추가로 −0.002 이하이면 설계자가 정한 practical Brier threshold까지 재현한 것으로 판정한다. 0.002는 실제 로봇의 비용에서 산출한 값이 아니다. 하한이 0 위면 반대 방향, 이외는 미결로 보고한다. Frozen full/legacy projected, 두 family별 paired 차이, probe 제외 query arm, 세 source seed의 편차, training feature 표준편차에서 벗어난 입력 비율은 보조 지표다. 어느 쪽이 좋아도 같은 결과를 보고한다.
+
+Target label을 생성하도록 신호하기 전에 모든 12개 catalog의 결과 파일을 검증하고 exp_locked_forecasts.json과 고정 SHA를 작성한다. exp_locked.py의 predict는 outcome 파일을 열지 않으며 scoring을 호출하지 않는다. Target producing agent는 prediction 봉인 신호를 받은 뒤 별도 solver로 binary outcomes를 생성한다. Source의 선택이나 hyperparameter를 target 결과로 바꾸지 않는다.

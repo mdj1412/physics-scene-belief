@@ -1,0 +1,7 @@
+# v56 표본과 sensor 생성 계획
+
+V55와 분리한 24개 신규 catalog에 braid·seam surface를 각각 하나씩 생성한다. 새 물체, material parameter와 instrument, 별도 교체 전후 calibration bank를 생성한다. 각 환경의 128개 deployment 물체에서 같은 위치의 보존·반전 변형의 PyBullet fine 및 ultra binary stick label을 직접 적분한다. Frozen v54 source-risk gate와 fixed impact의 예측·정답은 같은 입력에서 짝짓는다. Source의 decoder와 surface family 및 두 rate law를 보존한다.
+
+각 material에 high-mismatch fraction w를 .10, .35, .40, .4348074444131813, .47, .52, .80으로 층화한다. w는 같은 surface의 pilot과 deployment가 공유하는 유일한 sign-error population parameter다. 각 pilot은 서로 다른 calibration session에서 추출한다. 먼저 그 session의 e를 0 또는 .25((1−w)/2씩), .5(w)로 뽑는다. 그 뒤 한 sacrificial 물체에서 2.0 N reference와 impact를 각각 측정한다. 두 측정은 동일한 물체/위치의 방향을 가리키며 reset 뒤 물성이 유지된다고 가정한다. Weak preload는 pilot에 사지 않는다. 한 시도는 2 contacts, 2 resets다. Inactive 50%도 예산에 포함하고 재시도하지 않는다. 방향 센서는 impact가 inactive면 0, active면 이산 부호를 정확히 돌려주는 가상 장비다. Reference에는 family/height별 gauge 크기, gain·bias 및 displacement noise를 적용하고 0.12 mm dead zone을 둔다. 첫 K개의 signed reference/impact readout만 switch에 제공한다. 반복 512개와 최대 K=16을 미리 고정한다. 같은 표면의 두 law는 동일한 pilot을 공유한다. 서로 다른 w와 K 사이에는 variance를 줄이도록 공통 난수를 쓴다.
+
+새 deployment realization은 별도 test seed 56041971, 56045813에서 128개 물체를 각 환경의 finite pool에서 복원추출한다. 매 w에서 v55 구조의 세 e 조건을 지정 확률로 혼합한다. Pilot의 실제 mismatch sample을 deployment에 복사하지 않는다. Pilot과 test를 하나의 관측된 session로 묶는 가정은 없다. 배포에 실제 w, e, material 이름, 미래 stick label을 공개하지 않는다.

@@ -1,0 +1,5 @@
+# 추가 식별력 진단 · target label 공개 전 고정
+
+1. 두 모집단 w=.35/.52의 prior odds를 1:1로 두고, independent session에서 한 번만 읽을 때 K개 시도로 어느 쪽인지 판별하는 최대 성공률을 exact binomial likelihood로 계산한다. Reference와 impact 부호는 완전히 정확하고, 활성 여부는 mismatch와 독립이고 절반이 활성이라는 기준을 쓴다. K=0,1,4,8,16,32에서 모두 활성인 이상적인 경우와 비활성 50%를 포함하는 경우를 병기한다. 실제 instrument의 미판독·오판독 조건이 다르면 이상적인 비교의 범위를 명시한다.
+2. Conditional data만 이용해 E[gate−fixed I|e]를 집계한다. 균등 prior에서의 oracle regret과 관측 정보로 얻을 수 있는 최대 expected Brier gain을 비교한다. 후자는 두 모집단의 실제 mean Brier 차이를 아는 analyst가 각 count에서 더 낮은 mean loss를 고를 때 달성하는 진단이다. 배포 정책에는 이 값을 전달하지 않는다. K=8의 정확한 판별률 상한과 risk 차이는 다른 estimand이다.
+3. v55가 고정한 '낮은 두 mismatch 수준이 같은 비중' 가정을 풀면 동일한 mismatch 확률이어도 더 좋은 정책이 다른지 확인한다. e=(0,.25,.5)의 가중치를 A=(.42,0,.58), B=(0,.84,.16)로 사전 고정한다. 양쪽 E[e]는 .29다. 각 pilot가 서로 다른 session에 하나씩이라면 깨끗한 binary mismatch sequence의 분포는 어떤 K에서도 같다. 새 Brier contrast의 부호와 paired catalog interval을 계산한다. 같은 session에서 다른 두 active specimen의 mismatch를 조건부 독립으로 얻는다면 E[e²]가 달라져 이 예시를 구별할 수 있는지도 이론적으로 확인한다. 실제 paired-within-session sensor 성능은 실험하지 않는다.

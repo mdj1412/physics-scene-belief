@@ -1,0 +1,5 @@
+교체 전 4쌍은 같은 rate law의 반대 표면, 교체 후 K쌍은 배포 표면의 calibration support에서 취한다. 두 support는 배포 물체와 분리되어 있다. K는 0, 1, 2, 4, 8이다. 동일 환경의 K prefix는 중첩하고, 교체 전과 후에는 서로 다른 surface environment 및 고정된 독립 repetition 순열을 사용한다.
+
+두 방법 모두 κ의 Uniform prior, 교체 후 κ가 1−κ로 바뀔 사전 확률 0.25, reference에서 impact까지 독립 부호 오류의 design prior 0.10을 사용한다. 이 숫자는 이번 시험 정책의 상수다. 평가 시 실제 drift 여부, 해당 조건의 g·e, 개별 물체의 impact 부호를 입력하지 않는다. Likelihood는 동결된 v50 sensor noise와 dead zone으로 magnitude를 쓰고, vote는 같은 dead zone을 통과한 두 부호가 같은지만 센다. 두 정책 모두 keep·refit·unsigned를 가질 수 있다.
+
+교체 전·후 관측의 joint posterior를 16점 Gauss–Legendre quadrature로 계산하고 교체 후 weak–impact 부호 유지율의 posterior mean을 얻는다. 각 선택지에 대해 v47 source에만 독립 산출한 expected Brier를 두 endpoint 사이에서 보간한다. Keep은 교체 전 관측만으로 얻은 standalone mean으로 signed forecasts를 혼합하고 refit은 교체 후 관측만 사용한다. Unsigned는 기존 source-fitted |d| predictor다. 세 action 중 가장 작은 source risk를 고르고 차이가 1e−14 이하인 동률은 keep, refit, unsigned 순으로 처리한다. K=0은 refit을 제외한다. 별도로 post-only vote soft와 continuous joint posterior를 출력한다. 원래 predictor와 risk proxy가 모두 v47을 보았으므로 source risk는 개발용이다.

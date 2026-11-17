@@ -1,0 +1,8 @@
+## 실행·검산·재현
+
+- 서버 프로젝트는 `/scratch2/mdj1412/temporarily_dir/vlm-playground/physics-scene-belief/blind_decoder_v43`다. 2026년 11월 16일 같은 모델의 NVIDIA RTX PRO 6000 Blackwell Server Edition 두 장(node55·node56)이 유휴임을 확인했다. 할당 2744468·2744471에서 catalog를 나눠 실행하고, GPU p90은 node55의 2744468 한 장에서 재측정했다. [짝수 panel 기록](results/run_even.json) · [홀수 panel 기록](results/run_odd.json) · [latency 기록](results/run_timing.json)
+- 독립 작업으로 world·물리 검산, source 학습·leakage 검산, GPU runner·timing을 나눴다. 사전 기하 예측은 18:11:43 KST, target 실행 코드와 robust model은 18:14:23 KST에 고정했다. 첫 target run 전에 이전 코드 의존성까지 checksum을 확인했다. 같은 원형 물체를 조건별로 재사용한 6,144번의 deployment draw에는 서로 다른 panel·population별 catalog prototype 5,951개가 있었다. Calibration prototype은 별도로 192개였다. 같은 물체의 반복 noise와 높이를 독립 표본으로 세지 않았다. [주 실험 동결 목록](freeze43.sha256) · [source 동결](model43.sha256) · [기하 예측 동결](geometry_forecast43.json)
+- 576개 raw archive의 SHA-256을 검산하고 2,654,208개 binary event를 별도로 구현한 식과 대조했다. 12개 방법의 Brier를 직접 계산한 값과 맞췄다. Robust model의 모든 미구입 sensor 값을 큰 유한값으로 바꿔도 출력 변화는 0이었다. Registry의 family 이름·평가자 전용 latent는 operating function의 인자에 없다. 같은 bank를 모든 panel에 공유해 bank seed 자체의 불확실성은 이번 구간에 포함되지 않는다. [독립 확률 검산](audit43.json) · [물리 검산](physics_results43.json) · [사전 설계](PLAN_KO.md)
+- 전체 결과는 `results/panel_NN/*.npz`, GPU 원측정은 `results/timing/panel_NN.npz`에 있다. 압축 파일에 paid sensor, 세 decoder의 12개 확률, 9개 높이의 label, correction cue가 있다. [재현 순서](REPRODUCE_KO.md) · [확률 분석](stats43.py) · [동일 GPU의 교차 측정 코드](runner43.py) · [독립 재채점](audit43.py)
+
+14,155,776개 저장 예측의 단순 보정식을 독립 재계산한 최대 오차는 2.22×10⁻¹⁶, 동일 GPU timing path의 재계산 오차는 1.36×10⁻¹³이었다. 작업 종료 후 사용한 두 GPU 모두 0 MiB와 compute PID 0개를 확인했다. [GPU 검산](audit_gpu43.json) · [종료 상태](release43.log)

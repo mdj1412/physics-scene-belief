@@ -1,0 +1,5 @@
+# 세 calibration 쌍의 조건부 실험 가치
+
+미리 정한 primary는 v53 prior(drift .25, e=.5×Beta(1,4))로 예상한 네 번째 관측의 expected downstream Brier reduction(EVSI)이 큰 쪽이다. 선택 함수의 인수는 교체 후 3개 weak/reference의 displacement뿐이다. 교체 전 네 쌍의 *실제 값*은 들어오지 않는다. Terminal decoder가 교체 전 기록을 다시 사용한다는 사실만 반영해 가상 old histories를 평균한다. 미래의 reference 또는 impact 관측을 고정 sensor model에 따라 적분한다. 최종 terminal은 모든 primary와 fixed 전략에서 v53 nominal continuous joint로 같다. 동률은 reference다. Sensor moments, κ uniform prior 및 source Brier 계수 외 신규 training은 없다. 입력이 정보 없는 경우와 방향 일치가 강한 경우에서도 nominal policy가 한 행동만 택할 수 있다.
+
+Secondary는 첫 세 관측의 likelihood 대신 sign vote, 교체 전 정보의 downstream 사용을 생략한 acquisition, uniform e prior로 policy와 terminal를 함께 바꾼 경우, 그 선택만 고정 nominal terminal에 연결한 경우다. 추가로 source Brier risk에서 환경의 e~Uniform[0,.5]를 가정하되 terminal은 v53 nominal로 고정한 stress policy를 비교한다. 이것은 두 prior 중 worst-case를 최소화하지 않는다. 비교에 사용한 source coefficients는 v52에서 고정했다. 3쌍의 단순 synthetic 입력을 쓰는 analytic unit check에서 nominal route가 모두 reference이고 uniform/stress 일부가 impact여서 배포 조건에 따른 성능을 읽기 전에 명시했다. 실제 성능, material 또는 contact law별 label을 보고 policy를 바꾸지 않는다.

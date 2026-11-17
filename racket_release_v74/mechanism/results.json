@@ -1,0 +1,833 @@
+{
+  "specimen": "A-B-S II soft, existing Gossard control",
+  "frame": "racket local, [vx,vz,R*omega_y] m/s",
+  "changes": "Paired within observed impacts and frozen paid subsets. No new acquisition or intervention.",
+  "input_sha256": {
+    "run.json": "6d421f934015f036220cf47fbdea0b55030a1f1f8a2c12c8a0d3f32e5a012ecd",
+    "predictions.npz": "73e336c7388da55fb75d7082a2a8d5e668e6a8ce4ae507b80c2ce4f5ddaf5fbd",
+    "splits.npz": "f3c4924b0c8062057e7f3b31570e41c0a251ca7dffaf0369a8fd13be13ca74ce"
+  },
+  "sweep": {
+    "fast": {
+      "4": {
+        "impacts": 22,
+        "draws": 256,
+        "pairs": 5632,
+        "mistakes": 3520,
+        "accuracy": 0.375,
+        "correct_after_u_repair": 0.5071022727272727,
+        "correct_after_rim_repair": 0.7453835227272727,
+        "wrong_repaired_by": {
+          "u_only": 88,
+          "q_only": 1387,
+          "either": 699,
+          "neither": 1346
+        },
+        "correct_made_wrong_u_repair": 43,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.5270334139824804,
+        "spin_error_rads": 30.178702404158567,
+        "abs_err_u": 0.359789614285545,
+        "abs_err_normal": 0.3053073838538433,
+        "abs_err_rim": 0.6035740480831714,
+        "release_mae": 0.9442283327873084,
+        "signed_err_u": 0.08969147812976588,
+        "signed_err_rim": -0.2700377496649753,
+        "mean_product_errors": -0.33648894294006326,
+        "release_mse_attribution": {
+          "tangent": 0.2294887898638662,
+          "rim": 0.5802789336899877,
+          "cross": 0.6729778858801265,
+          "total": 1.4827456094339804
+        },
+        "measured_release_abs": 0.603723823844846,
+        "predicted_release_abs": 0.6799213529294547,
+        "pred_within_margin": 0.27095170454545453,
+        "median_abs_incident_release": 4.760893725233522,
+        "mean_abs_momentum_residual": 0.16841883337655147,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.03438596186549625,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 19,
+        "pred_alpha_above": 0.32457386363636365,
+        "observed_close_to_boundary_002": 1,
+        "observed_alpha_q25_50_75": [
+          0.4317985807468959,
+          0.4383233088532621,
+          0.4455263035482868
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.04538121990102346,
+        "predicted_abs_alpha_distance_to_boundary": 0.05323423872630592,
+        "mean_abs_alpha_error": 0.07711822951562099,
+        "conditional_true_alpha_above": 0.3260690789473684,
+        "conditional_true_alpha_below": 0.6848958333333334
+      },
+      "8": {
+        "impacts": 22,
+        "draws": 256,
+        "pairs": 5632,
+        "mistakes": 3651,
+        "accuracy": 0.3517400568181818,
+        "correct_after_u_repair": 0.5177556818181818,
+        "correct_after_rim_repair": 0.8330965909090909,
+        "wrong_repaired_by": {
+          "u_only": 118,
+          "q_only": 1856,
+          "either": 855,
+          "neither": 822
+        },
+        "correct_made_wrong_u_repair": 38,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.4559625811885883,
+        "spin_error_rads": 26.11981220489014,
+        "abs_err_u": 0.30310081928097526,
+        "abs_err_normal": 0.2782371437968189,
+        "abs_err_rim": 0.5223962440978028,
+        "release_mae": 0.8107143794775439,
+        "signed_err_u": 0.090033157922195,
+        "signed_err_rim": -0.270550269353619,
+        "mean_product_errors": -0.22022947969892243,
+        "release_mse_attribution": {
+          "tangent": 0.15022201803361745,
+          "rim": 0.40985078058462493,
+          "cross": 0.44045895939784485,
+          "total": 1.0005317580160875
+        },
+        "measured_release_abs": 0.603723823844846,
+        "predicted_release_abs": 0.5869547736994007,
+        "pred_within_margin": 0.2917258522727273,
+        "median_abs_incident_release": 4.760893725233522,
+        "mean_abs_momentum_residual": 0.16841883337655147,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.03438596186549625,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 19,
+        "pred_alpha_above": 0.25159801136363635,
+        "observed_close_to_boundary_002": 1,
+        "observed_alpha_q25_50_75": [
+          0.4317985807468959,
+          0.4383233088532621,
+          0.4455263035482868
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.04538121990102346,
+        "predicted_abs_alpha_distance_to_boundary": 0.04289721965319453,
+        "mean_abs_alpha_error": 0.06510451185864358,
+        "conditional_true_alpha_above": 0.27035361842105265,
+        "conditional_true_alpha_below": 0.8671875
+      },
+      "k4_to_k8": {
+        "correct_to_wrong": 734,
+        "wrong_to_correct": 603,
+        "unchanged": 4295,
+        "at_least_one_flip_impacts": 22
+      }
+    },
+    "other": {
+      "4": {
+        "impacts": 84,
+        "draws": 256,
+        "pairs": 21504,
+        "mistakes": 9510,
+        "accuracy": 0.5577566964285714,
+        "correct_after_u_repair": 0.7989676339285714,
+        "correct_after_rim_repair": 0.8946242559523809,
+        "wrong_repaired_by": {
+          "u_only": 147,
+          "q_only": 2062,
+          "either": 5182,
+          "neither": 2119
+        },
+        "correct_made_wrong_u_repair": 142,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.804767744588583,
+        "spin_error_rads": 46.56833167423676,
+        "abs_err_u": 0.6513573127012064,
+        "abs_err_normal": 0.33833500796461813,
+        "abs_err_rim": 0.9313666334847351,
+        "release_mae": 1.5680270692574396,
+        "signed_err_u": -0.0025312891479976696,
+        "signed_err_rim": -0.06011797869228851,
+        "mean_product_errors": -1.2849814704748939,
+        "release_mse_attribution": {
+          "tangent": 0.9100704089191582,
+          "rim": 1.8851963632590258,
+          "cross": 2.5699629409497877,
+          "total": 5.365229713127972
+        },
+        "measured_release_abs": 2.047584858782198,
+        "predicted_release_abs": 1.1402660839488055,
+        "pred_within_margin": 0.2242373511904762,
+        "median_abs_incident_release": 5.4321597125331325,
+        "mean_abs_momentum_residual": 0.14663761812301107,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.03521433262341842,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 28,
+        "pred_alpha_above": 0.33370535714285715,
+        "observed_close_to_boundary_002": 2,
+        "observed_alpha_q25_50_75": [
+          0.23474978708548488,
+          0.30770194444002374,
+          0.42823077058175807
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.10334789229785776,
+        "predicted_abs_alpha_distance_to_boundary": 0.06197736489245509,
+        "mean_abs_alpha_error": 0.08973989454025402,
+        "conditional_true_alpha_above": 0.33719308035714285,
+        "conditional_true_alpha_below": 0.6680385044642857
+      },
+      "8": {
+        "impacts": 84,
+        "draws": 256,
+        "pairs": 21504,
+        "mistakes": 7346,
+        "accuracy": 0.6583891369047619,
+        "correct_after_u_repair": 0.81640625,
+        "correct_after_rim_repair": 0.9342912946428571,
+        "wrong_repaired_by": {
+          "u_only": 192,
+          "q_only": 2559,
+          "either": 3374,
+          "neither": 1221
+        },
+        "correct_made_wrong_u_repair": 168,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.6053147110707395,
+        "spin_error_rads": 34.01903964509071,
+        "abs_err_u": 0.48605644458654157,
+        "abs_err_normal": 0.2579298822558111,
+        "abs_err_rim": 0.6803807929018142,
+        "release_mae": 1.1497110040945242,
+        "signed_err_u": -0.05981195608822025,
+        "signed_err_rim": 0.025803021718045445,
+        "mean_product_errors": -0.6985042846469111,
+        "release_mse_attribution": {
+          "tangent": 0.5088823630253425,
+          "rim": 1.0284379090361628,
+          "cross": 1.3970085692938221,
+          "total": 2.9343288413553275
+        },
+        "measured_release_abs": 2.047584858782198,
+        "predicted_release_abs": 1.3210001715708013,
+        "pred_within_margin": 0.24330357142857142,
+        "median_abs_incident_release": 5.4321597125331325,
+        "mean_abs_momentum_residual": 0.14663761812301107,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.03521433262341842,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 28,
+        "pred_alpha_above": 0.22395833333333334,
+        "observed_close_to_boundary_002": 2,
+        "observed_alpha_q25_50_75": [
+          0.23474978708548488,
+          0.30770194444002374,
+          0.42823077058175807
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.10334789229785776,
+        "predicted_abs_alpha_distance_to_boundary": 0.06320728752560172,
+        "mean_abs_alpha_error": 0.07042361775971104,
+        "conditional_true_alpha_above": 0.32352120535714285,
+        "conditional_true_alpha_below": 0.8258231026785714
+      },
+      "k4_to_k8": {
+        "correct_to_wrong": 1494,
+        "wrong_to_correct": 3658,
+        "unchanged": 16352,
+        "at_least_one_flip_impacts": 84
+      }
+    },
+    "fast_margin_020_to_050": {
+      "4": {
+        "impacts": 14,
+        "draws": 256,
+        "pairs": 3584,
+        "mistakes": 2288,
+        "accuracy": 0.36160714285714285,
+        "correct_after_u_repair": 0.466796875,
+        "correct_after_rim_repair": 0.7195870535714286,
+        "wrong_repaired_by": {
+          "u_only": 87,
+          "q_only": 950,
+          "either": 333,
+          "neither": 918
+        },
+        "correct_made_wrong_u_repair": 43,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.4321887977848534,
+        "spin_error_rads": 24.69121872094272,
+        "abs_err_u": 0.2866447200524088,
+        "abs_err_normal": 0.2586582090164356,
+        "abs_err_rim": 0.49382437441885446,
+        "release_mae": 0.7578299921994736,
+        "signed_err_u": 0.19546316831546032,
+        "signed_err_rim": -0.3295740307969029,
+        "mean_product_errors": -0.20864400064024277,
+        "release_mse_attribution": {
+          "tangent": 0.1430717170610897,
+          "rim": 0.38216465586460596,
+          "cross": 0.41728800128048554,
+          "total": 0.9425243742061813
+        },
+        "measured_release_abs": 0.3614559149459518,
+        "predicted_release_abs": 0.542646542997922,
+        "pred_within_margin": 0.3267299107142857,
+        "median_abs_incident_release": 4.091704760799618,
+        "mean_abs_momentum_residual": 0.14695808017195205,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.034387862554685365,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 13,
+        "pred_alpha_above": 0.3325892857142857,
+        "observed_close_to_boundary_002": 1,
+        "observed_alpha_q25_50_75": [
+          0.4317985807468959,
+          0.4360899681500413,
+          0.4419655517501818
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.03645801066151847,
+        "predicted_abs_alpha_distance_to_boundary": 0.050400327742554284,
+        "mean_abs_alpha_error": 0.07333012847142159,
+        "conditional_true_alpha_above": 0.33533653846153844,
+        "conditional_true_alpha_below": 0.703125
+      },
+      "8": {
+        "impacts": 14,
+        "draws": 256,
+        "pairs": 3584,
+        "mistakes": 2301,
+        "accuracy": 0.3579799107142857,
+        "correct_after_u_repair": 0.5083705357142857,
+        "correct_after_rim_repair": 0.8203125,
+        "wrong_repaired_by": {
+          "u_only": 115,
+          "q_only": 1195,
+          "either": 462,
+          "neither": 529
+        },
+        "correct_made_wrong_u_repair": 38,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.36860521191702506,
+        "spin_error_rads": 20.877720512822346,
+        "abs_err_u": 0.23671097600779994,
+        "abs_err_normal": 0.22967626087694346,
+        "abs_err_rim": 0.4175544102564469,
+        "release_mae": 0.635744075372712,
+        "signed_err_u": 0.1653345020100658,
+        "signed_err_rim": -0.28438103133881115,
+        "mean_product_errors": -0.1280379495817113,
+        "release_mse_attribution": {
+          "tangent": 0.09287442590477386,
+          "rim": 0.2532904077907222,
+          "cross": 0.2560758991634226,
+          "total": 0.6022407328589185
+        },
+        "measured_release_abs": 0.3614559149459518,
+        "predicted_release_abs": 0.41301583943114073,
+        "pred_within_margin": 0.37137276785714285,
+        "median_abs_incident_release": 4.091704760799618,
+        "mean_abs_momentum_residual": 0.14695808017195205,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.034387862554685365,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 13,
+        "pred_alpha_above": 0.30552455357142855,
+        "observed_close_to_boundary_002": 1,
+        "observed_alpha_q25_50_75": [
+          0.4317985807468959,
+          0.4360899681500413,
+          0.4419655517501818
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.03645801066151847,
+        "predicted_abs_alpha_distance_to_boundary": 0.036577375230615314,
+        "mean_abs_alpha_error": 0.0592632374687467,
+        "conditional_true_alpha_above": 0.31881009615384615,
+        "conditional_true_alpha_below": 0.8671875
+      },
+      "k4_to_k8": {
+        "correct_to_wrong": 455,
+        "wrong_to_correct": 442,
+        "unchanged": 2687,
+        "at_least_one_flip_impacts": 14
+      }
+    },
+    "fast_margin_above_050": {
+      "4": {
+        "impacts": 8,
+        "draws": 256,
+        "pairs": 2048,
+        "mistakes": 1232,
+        "accuracy": 0.3984375,
+        "correct_after_u_repair": 0.57763671875,
+        "correct_after_rim_repair": 0.79052734375,
+        "wrong_repaired_by": {
+          "u_only": 1,
+          "q_only": 437,
+          "either": 366,
+          "neither": 428
+        },
+        "correct_made_wrong_u_repair": 0,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.6930114923283274,
+        "spin_error_rads": 39.78179884978629,
+        "abs_err_u": 0.4877931791935334,
+        "abs_err_normal": 0.3869434398193069,
+        "abs_err_rim": 0.7956359769957259,
+        "release_mae": 1.270425428816019,
+        "signed_err_u": -0.09540897969519933,
+        "signed_err_rim": -0.16584925768410197,
+        "mean_product_errors": -0.5602175919647491,
+        "release_mse_attribution": {
+          "tangent": 0.38071866726872505,
+          "rim": 0.9269789198844058,
+          "cross": 1.1204351839294981,
+          "total": 2.428132771082629
+        },
+        "measured_release_abs": 1.027692664417911,
+        "predicted_release_abs": 0.9201522703096363,
+        "pred_within_margin": 0.17333984375,
+        "median_abs_incident_release": 5.791100891738894,
+        "mean_abs_momentum_residual": 0.2059751514846005,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.03438263565941526,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 6,
+        "pred_alpha_above": 0.310546875,
+        "observed_close_to_boundary_002": 0,
+        "observed_alpha_q25_50_75": [
+          0.4071129540396026,
+          0.4427320915808377,
+          0.44731464735795223
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.060996836070157205,
+        "predicted_abs_alpha_distance_to_boundary": 0.05819358294787129,
+        "mean_abs_alpha_error": 0.08374740634296995,
+        "conditional_true_alpha_above": 0.3059895833333333,
+        "conditional_true_alpha_below": 0.67578125
+      },
+      "8": {
+        "impacts": 8,
+        "draws": 256,
+        "pairs": 2048,
+        "mistakes": 1350,
+        "accuracy": 0.3408203125,
+        "correct_after_u_repair": 0.5341796875,
+        "correct_after_rim_repair": 0.85546875,
+        "wrong_repaired_by": {
+          "u_only": 3,
+          "q_only": 661,
+          "either": 393,
+          "neither": 293
+        },
+        "correct_made_wrong_u_repair": 0,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.6088379774138237,
+        "spin_error_rads": 35.29347266600878,
+        "abs_err_u": 0.419283045009032,
+        "abs_err_normal": 0.3632186889066008,
+        "abs_err_rim": 0.7058694533201757,
+        "release_mae": 1.1169124116609996,
+        "signed_err_u": -0.04174419423157888,
+        "signed_err_rim": -0.2463464358795327,
+        "mean_product_errors": -0.3815646574040419,
+        "release_mse_attribution": {
+          "tangent": 0.2505803042590938,
+          "rim": 0.6838314329739548,
+          "cross": 0.7631293148080838,
+          "total": 1.6975410520411325
+        },
+        "measured_release_abs": 1.027692664417911,
+        "predicted_release_abs": 0.8913479086688556,
+        "pred_within_margin": 0.15234375,
+        "median_abs_incident_release": 5.791100891738894,
+        "mean_abs_momentum_residual": 0.2059751514846005,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.03438263565941526,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 6,
+        "pred_alpha_above": 0.1572265625,
+        "observed_close_to_boundary_002": 0,
+        "observed_alpha_q25_50_75": [
+          0.4071129540396026,
+          0.4427320915808377,
+          0.44731464735795223
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.060996836070157205,
+        "predicted_abs_alpha_distance_to_boundary": 0.053956947392708135,
+        "mean_abs_alpha_error": 0.0753267420409631,
+        "conditional_true_alpha_above": 0.16536458333333334,
+        "conditional_true_alpha_below": 0.8671875
+      },
+      "k4_to_k8": {
+        "correct_to_wrong": 279,
+        "wrong_to_correct": 161,
+        "unchanged": 1608,
+        "at_least_one_flip_impacts": 8
+      }
+    },
+    "fast_positive": {
+      "4": {
+        "impacts": 7,
+        "draws": 256,
+        "pairs": 1792,
+        "mistakes": 935,
+        "accuracy": 0.47823660714285715,
+        "correct_after_u_repair": 0.6724330357142857,
+        "correct_after_rim_repair": 0.7449776785714286,
+        "wrong_repaired_by": {
+          "u_only": 46,
+          "q_only": 155,
+          "either": 323,
+          "neither": 411
+        },
+        "correct_made_wrong_u_repair": 21,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.5512802495790247,
+        "spin_error_rads": 30.050666331252636,
+        "abs_err_u": 0.4747348010667653,
+        "abs_err_normal": 0.21080036502950725,
+        "abs_err_rim": 0.6010133266250527,
+        "release_mae": 1.056139361915197,
+        "signed_err_u": -0.3330565836840846,
+        "signed_err_rim": 0.43224066601258926,
+        "mean_product_errors": -0.4515856027708101,
+        "release_mse_attribution": {
+          "tangent": 0.36556967268255663,
+          "rim": 0.626766562078486,
+          "cross": 0.9031712055416202,
+          "total": 1.8955074403026626
+        },
+        "measured_release_abs": 0.934015039475838,
+        "predicted_release_abs": 0.9006245011360122,
+        "pred_within_margin": 0.21037946428571427,
+        "median_abs_incident_release": 5.884820168549228,
+        "mean_abs_momentum_residual": 0.1981143273605411,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.03656494872563328,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 4,
+        "pred_alpha_above": 0.3197544642857143,
+        "observed_close_to_boundary_002": 1,
+        "observed_alpha_q25_50_75": [
+          0.3459238081840634,
+          0.4153907418709612,
+          0.437230054472576
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.054400869161466366,
+        "predicted_abs_alpha_distance_to_boundary": 0.0580081055235102,
+        "mean_abs_alpha_error": 0.0712545370421644,
+        "conditional_true_alpha_above": 0.3232421875,
+        "conditional_true_alpha_below": 0.6848958333333334
+      },
+      "8": {
+        "impacts": 7,
+        "draws": 256,
+        "pairs": 1792,
+        "mistakes": 871,
+        "accuracy": 0.5139508928571429,
+        "correct_after_u_repair": 0.7237723214285714,
+        "correct_after_rim_repair": 0.7873883928571429,
+        "wrong_repaired_by": {
+          "u_only": 56,
+          "q_only": 159,
+          "either": 331,
+          "neither": 325
+        },
+        "correct_made_wrong_u_repair": 11,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.463905307365219,
+        "spin_error_rads": 23.31103361496664,
+        "abs_err_u": 0.3831127864466733,
+        "abs_err_normal": 0.2021287151803257,
+        "abs_err_rim": 0.4662206722993328,
+        "release_mae": 0.830726209224477,
+        "signed_err_u": -0.25793209758344665,
+        "signed_err_rim": 0.3195539368616324,
+        "mean_product_errors": -0.262009098556958,
+        "release_mse_attribution": {
+          "tangent": 0.22733719318273748,
+          "rim": 0.3690601283115228,
+          "cross": 0.524018197113916,
+          "total": 1.1204155186081761
+        },
+        "measured_release_abs": 0.934015039475838,
+        "predicted_release_abs": 0.8930897663587718,
+        "pred_within_margin": 0.19363839285714285,
+        "median_abs_incident_release": 5.884820168549228,
+        "mean_abs_momentum_residual": 0.1981143273605411,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.03656494872563328,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 4,
+        "pred_alpha_above": 0.19921875,
+        "observed_close_to_boundary_002": 1,
+        "observed_alpha_q25_50_75": [
+          0.3459238081840634,
+          0.4153907418709612,
+          0.437230054472576
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.054400869161466366,
+        "predicted_abs_alpha_distance_to_boundary": 0.054097058524074045,
+        "mean_abs_alpha_error": 0.05687952469489555,
+        "conditional_true_alpha_above": 0.2490234375,
+        "conditional_true_alpha_below": 0.8671875
+      },
+      "k4_to_k8": {
+        "correct_to_wrong": 173,
+        "wrong_to_correct": 237,
+        "unchanged": 1382,
+        "at_least_one_flip_impacts": 7
+      }
+    },
+    "fast_negative": {
+      "4": {
+        "impacts": 15,
+        "draws": 256,
+        "pairs": 3840,
+        "mistakes": 2585,
+        "accuracy": 0.3268229166666667,
+        "correct_after_u_repair": 0.42994791666666665,
+        "correct_after_rim_repair": 0.7455729166666667,
+        "wrong_repaired_by": {
+          "u_only": 42,
+          "q_only": 1232,
+          "either": 376,
+          "neither": 935
+        },
+        "correct_made_wrong_u_repair": 22,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.5157182240374263,
+        "spin_error_rads": 30.238452571514667,
+        "abs_err_u": 0.3061485271209755,
+        "abs_err_normal": 0.34941065930520016,
+        "abs_err_rim": 0.6047690514302934,
+        "release_mae": 0.8920031858609602,
+        "signed_err_u": 0.28697390697622943,
+        "signed_err_rim": -0.5977676769811722,
+        "mean_product_errors": -0.28277716835238137,
+        "release_mse_attribution": {
+          "tangent": 0.16598437788181067,
+          "rim": 0.5585847071086886,
+          "cross": 0.5655543367047627,
+          "total": 1.2901234216952622
+        },
+        "measured_release_abs": 0.4495879232170498,
+        "predicted_release_abs": 0.576926550433061,
+        "pred_within_margin": 0.29921875,
+        "median_abs_incident_release": 4.32460278260891,
+        "mean_abs_momentum_residual": 0.15456093618402297,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.033369101330765615,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 15,
+        "pred_alpha_above": 0.3268229166666667,
+        "observed_close_to_boundary_002": 0,
+        "observed_alpha_q25_50_75": [
+          0.4360899681500413,
+          0.4415757361789351,
+          0.44629783673338363
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.04117205024615011,
+        "predicted_abs_alpha_distance_to_boundary": 0.05100643422094393,
+        "mean_abs_alpha_error": 0.0798546193365674,
+        "conditional_true_alpha_above": 0.3268229166666667,
+        "conditional_true_alpha_below": null
+      },
+      "8": {
+        "impacts": 15,
+        "draws": 256,
+        "pairs": 3840,
+        "mistakes": 2780,
+        "accuracy": 0.2760416666666667,
+        "correct_after_u_repair": 0.42161458333333335,
+        "correct_after_rim_repair": 0.8544270833333333,
+        "wrong_repaired_by": {
+          "u_only": 62,
+          "q_only": 1697,
+          "either": 524,
+          "neither": 497
+        },
+        "correct_made_wrong_u_repair": 27,
+        "correct_made_wrong_rim_repair": 0,
+        "velocity_error": 0.4522559756394939,
+        "spin_error_rads": 27.430575546854442,
+        "abs_err_u": 0.2657619012703162,
+        "abs_err_normal": 0.31375441048451574,
+        "abs_err_rim": 0.5486115109370888,
+        "release_mae": 0.8013755255956418,
+        "signed_err_u": 0.25241694382482777,
+        "signed_err_rim": -0.5459322322540695,
+        "mean_product_errors": -0.20073232423183918,
+        "release_mse_attribution": {
+          "tangent": 0.11423493629736146,
+          "rim": 0.4288864183120726,
+          "cross": 0.40146464846367835,
+          "total": 0.9445860030731125
+        },
+        "measured_release_abs": 0.4495879232170498,
+        "predicted_release_abs": 0.44409177712502756,
+        "pred_within_margin": 0.3375,
+        "median_abs_incident_release": 4.32460278260891,
+        "mean_abs_momentum_residual": 0.15456093618402297,
+        "mean_abs_alpha_u_minus_alpha_rim": 0.033369101330765615,
+        "outside_feasible_alpha": 0,
+        "observed_alpha_above": 15,
+        "pred_alpha_above": 0.2760416666666667,
+        "observed_close_to_boundary_002": 0,
+        "observed_alpha_q25_50_75": [
+          0.4360899681500413,
+          0.4415757361789351,
+          0.44629783673338363
+        ],
+        "mean_abs_alpha_distance_to_boundary": 0.04117205024615011,
+        "predicted_abs_alpha_distance_to_boundary": 0.03767062818011741,
+        "mean_abs_alpha_error": 0.06894283920172596,
+        "conditional_true_alpha_above": 0.2760416666666667,
+        "conditional_true_alpha_below": null
+      },
+      "k4_to_k8": {
+        "correct_to_wrong": 561,
+        "wrong_to_correct": 366,
+        "unchanged": 2913,
+        "at_least_one_flip_impacts": 15
+      }
+    }
+  },
+  "single_threshold_diagnostic": {
+    "best_held_fast": {
+      "training_eligible": 22,
+      "best_hits": 22,
+      "observed_reverse": 19,
+      "tied_rules": [
+        {
+          "reverse_if_abs_slip_higher": false,
+          "threshold": 6.494075617377737
+        }
+      ],
+      "held_hits_across_tied_rules": [
+        22,
+        22
+      ],
+      "held_n": 22
+    },
+    "all_training": {
+      "training_eligible": 353,
+      "best_hits": 310,
+      "observed_reverse": 132,
+      "tied_rules": [
+        {
+          "reverse_if_abs_slip_higher": false,
+          "threshold": 5.013680444942989
+        },
+        {
+          "reverse_if_abs_slip_higher": false,
+          "threshold": 5.224632776214562
+        },
+        {
+          "reverse_if_abs_slip_higher": false,
+          "threshold": 5.687937666144325
+        }
+      ],
+      "held_hits_across_tied_rules": [
+        15,
+        17
+      ],
+      "held_n": 22
+    },
+    "slower_training": {
+      "training_eligible": 281,
+      "best_hits": 251,
+      "observed_reverse": 75,
+      "tied_rules": [
+        {
+          "reverse_if_abs_slip_higher": false,
+          "threshold": 4.992850037150535
+        },
+        {
+          "reverse_if_abs_slip_higher": false,
+          "threshold": 5.012957660083112
+        }
+      ],
+      "held_hits_across_tied_rules": [
+        15,
+        15
+      ],
+      "held_n": 22
+    },
+    "fast_training": {
+      "training_eligible": 72,
+      "best_hits": 70,
+      "observed_reverse": 57,
+      "tied_rules": [
+        {
+          "reverse_if_abs_slip_higher": false,
+          "threshold": 6.592095205483247
+        }
+      ],
+      "held_hits_across_tied_rules": [
+        21,
+        21
+      ],
+      "held_n": 22
+    }
+  },
+  "velocity_shapley": {
+    "fast_all": {
+      "k4_error": 0.44111191690641716,
+      "k8_error": 0.37762449154669947,
+      "reduction": 0.06348742535971769,
+      "tangential_share_mps": 0.03609191328803937,
+      "normal_share_mps": 0.027395512071678313
+    },
+    "fast_resolved": {
+      "k4_error": 0.5270334139824804,
+      "k8_error": 0.4559625811885883,
+      "reduction": 0.07107083279389209,
+      "tangential_share_mps": 0.05044765139186408,
+      "normal_share_mps": 0.020623181402028012
+    },
+    "other_all": {
+      "k4_error": 0.6694918529630798,
+      "k8_error": 0.5020199317812093,
+      "reduction": 0.1674719211818705,
+      "tangential_share_mps": 0.11100544717125599,
+      "normal_share_mps": 0.0564664740106145
+    }
+  },
+  "paid": {
+    "4": {
+      "fast_paid": 2,
+      "fast_resolved_hist": [
+        57,
+        120,
+        79
+      ],
+      "fast_with_both_reversal_classes": 24
+    },
+    "8": {
+      "fast_paid": 4,
+      "fast_resolved_hist": [
+        9,
+        50,
+        101,
+        76,
+        20
+      ],
+      "fast_with_both_reversal_classes": 84
+    }
+  },
+  "fitted_rule": {
+    "4": {
+      "decreasing_slope_draws": 127,
+      "draws": 256,
+      "decreasing_cutoff_quantiles_10_50_90": [
+        -39.16343235502353,
+        -0.4392097811579363,
+        4.694674589299619
+      ],
+      "opposite_slope_draws": 129,
+      "max_reconstruction_error": 8.881784197001252e-16,
+      "within_resolved_fast_abs_slip_range": 49
+    },
+    "8": {
+      "decreasing_slope_draws": 221,
+      "draws": 256,
+      "decreasing_cutoff_quantiles_10_50_90": [
+        -5.915287466180214,
+        2.404697117093006,
+        4.961130905110617
+      ],
+      "opposite_slope_draws": 35,
+      "max_reconstruction_error": 7.771561172376096e-16,
+      "within_resolved_fast_abs_slip_range": 113
+    }
+  }
+}

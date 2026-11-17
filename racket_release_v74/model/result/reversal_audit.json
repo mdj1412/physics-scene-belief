@@ -1,0 +1,54 @@
+{
+  "official": {
+    "source_only_vs_negative_incident_sign_disagreements": {
+      "4": 0,
+      "8": 0
+    },
+    "groups": {
+      "fast": {
+        "n": 37,
+        "resolved": 22,
+        "same": 3,
+        "reversed": 19
+      },
+      "other": {
+        "n": 121,
+        "resolved": 84,
+        "same": 56,
+        "reversed": 28
+      },
+      "all": {
+        "n": 158,
+        "resolved": 106,
+        "same": 59,
+        "reversed": 47
+      }
+    }
+  },
+  "secondary": {
+    "source_only_vs_negative_incident_sign_disagreements": {
+      "4": 0,
+      "8": 0
+    },
+    "groups": {
+      "fast": {
+        "n": 68,
+        "resolved": 33,
+        "same": 9,
+        "reversed": 24
+      },
+      "other": {
+        "n": 248,
+        "resolved": 146,
+        "same": 115,
+        "reversed": 31
+      },
+      "all": {
+        "n": 316,
+        "resolved": 179,
+        "same": 124,
+        "reversed": 55
+      }
+    }
+  }
+}

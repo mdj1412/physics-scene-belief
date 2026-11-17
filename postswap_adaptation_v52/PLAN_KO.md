@@ -1,0 +1,7 @@
+# v52 · 교체 후 calibration으로 기존 보정을 유지할지 결정하기
+
+교체 전 opposite surface에서 수집한 네 쌍을 공통으로 제공한다. 같은 contact law의 두 다른 surface 사이에서 교체 후 0, 1, 2, 4, 8개 독립 calibration 물체의 weak/reference 측정을 추가한다. 각 쌍은 0.4 N/2.0 N contact와 개별 reset으로 구성된다. Deployment에는 별도 held-out 물체만 쓰고 weak signed displacement 한 번을 읽는다. 목표는 기존 v50·51의 물체에 대한 matched intervention이다. 신규 실물 dataset을 수집한 것으로 해석하지 않는다.
+
+Primary는 교체 후 네 쌍이다. 사전 κ={0,.25,.50,.75,1}, session 단위 complement 확률 g={0,.25,.5,1}, active 물체별 reference–impact 불일치율 e={0,.25,.5}의 균등 mixture를 쓴다. Policy는 e, g, event, outcome, 물체·표면 이름을 보지 않는다. 설계 prior g0=.25와 e0=.10을 정하고 source에서만 추정한 Brier risk로 keep-old / refit-new / unsigned를 선택한다. 두 번째 policy는 같은 prior·action·risk와 같은 양의 데이터를 사용하되 측정 크기 대신 threshold를 넘은 sign agreement 수를 쓴다. 세 번째 policy는 교체 후 simple vote의 posterior mean으로 바로 두 예측을 혼합한다. Always-keep, always-refit 및 unsigned와 연속 혼합을 진단으로 둔다.
+
+가설은 교체 후 측정이 drift와 stationary 상태의 분리에 도움을 주되, 후속 측정만 쓰는 대조나 같은 세 action을 가진 단순 vote보다 session 상위 손실까지 좋아지는지는 열려 있다는 것이다. κ=.5 또는 e=.5에서는 방향 관측의 한계를 따로 보고한다. Primary endpoint는 (i) 평균 held-out Brier, (ii) 128개 deployment object당 평균 Brier의 90번째 백분위수다. 동일 catalog·session·object·noise로 짝짓고, 두 대조 × 두 endpoint의 네 비교에 집단별 보정을 적용한다. 개별 관측이나 256개 prefix 반복을 독립 재질로 세지 않는다. 정책별 session p90의 차이와 paired difference의 p90을 구별한다. 비용은 교체 전 sunk cost·교체 후 양쪽 contact/reset·배포 touch·GPU inference를 구별한다. GPU timing은 실제 end-to-end 경로를 같은 장치에서 순서를 균형화한다.

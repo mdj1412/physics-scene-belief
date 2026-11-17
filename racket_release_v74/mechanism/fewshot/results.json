@@ -1,0 +1,208 @@
+{
+  "official": {
+    "4": {
+      "fewshot_threshold": {
+        "fast": 37,
+        "eligible": 22,
+        "accuracy": 0.8643465909090909,
+        "velocity": 0.3669060337649011,
+        "spin": 11.859385916230368,
+        "sign_hits": 4868,
+        "sign_pairs": 5632,
+        "majority_acc": 0.6402698863636364,
+        "paired_gain_vs_reverse_percentile": [
+          -0.013494318181818182,
+          0.015980113636363636
+        ],
+        "rev": 0.9877533783783784,
+        "coherent_changed": 0.6373521959459459,
+        "subset_identified_fast_accuracy": 0.8712121212121212,
+        "subset_unidentified_fast_accuracy": 0.8636363636363636
+      },
+      "always_reverse": {
+        "fast": 37,
+        "eligible": 22,
+        "accuracy": 0.8636363636363636,
+        "velocity": 0.36746006480468874,
+        "spin": 11.844316859537791,
+        "sign_hits": 4864,
+        "sign_pairs": 5632,
+        "majority_acc": 0.6402698863636364,
+        "paired_gain_vs_reverse_percentile": [
+          0.0,
+          0.0
+        ],
+        "rev": 1.0,
+        "coherent_changed": 0.6460092905405406,
+        "subset_identified_fast_accuracy": 0.8636363636363636,
+        "subset_unidentified_fast_accuracy": 0.8636363636363636
+      },
+      "evidence": {
+        "counts": {
+          "reverse_only": 157,
+          "no_vote": 57,
+          "retain_only": 18,
+          "separated": 24
+        },
+        "draws": 256,
+        "both_class_draws": 24,
+        "consistent_gap_median_mps": 2.811354064392726,
+        "identified_finite_cutoff_median_mps": 6.103293624847254
+      }
+    },
+    "8": {
+      "fewshot_threshold": {
+        "fast": 37,
+        "eligible": 22,
+        "accuracy": 0.8700284090909091,
+        "velocity": 0.3308011492100748,
+        "spin": 11.481787174151087,
+        "sign_hits": 4900,
+        "sign_pairs": 5632,
+        "majority_acc": 0.5889559659090909,
+        "paired_gain_vs_reverse_percentile": [
+          -0.03981711647727273,
+          0.05699573863636364
+        ],
+        "rev": 0.9607263513513513,
+        "coherent_changed": 0.5796030405405406,
+        "subset_identified_fast_accuracy": 0.8831168831168831,
+        "subset_unidentified_fast_accuracy": 0.8636363636363636
+      },
+      "always_reverse": {
+        "fast": 37,
+        "eligible": 22,
+        "accuracy": 0.8636363636363636,
+        "velocity": 0.33650483398939907,
+        "spin": 11.773858629662831,
+        "sign_hits": 4864,
+        "sign_pairs": 5632,
+        "majority_acc": 0.5889559659090909,
+        "paired_gain_vs_reverse_percentile": [
+          0.0,
+          0.0
+        ],
+        "rev": 1.0,
+        "coherent_changed": 0.6150760135135135,
+        "subset_identified_fast_accuracy": 0.8636363636363636,
+        "subset_unidentified_fast_accuracy": 0.8636363636363636
+      },
+      "evidence": {
+        "counts": {
+          "reverse_only": 148,
+          "separated": 83,
+          "retain_only": 15,
+          "no_vote": 9,
+          "conflict": 1
+        },
+        "draws": 256,
+        "both_class_draws": 84,
+        "consistent_gap_median_mps": 3.197787262597981,
+        "identified_finite_cutoff_median_mps": 6.133198981697339
+      }
+    }
+  },
+  "secondary": {
+    "4": {
+      "fewshot_threshold": {
+        "fast": 68,
+        "eligible": 33,
+        "accuracy": 0.7420691287878788,
+        "velocity": 0.39731335754653735,
+        "spin": 14.112418328404415,
+        "sign_hits": 6269,
+        "sign_pairs": 8448,
+        "majority_acc": 0.5681818181818182,
+        "paired_gain_vs_reverse_percentile": [
+          4.438920454545455e-05,
+          0.029548413825757576
+        ],
+        "rev": 0.9805836397058824,
+        "coherent_changed": 0.5757123161764706,
+        "subset_identified_fast_accuracy": 0.88510101010101,
+        "subset_unidentified_fast_accuracy": 0.7272727272727273
+      },
+      "always_reverse": {
+        "fast": 68,
+        "eligible": 33,
+        "accuracy": 0.7272727272727273,
+        "velocity": 0.3987242591084271,
+        "spin": 14.122119408546645,
+        "sign_hits": 6144,
+        "sign_pairs": 8448,
+        "majority_acc": 0.5681818181818182,
+        "paired_gain_vs_reverse_percentile": [
+          0.0,
+          0.0
+        ],
+        "rev": 1.0,
+        "coherent_changed": 0.5932904411764706,
+        "subset_identified_fast_accuracy": 0.7272727272727273,
+        "subset_unidentified_fast_accuracy": 0.7272727272727273
+      },
+      "evidence": {
+        "counts": {
+          "no_vote": 44,
+          "reverse_only": 163,
+          "retain_only": 25,
+          "separated": 24
+        },
+        "draws": 256,
+        "both_class_draws": 24,
+        "consistent_gap_median_mps": 3.225348350144396,
+        "identified_finite_cutoff_median_mps": 6.0397977239452025
+      }
+    },
+    "8": {
+      "fewshot_threshold": {
+        "fast": 68,
+        "eligible": 33,
+        "accuracy": 0.7804214015151515,
+        "velocity": 0.3658200788272451,
+        "spin": 13.660780035526985,
+        "sign_hits": 6593,
+        "sign_pairs": 8448,
+        "majority_acc": 0.5980113636363636,
+        "paired_gain_vs_reverse_percentile": [
+          0.005445075757575758,
+          0.10116299715909091
+        ],
+        "rev": 0.9365234375,
+        "coherent_changed": 0.5383157169117647,
+        "subset_identified_fast_accuracy": 0.9039748130657221,
+        "subset_unidentified_fast_accuracy": 0.7272727272727273
+      },
+      "always_reverse": {
+        "fast": 68,
+        "eligible": 33,
+        "accuracy": 0.7272727272727273,
+        "velocity": 0.37110453013268574,
+        "spin": 13.751045880523762,
+        "sign_hits": 6144,
+        "sign_pairs": 8448,
+        "majority_acc": 0.5980113636363636,
+        "paired_gain_vs_reverse_percentile": [
+          0.0,
+          0.0
+        ],
+        "rev": 1.0,
+        "coherent_changed": 0.6016773897058824,
+        "subset_identified_fast_accuracy": 0.7272727272727273,
+        "subset_unidentified_fast_accuracy": 0.7272727272727273
+      },
+      "evidence": {
+        "counts": {
+          "separated": 75,
+          "reverse_only": 167,
+          "retain_only": 7,
+          "conflict": 2,
+          "no_vote": 5
+        },
+        "draws": 256,
+        "both_class_draws": 77,
+        "consistent_gap_median_mps": 2.4645860445647916,
+        "identified_finite_cutoff_median_mps": 6.12610667184347
+      }
+    }
+  }
+}

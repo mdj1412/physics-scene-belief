@@ -1,0 +1,5 @@
+# v64 · 자료 적합 기준 및 실제 조명 대조 계획
+
+주 검증 단위는 같은 surface-session의 물체 8개에 지불한 reference와 impact이다. 아래 자료를 session ID 및 타임스탬프로 연결할 수 있어야 한다. (1) 같은 event의 서로 다른 방향 조명 영상, 또는 사전 무작위로 배정한 반복 event와 그 배정 자료, (2) 영상과 독립이고 부호 convention이 확인되는 strain, (3) 여러 frame에 걸쳐 같은 물리 landmark의 identity를 확인하는 기준, (4) 각 후보 행동의 실제 후속 관측과 held-out stick/slip label 또는 식별 가능한 randomized logging. 조명 비교에는 같은 기하와 고정한 정책을 쓰며 단일 방향의 frame들을 임의로 재색칠하지 않는다. 단일 방향의 force, 압력, 이미지 유도 DIC strain은 독립 strain과 구분한다. Joint 자료를 확인하지 못하면 field rate·실물 Brier·field end-to-end GPU p90은 미추정이라고 보고한다.
+
+**실측 정지 대조.** Shi 등 DiLiGenT main의 고정 camera와 10개 물체, calibrated LED를 사용한다. 결과를 보기 전에 light vector의 수평 meridian에서 -40°, -15°, +15°, +40°에 가장 가까운 서로 다른 네 방향을 고른다. 첫 방향을 기준으로 25 pixel 간격 정사각 격자의 object mask 내부를 검사한다. 15 × 15 patch의 zero-mean normalized cross-correlation(NCC)으로 중심 주변 ±8 pixel을 탐색한다. NCC 계산 분모가 양수인 texture patch를 사용한다. 같은 영상에서는 좌표가 같아야 한다. 나머지 세 방향 모두 NCC ≥ 0.8이면서 기준 대비 수평 offset이 세 방향 모두 +2 pixel 이상 또는 모두 −2 pixel 이하인 비율을 구한다. 세 방향은 서로 다른 조명으로 촬영한 정지 상태의 재관측이다. 시간 연속의 잘못된 marker identity나 impact 빈도로 해석하지 않는다. 역순과 NCC 0.7·0.9는 sensitivity다. 조명 세트는 좌표만으로 결정한다. 물체별 분모와 동일 영상 replay를 함께 보고한다.

@@ -1,0 +1,45 @@
+# 첨부 서베이 검토 · 어떤 contour 성분을 제거해도 되는가?
+
+**채택할 제안은 세 가지다.** 후보 변형이 실제 stick/slip을 바꾸는 현상과 표현의 예측 정보 손실을 분리한다. 같은 측정 예산에서 source 방향을 약하게 억제하는 것과 완전히 제거하는 것을 비교한다. 동일하게 재학습한 readout에서 전체 profile과 제거한 profile의 차이가 남는지 살핀다. 반면 서베이가 제안한 alignment × mechanical coupling 실험과 source relative-risk router는 v47에서 이미 수행했다. 원고에는 이 기존 실험을 메커니즘 증거로 제시하는 편이 적절하다. [v47 실험](../factorial_projection_v47/REPORT_KO.md)
+
+검토일 2026-11-17. 첨부가 제시한 22편의 공식 proceedings, 저널 또는 저자 preprint 기록을 대조했다. 아래 네 핵심 문헌은 논문 본문의 가정, 표현 또는 비교 실험까지 확인했다. 나머지 문헌은 원 연구의 과제·측정과 우리 설계의 일치 범위에 따라 분류했다. 신규성 판단의 범위는 이 22편과 현재 원고의 비교에 한정한다.
+
+## 1. 원고의 논지를 바꾸는 네 편
+
+| 원문 | 질문·방법·표본 | 발견 | 우리 실험에 반영할 내용 |
+|---|---|---|---|
+| Fazeli et al., CoRL 2017 | 실물 planar impact를 어떤 물리적 표현으로 예측하는가? 2,000번 drop에서 무결성 검사 후 1,718건을 사용했다. 10차원 상태에서 접촉점 inertia와 velocity를 쓰는 5차원, momentum을 쓰는 2차원 feature를 유도하고 GP·analytic model을 비교했다. | 5차원과 2차원의 차이는 작았고, wrench에 torque를 허용하면 해당 실험에서 rigid impulse model의 한계를 넘어섰다. | 물리적으로 선택한 feature와 관측 분산이 큰 축을 지우는 PCA는 서로 다른 가정이다. 같은 관측에서 추정한 local slope·velocity를 이용한 probabilistic baseline이 후속 우선순위다. 참 inertia·pressure·contact 위치를 주는 결과는 privileged diagnostic으로 표시한다. [원문 §§3–4](https://proceedings.mlr.press/v78/fazeli17a/fazeli17a.pdf) |
+| Achille & Soatto, JMLR 2018 | Minimal sufficient representation의 invariance를 어떤 조건에서 설명할 수 있는가? 이론과 신경망 실험을 결합한다. | 이론에서 nuisance는 과제 변수와 독립이다. 관측과 과제 관련 정보를 보존하는 sufficient representation의 성질을 도출한다. | Source paired shape에서 큰 분산 축을 찾았다는 사실만으로 target의 task nuisance라 명명할 수 없다. 원고에서는 **source deformation direction**으로 지칭하고, 제거 성능과 label invariance를 경험적으로 검사한다. [원문 §§2–3](https://jmlr.org/papers/volume19/17-646/17-646.pdf) |
+| Johansson, Sontag & Ranganath, AISTATS 2019 | Domain-invariant representation의 비가역성과 support가 target risk에 어떻게 관여하는가? 동일한 원 입력의 label conditional을 전제해 분석한다. | 원 입력에서 covariate shift가 성립해도 여러 입력이 한 표현으로 합쳐지면 그 표현의 label conditional은 달라질 수 있다. | Contact law를 바꾸어 같은 측정의 outcome 자체가 달라지는 실험에서는 해당 bound의 전제를 다시 확인해야 한다. 지금의 frozen likelihood 차이는 곧바로 정보 손실량을 뜻하지 않는다. [원문 §2·§5](https://proceedings.mlr.press/v89/johansson19a/johansson19a.pdf) |
+| Xiao et al., ICLR 2021 | 어떤 영상 augmentation이 downstream task의 단서를 지우는가? 공유 backbone과 augmentation별 head를 학습해 coarse/fine-grained 및 few-shot task에서 비교한다. | 원 연구의 downstream 비교에서는 invariant·varying head를 함께 활용할 때 성능이 좋았다. | Orthogonal complement만 남긴 표현과, 버린 scalar를 별도 채널에 보존한 표현에 동일한 종류의 readout을 학습한다. 우리 rank-one 조작은 LooC와 다른 알고리즘이므로 이 조건에서의 개선은 직접 검정해야 한다. [원문 §1·§4](https://arxiv.org/pdf/2008.05659) |
+
+## 2. 나머지 18편의 쓰임
+
+| 주제 | 원 연구가 확인한 것과 현재 원고에서 사용할 범위 |
+|---|---|
+| 변환을 지정하거나 학습하는 방법 (4편) | Tangent Prop은 지정한 transformation tangent에 대한 출력 민감도를 벌점화한다. Augerino는 transformation distribution, InstaAug는 입력별 transformation parameter를 학습한다. von Kügelgen et al.의 식별 결과에는 augmentation이 content를 보존하는 생성 가정이 필요하다. 이 문헌은 강도 sweep·입력별 규칙의 배경이다. 우리 frozen likelihood sweep을 해당 학습법의 재현으로 기록할 수 없다. [Tangent Prop](https://proceedings.neurips.cc/paper/1991/file/65658fde58ab3c2b6e5132a39fae7cb9-Paper.pdf) · [Augerino](https://proceedings.neurips.cc/paper/2020/file/cc8090c4d2791cdd9cd2cb3c24296190-Paper.pdf) · [InstaAug](https://proceedings.mlr.press/v202/miao23a.html) · [Content–style 식별](https://proceedings.neurips.cc/paper/2021/file/8929c70f8d710e412d38da624b21c3c8-Paper.pdf) |
+| Domain shift와 평가 (3편) | Zhao et al.은 invariant marginal과 낮은 source error가 target 성공을 보장하기에 부족한 반례와 bound를 제시한다. WILDS는 자연 발생 shift의 group 평가를 구성했고, Ovadia et al.은 shift 아래 probabilistic predictions를 비교했다. 우리 연구에서는 surface·family 단위 split, family별 Brier, 필요 시 reliability·resolution을 따로 본다. 같은 target family 안에서 catalog seed를 새로 뽑은 검증과 새로운 family를 모집한 검증을 분리한다. [Zhao](https://proceedings.mlr.press/v97/zhao19a.html) · [WILDS](https://proceedings.mlr.press/v139/koh21a.html) · [Ovadia](https://proceedings.neurips.cc/paper_files/paper/2019/file/8558cb408c1d76621371888657d2eb1d-Paper.pdf) |
+| Contact representation과 확률 모델 (3편) | ContactNets는 trajectory에서 signed distance와 contact-frame Jacobian을 학습한다. Elandt et al.은 접촉 영역의 pressure·traction을 적분해 wrench를 구한다. Bauza & Rodriguez는 planar pushing의 확률적 motion을 모델링한다. 세 과제 모두 우리 binary gross-slip Brier와 평가 대상이 다르다. 관측으로 추정한 mechanics baseline과 별도 ground-truth diagnostic을 구분할 근거다. [ContactNets](https://proceedings.mlr.press/v155/pfrommer21a.html) · [Pressure field](https://arxiv.org/abs/1904.11433) · [Probabilistic pushing](https://arxiv.org/abs/1704.03033) |
+| Risk와 calibration (4편) | Learning to Defer는 classifier와 expert의 relative error, SelectiveNet은 거절률과 수용 집합 risk를 다룬다. 우리 policy는 full decoder로 fallback하므로 모든 trial의 risk가 필요하다. Learn then Test의 calibration population과 target 관계가 깨지면 보장은 자동 이전되지 않는다. CaPTURe는 두 simulated planning task에서 future configuration region의 coverage를 시험했다. 이들 결과는 binary Brier 개선이나 OOD 보장을 입증하지 않는다. [Deferral](https://proceedings.mlr.press/v119/mozannar20b.html) · [SelectiveNet](https://proceedings.mlr.press/v97/geifman19a.html) · [Learn then Test](https://arxiv.org/abs/2110.01052) · [CaPTURe, COPA 2026](https://proceedings.mlr.press/v329/marques26a.html) |
+| 실제 물리와 calibration 맥락 (4편) | Ma & Rodriguez는 planar pushing에서 비균질성·anisotropy·데이터 수집순서로 관측된 변동 일부를 설명했다. Acosta et al.은 실제 cube와 Cassie에서 simulator·impact regime에 따라 정확도가 달라짐을 보였다. PhysTwin은 영상에서 deformable object의 물성을 포함한 reconstruction, PhysiCalWorld는 네 환경의 exploratory clip으로 instance-specific rollout을 다룬다. 실물 검증 설계와 동기를 지지한다. PhysiCalWorld의 확인된 기록은 2026년 10월 arXiv preprint다. [Friction variability](https://arxiv.org/abs/1802.10089) · [Impact 검증](https://arxiv.org/abs/2110.00541) · [PhysTwin](https://arxiv.org/abs/2503.17973) · [PhysiCalWorld](https://arxiv.org/abs/2610.30125) |
+
+## 3. 같은 projection을 두고 왜 손익이 달라지는가?
+
+평가 대상을 세 가지로 명시한다.
+
+1. **Physical outcome invariance.** 같은 물체·속도·표면에서 shape만 바꿨을 때 solver 또는 실물 label이 달라지는 빈도다. v47에서 inert coupling은 0%, strong coupling은 33.72%였다. 변형 norm이 같고 high alignment여도 forced projection의 Brier 차이는 inert −0.009763, strong +0.027425였다. 이 결과는 정해진 simulation intervention에 관한 증거다. [v47 mechanics와 outcome](../factorial_projection_v47/REPORT_KO.md)
+2. **Predictive sufficiency.** 같은 관측 모집단에서 전체 입력 X와 축 삭제 후 입력 Z를 비교한다. 공통 factual evidence와 paid arm도 두 입력에 붙인다. Binary Brier에 대해 Bayes risk의 차이는 E[(P(Y=1|X)−P(Y=1|Z))²]이다. 조건부 평균의 직교성으로 얻는 이 항등식은 finite readout의 실험 차이와 구별된다. Source에서만 훈련한 readout은 target conditional 변화도 함께 겪는다. 삭제 후 손실이 작다는 사실만으로 target에서의 sufficiency를 입증할 수 없다. [비가역적 표현](https://proceedings.mlr.press/v89/johansson19a.html)
+3. **Frozen decoder utility.** 동일 측정 조건에서 사전 고정한 확률의 Brier를 비교한다. α=1인 rank-one deletion은 해당 축 성분을 없앤다. 0≤α<1이면 축의 크기만 (1−α)배가 되어 변환은 가역적이다. Residual의 likelihood를 등방성으로 유지하면 그 축의 energy 가중치가 (1−α)²로 바뀐다. Axis와 whitening이 같은 hypothesis들에 적용되고 원 측정의 함께 쓰이는 side information이 고정된 조건에서 이 효과는 precision 변경으로 읽을 수 있다. α가 1보다 작아도 이득이 보이면, 이득을 설명할 때 완전한 정보 삭제를 가정할 필요가 없다. [원고의 residual 정의와 관측 마스킹](../factorial_projection_v47/REPORT_KO.md)
+
+**두 가지 진단이 충분조건이 될 수 없는 반례.** 자료 수집을 추가하지 않고 확인 가능한 수학 예시다. 서로 다른 두 물체의 기초 높이 B를 −2 또는 +2로 같은 확률로 두고, variant D는 ±1이라고 하자. 관측 X=(B+D,0), label Y=1[B>0]이다. 각 물체의 variant pair는 label을 완벽하게 보존하고 pair 축은 e₁과 완전히 정렬한다. 그런데 X에서 e₁을 지우면 두 물체를 구별할 수 없어 최적 Brier가 0에서 0.25로 오른다. Source 축이 처음부터 여러 물체 사이의 높이 차이도 함께 담았기 때문이다. 이는 논리적 반례이고 실제 생성기에서 측정한 수치가 아니다. 따라서 원고의 “두 조건”은 성능을 보장하는 기준보다 **서로 다른 개입으로 살펴볼 두 질문**으로 기술하는 것이 엄밀하다.
+
+## 4. 기존 결과와 남은 검정의 우선순위
+
+| 판단 | 근거·결정 |
+|---|---|
+| 본문에 반영 | v46의 90.4%는 같은 route에서 privileged target axis를 대입해 줄어든 excess risk 비율이다. 남은 차이를 label change의 기여율로 배분할 수 없다. v47은 같은 pre-contact frame에서 alignment와 loaded deformation을 교차했다. 다만 probe arm에서는 두 decoder가 같으며 surface·law의 단독 효과는 추정하지 않았다. [v46](../normal_variance_v46/REPORT_KO.md) · [v47](../factorial_projection_v47/REPORT_KO.md) |
+| 새 계산에 우선 | Source validation에서 α를 고르고, target label을 쓰지 않는 frozen 비교를 실시한다. α=0·1과 source-selected α를 일차 비교로, target sweep은 기술적 진단으로 표기한다. Information-preserving split과 원 입력의 차이가 생기면 정규화·모델 용량·feature scaling·최적화를 검사한다. Rotation-equivariant single-height linear readout과 isotropic penalty라면 full/split 동일성은 구현 대조다. 높이마다 축이 다르면 height-specific readout이나 같은 조건부 좌표계를 제공해야 한다. [Xiao](https://arxiv.org/abs/2008.05659) · [Tangent Prop](https://proceedings.neurips.cc/paper/1991/file/65658fde58ab3c2b6e5132a39fae7cb9-Paper.pdf) |
+| 기존 결과 활용 | Relative-loss learner 자체는 v47에 있다. 당시 observation-only router Brier 0.151723, always-original 0.151709, frozen v46 0.153199였다. projection 사용률이 0.925%로 작았다. 이 결과를 성공적인 active selection이나 full-profile 대비 개선으로 일반화할 수 없다. [v47 router](../factorial_projection_v47/ROUTER_KO.md) · [v47 평가](../factorial_projection_v47/REPORT_KO.md) |
+| 최종 증거로 남은 부분 | 여러 independent source fit의 변동, 전체 family를 새로 모집한 locked holdout, 동일 관측으로 학습한 contact-mechanics baseline을 구분한다. 실제 matched contact·slip·strain은 v65가 설계만 완료했다. v64 정적 실측 patch와 v65 replay는 외부 계측의 구체적 실패를 확인하지만 실제 contact intervention의 정책 이득은 남아 있다. [시편별 실물 설계](../paired_light_pilot_v65/REPORT_KO.md) · [Acosta](https://arxiv.org/abs/2110.00541) |
+
+현재 가장 설득력 있는 주장은 같은 paid observation에서 방향 선택, 실제 mechanics, 특정 decoder의 과신을 분리해 음의 전이를 진단할 수 있다는 것이다. 실물 자료의 역할은 그 기전이 제어된 simulation 밖에서도 반복되는지 검정하는 데 있다.

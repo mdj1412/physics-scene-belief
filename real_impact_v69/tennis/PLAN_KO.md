@@ -1,0 +1,3 @@
+# Cross Wilson two-impact test
+
+Figure의 rebound velocity digitization을 전달받기 전에 정한 계산이다. 입력은 58.1 g, 반지름 33 mm인 Wilson Australian Open ball의 no-spin (5.8, −6.8), (21.1, −6.8) m/s이다. 가운데 예측은 e=.75, mu=.50, hollow thin-shell I/(mR²)=2/3, tangential-memory가 있는 조건의 k_t/k_load=.5이다. 동일한 두 입사 조건과 자유 평면을 PyBullet와 compliant에 준다. e∈{.65,.75,.85}, mu∈{.2,.5,.8}, memory ratio∈{.125,.5,1}로 sensitivity를 계산한다. 이 범위는 두 rebound 측정에서 추정하지 않은 design assumptions이며 prior probability·confidence interval로 해석하지 않는다. 중심값의 오차와 구간 밖/안 여부를 보고한다. 저자의 chalk footprint는 접촉 중 전체 흔적으로, instantaneous contact area·stick map으로 바꾸지 않는다. 두 예시를 independent population estimate로 취급하지 않는다.

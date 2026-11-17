@@ -1,0 +1,7 @@
+# v62 · Selective readout 사전 명세
+
+LED pulse width 0.20/0.80 ms와 global shutter exposure 0.25/0.80 ms를 2×2로 교차한다. 1 kHz frame의 노출 구간과 발광 구간이 겹친 길이를 exposure로 나눠 optical contrast를 계산한다. 물체 쪽은 exposure 구간의 네 midpoint에서 움직인 marker 영상을 같은 가중치로 적분한다. Photodiode waveform의 pulse 폭도 같은 설정보다 독립적으로 길어지지 않도록 실제 LED pulse와 연동한다. 4개 timing offset (LED, camera) = (0,0), (0,2), (2,0), (2,2) ms는 pilot당 8개 impact slot에 각각 두 번씩 무작위 배정해 exposure와 독립시킨다. Reference는 모든 조건에서 board offset과 clip jitter만 따른다.
+
+8개 새 synthetic sensor board와 48개 새 surface를 교차한다. Surface당 512개 8-impact pilot, board당 64개 반복이다. 동일한 paid raw frame·두 채널 ADC waveform·전자센서 readout에서 v61 frozen dual과 selective dual을 평가한다. Selective는 v61 dual이 낸 부호를 바꾸지 않고 일부만 보류한다. 한 clip이 v61 기본 요건을 만족한 뒤, 첫째 LED 최대 contrast가 48 이상이고 두 번째가 28 이하인지, 둘째 네 frame의 보정된 marker 변위로 구한 변화의 절댓값이 0.75 pixel 이상인지, 셋째 early-to-mid 및 next-to-late 변화 두 개가 모두 최종 부호 방향으로 0.20 pixel 이상인지를 확인한다. 하나라도 실패하면 그 clip 부호는 결측이다. 기준은 target outcome·board ID·pulse/exposure 명칭·simulator truth를 사용하지 않으며 outcomes를 읽기 전에 고정한다. Probe 수, 재촬영, 추가 reset이 없다.
+
+표면당 네 session마다 물체 두 개, 각 물체에 R/I 하나씩. 한 쌍에서 R/I 양쪽의 부호가 모두 있어야 optical mismatch bit를 읽는다. 물리적으로 활성인 쌍 대비 판독률, 유효한 판독 중 오류율, 전체 human-visible opportunity 대비 판독·정답, 보류 집합의 원래 오류율과 얼마나 많은 cap이 남았는지를 각각 보고한다. 원인 P/C 및 환경 A/B에 대해 같이 생성한 네 counterfactual을 독립적인 장비 수로 세지 않는다. 24개 catalog·8개 board를 통째로 복원추출하는 paired product bootstrap을 사용한다. 4개 cell의 동일 paid evidence를 여러 번 산 것으로 세지 않는다. 원래 reader와의 strict subset, 결측 frame/ADC의 차폐, fixture replay 일치와 pulse × shutter 가독성의 상호작용을 검산한다.

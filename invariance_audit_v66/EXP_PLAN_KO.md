@@ -1,0 +1,9 @@
+# 공통 downstream readout으로 geometry projection의 영향을 다시 측정하는 계획
+
+기존 v45 fold/ripple 12개 catalog를 source로 사용한다. 0–7은 fit, 8–11은 epoch 선택에만 쓴다. 기존 v46 terrace/dimple 12개 disjoint catalog의 numerical risk는 역사적으로 공개되어 있다. 이번 readout 비교에 대해서는 source에서만 학습·선택하며, 모든 가중치와 target forecast를 쓴 뒤 target label을 연다. 이는 보존된 benchmark의 새 분석이다.
+
+동일하게 구매한 query profile의 7개 채널은 같은 sensor noise scale을 갖는다. 기존 높이별 source axis u와 6차원 orthogonal complement U를 동결한다. Full은 원래 7좌표, dropped는 Uᵀx와 0, restored는 Uᵀx와 uᵀx다. 세 조건 모두 같은 11개 factual channel, nominal 높이, hard-projected physics forecast의 log odds를 받는다. 이 forecast는 perpendicular residual 및 factual evidence로만 계산되므로 dropped 쪽에 삭제된 값을 노출하지 않는다. Forecast에 학습 residual을 더해 확률을 낸다. Probe 구입 시 세 조건 모두 원래 probability를 사용한다. Family·law·surface·hidden state·선택하지 않은 측정·label은 predictor에 주지 않는다. 높이와 paid sensor 유형은 관측 설정이다.
+
+동일한 single-hidden-layer 64-unit SiLU residual readout, 3개 source-fit seed, source-only feature scale, AdamW lr 0.002, batch 4096로 각각을 다시 학습한다. 4개 paid-noise 반복 중 source fitting에는 첫 2개를, validation/test에는 4개 전부를 쓴다. E=4, 8, 16에서 source validation Brier가 가장 낮은 epoch을 seed·representation별로 고른다. Terminal residual의 target은 radius 0.25/2 mm와 3 offset에서 균등 평균한 binary outcome이다. 실제 Brier는 p²−2p E[Y]+E[Y]로 개별 binary trial의 평균을 정확히 구한다. Primary risk는 source seed별 risk 평균이다. Probe 포함 complete policy에 대해 12 target catalog의 restored−dropped와 full−dropped 두 비교를 Bonferroni simultaneous 95% paired t interval로 계산한다. Family별 및 restored−full은 진단이다. 기존 frozen original/projected를 같은 자료에서 재계산해 v46 archive와 대조한다.
+
+Prediction coordinate reconstruction, finite-value/masking, full vs restored 원자료 보존, 각 blinded target forecast SHA와 target label을 독립 경로에서 결합하는 검사를 수행한다. Readout의 test risk 차이는 해당 source/readout/shift에 관한 값이다. Target-optimal Bayes risk, 충분성, 인과 효과를 식별하지 않는다.

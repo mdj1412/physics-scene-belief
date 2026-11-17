@@ -1,0 +1,9 @@
+# v74 · 부호 보정의 평가 규약
+
+기존 v73의 공개 aggregate와 결과를 이미 보았으므로 공식 test는 retrospective다. 아래 설계와 코드 checksum을 target 예측 실행 전에 기록한다. 새 시편에 대한 독립 검증은 별도로 필요하다.
+
+주 방법은 고정 racket에서 입사 접촉점의 slip 부호가 뒤집히면 물리적으로 대칭일 수 있다는 가정으로, 입사에 대한 이탈 부호의 보존·반전을 학습한다. 각 sample의 입사 상태는 v_x, v_z, Rω 순서이고 s=v_x−Rω다. sign(s)에 대해 정렬한 두 feature는 |s|/|v_z|와 v_x·sign(s)/|v_z|다. 이는 normal speed에 상대적인 slip 크기와 공 중심 운동을 구분한다. Source 훈련 통계로 표준화하고, source 제품마다 RBF 평균으로 추정한 확률을 제품 동등 가중으로 합친다. Target calibration의 판독 가능한 부호(|s'|>0.20 m/s)만 거리 가중으로 더하며 source pseudo-count는 고정한다. Target 부호는 다시 입사 방향으로 되돌린다. Bandwidth 0.25, 1, 무한과 pseudo-count 0, 0.5, 2의 9개 조합 중 하나를 5개 source rubber의 leave-one-product-out, K4·8 공동 fast sign accuracy로 선택한다. Source train 내 pseudo-target을 speed 층화 사전 고정 반분해 평가한다. Source 선택에 A-B-S II soft의 입력·출력·test는 모두 배제한다. 동점은 넓은 bandwidth와 작은 pseudo-count 우선이다. 유효 vote가 없을 때 source를 사용한다. 반사 대칭은 제조·마모·각도·측정 축에 따른 비대칭이 있으면 실패할 수 있다.
+ 
+최종 출력에서 elastic과 보정 부호가 다르면 desired slip을 해당 부호의 ±0.20 m/s로 두고, Δu=0.4Δs 및 Δ(Rω)=−0.6Δs로 수정한다. 이 식은 기존 thin-shell angular impulse coupling을 보존한다. 이는 v71 계수 범위에서 항상 실현 가능함을 뜻하지 않으므로 implicit impulse coefficient [0,0.8] 이탈도 기록한다. 같은 부호의 예측은 크기를 유지한다. Source-only sign, paid global sign, paid fast/other sign, source prior 없는 parity-global sign, v73 majority와 elastic을 함께 비교한다. Paid constant baseline의 동률은 원래 elastic 이탈 부호를 따른다. Sign-only head의 적중률은 coherent와 동일하고 연속 오차는 elastic과 동일하나, 보정 전 sign과 운동 예측이 모순되는 비율을 함께 낸다.
+
+Official 158개의 fast 37·판독 22에 v73 동일 256 draw(4/8회)를 쓰고 추가 분석은 632개 공식 train만 seed 740074로 fast/other별 절반씩 분리한다. Secondary에서는 calibration와 평가행이 겹치지 않고 원 official test는 사용하지 않는다. 주 판독 margin 0.20, 평가 mask를 0, 0.50으로 바꾼 sensitivity에서는 보정 규칙과 예측을 동결한다. 센서 실패를 포함한 모집단 판독률은 알 수 없다. 기본 비교는 주 head의 coherent output이 같은 fast test 분모에서 majority보다 높은 적중률과 낮은 두 연속 오차를 함께 나타내는지다. Source 검증 기준은 방향이 primary이고, 실제 연속 오차는 매 budget·split에서 별도로 판정한다.

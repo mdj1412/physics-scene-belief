@@ -1,0 +1,4 @@
+# 별도 locked transfer · geometry moment
+2026-11-17. 기존 v46 결과 확인 후, wendland/dispersive의 target outcome 생성 전에 추가 결정한 secondary comparison이다. 이 결과는 원래의 두 primary readout contrast와 별도 family of hypotheses다. v45 source로 fit하여 이미 동결된 CPU 세 가지 표현(moment/full/dropped)과 세 seed를 그대로 사용한다. 새 표면·법칙은 주장하지 않으며 두 새 contour family, 12개 새 catalog를 대상으로 한다. 동일 hard-projected physics log odds·factual evidence를 공유하고 probe arm은 그대로 둔다. 학습·threshold·axis·epoch 갱신은 없다.
+
+Complete-policy Brier의 moment−full 및 moment−dropped를 12개 paired catalog에서 동시에 95% 보장하도록 Bonferroni t interval 두 개로 보고한다. 전자의 상한이 +0.002 미만이면 설계상 absolute Brier noninferiority, 후자의 상한이 0 미만이면 superiority다. +0.002는 후속 물리 의사결정 비용에서 유도되지 않은 설계자가 고른 수치다. Family, query-only는 기술용. 이 가설은 v46에서 낮은 차이를 관찰한 뒤 정했으며 원 locked 실험군의 모든 비교에 대한 multiplicity 보장은 없다. 모든 모델 SHA와 12개 forecast SHA 저장 후 independent agent에게 physical label 생성 허용을 통보한다.

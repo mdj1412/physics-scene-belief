@@ -1,0 +1,3 @@
+## Probability scale과 보정 신호의 원인 분해
+
+주 대조를 보완하기 위해 target 점수를 보기 전에 세 가지 CPU replay를 명세한다. (1) Source temperature는 logit 변환 직전 p를 [10⁻⁵, 1−10⁻⁵]로 자른다. 같은 T에서 0·1은 정확히 유지하고 나머지는 double precision 확률 그대로 쓰는 보조 대조를 둔다. Saturated 예측 비율도 기록한다. (2) T와 optimizer를 각각 단독 적용하는 주 비교에서 T가 이기더라도 T 뒤에 signed cue를 더하는 순차 방식의 결과는 별개다. 동결된 T와 βzw를 차례로 적용하고 T만 적용한 경우와 비교한다. (3) Predictor가 본 calibration에 관계없이 늘 같은 방향으로 움직이는 효과와 cue의 environment-specific 정보가 구분되는지 보기 위해 같은 panel·cell 안의 네 환경에서 correction 강도 βzw를 순환시킨 세 가지 비영 permutation의 평균 손실을 참조한다. 기대치를 정하는 무작위 배포 정책이 아닌 진단이다. 각 항목은 exploratory paired panel 대조이며 이 자료에서 정책을 재선택하지 않는다.

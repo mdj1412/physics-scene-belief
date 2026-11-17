@@ -1,0 +1,7 @@
+## 영상 경로와 source 학습
+
+같은 v45 camera의 세 pre-impact frame(96×32 grayscale)에서 v45 위치 추정기를 그대로 사용한다. 추가 scalar feature는 추정한 접촉 좌표 중심 ±2 mm 범위의 표면 방향 분산이다. 첫 frame의 air와 surface intensity를 추정하고, 회색 픽셀이 수직으로 연속되는 위치에서 coverage를 적분해 subpixel edge 높이를 얻는다. 두 fiducial로 매 영상의 배율을 보정한다. 0.5 mm 간격의 9개 높이에서 길이 1 mm인 7개 secant의 기울기를 구한 뒤 arctan한다. 표면 tangent와 normal 각도는 상수만큼 차이 나므로 7개 각도의 population variance가 동일하다. 단위는 rad²다. Analytic reference는 참 좌표에 같은 7개 secant를 적용해 계산한다.
+
+고정 v45는 estimated absolute x를 가장 가까운 여섯 source 위치에 할당해 30.5 및 31 mm에서 projection을 선택한다. 새 matched x-only와 x+variance는 v45 전체 catalog 12개와 2개 source family에서 공통 source-axis decoder의 paired Brier difference를 학습한다. Source 학습 target은 narrow·broad, 두 law와 surface, 4회 decoder noise를 같은 가중으로 평균했다. x-only는 여섯 x bin에서 평균 paired Brier difference가 음수이면 projection한다. Joint는 각 x bin 안에서 source variance quartile을 구해 4개 그룹으로 나누고, 그룹별 paired Brier difference에 75%, x 그룹 전체에 25%를 부여한다. 동률이면 original을 선택한다. 두 모델 모두 학습 후 geometry family, true offset, pressure area를 입력받지 않는다. 별도 oracle은 source에서 true x·analytic normal variance를 써서 같은 과정을 거쳐 학습하고, target에서도 해당 참값을 공급한다.
+
+Source internal validation은 leave-one-catalog-out 및 두 방향의 leave-one-family-out 방식으로 구간과 risk table까지 source training split 안에서 다시 구한다. 새 family의 label은 image estimation, 표준화, binning 및 fit 과정에서 사용하지 않는다. 동일한 원본 clip을 읽는 정책 세 개의 전체 GPU p90을 비교한다. 고정 위치, refit 위치, joint 정책의 차이를 구분한다. Shape별·within x별 Spearman correlation과 rad² 오차는 geometry reference 대비 measurement를 평가한다.

@@ -1,0 +1,7 @@
+# v54 평가 계획
+
+평가 자료는 v53과 같은 12 held-out catalog, 4 environment × 128 objects, 256 post-swap calibration prefix다. 네 번째 후보 측정의 potential outcome은 동일 물체·weak 관측을 공유한다. 각 deployment session의 예측은 구입한 쪽의 frozen continuous joint와 동일해야 한다. Gate는 새 표면 첫 세 쌍의 weak/reference만 읽는다. 평가자가 알고 있는 부호·충돌 정답·pre-swap κ·surface·error rate e·drift event·다른 후보의 손실은 gate에 전달하지 않는다. 교체 이전 paid 기록은 세 arm의 terminal decoder에만 공통으로 제공한다.
+
+주 endpoint는 conditional risk로 적분한 평균 Brier와 동일 binary deployment rollout의 session당 128-object 평균 Brier의 absolute marginal p90. 균등한 3 e × 4 g × 5 κ와 catalog mixture. Gate − fixed 4R, gate − fixed 3R+I 두 차이 × 두 endpoint에 Bonferroni familywise 95% interval. Mean은 12 paired catalog t interval, tail은 5000 paired catalog bootstrap. 낮은 값이 좋다. 두 fixed 모두 이기는지 endpoint별로 판정하고 네 CI 모두 0 미만이어야 동시 우위라고 한다.
+
+Secondary는 두 번째 deployment seed, ultra-resolution mean/p90, source error prior를 바꾼 동일 decoder, sign-only prefix gate, 무작위 구매 비율 대조, 48-session finite fleet와 e·κ별 차이다. 무작위 gate는 post3 부호와 독립인 seed에서 primary의 전체 구매 비율을 맞춘 운영점 대조이며 50:50 무작위도 제시한다. Prefix의 실제 참값(e,event,κ)을 알고 다른 catalog로 평균 risk를 추정한 oracle은 네 번째 관측 전에 고를 수 있는 비배포 진단이며, 모든 정책의 엄밀한 상한과 구별한다. 같은 원리로 3쌍의 판독 가능 횟수와 동의 횟수만 쓴 leave-one-catalog-out lookup을 탐색한다. 각 test prefix에서 두 네 번째 관측을 모두 획득하고 latent expected risk가 더 낮은 쪽을 고른 경우가 평균에 대한 hindsight 하한이다. 이는 p90 최적 oracle이 아니다. 같은 기존 support에 반복한 분석이며 신규 물질 모집단을 표집한 것이 아니다.

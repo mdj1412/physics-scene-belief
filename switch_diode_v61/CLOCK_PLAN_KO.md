@@ -1,0 +1,5 @@
+# v61 · 두 지연의 식별 및 차등 clock 오차 사전 검증
+
+1. 네 조건 중 (LED, trigger) = (0,0) 또는 (2,2) ms인 paired impact만 취한다. Camera에서 최초 발광한 frame의 **위치만** 보는 판별기의 empirical balanced accuracy를 평가한다. 두 조건에서 위치가 같으면 지연의 공통 이동은 이 한 관측으로 식별할 수 없다. Missing을 하나의 관측 bin으로 포함한 empirical total variation에 따른 최선의 histogram accuracy 0.5(1+TV)를 계산한다. 같은 impact들에서 switch–photodiode와 camera가 주는 두 지연 추정치로 두 축 모두 1 ms보다 늦으면 (2,2), 두 축 모두 이하면 (0,0), 불일치·결측이면 균등 무작위로 둘 중 하나를 예측한 기대 정확도를 계산한다. Complete-case와 전체를 별도 표시한다. 이 진단은 board ID, simulator label로 배포 정책을 학습하지 않는다.
+2. 저장된 timing fixture의 실제 두 analog trace에 +1 ms씩 공통 시프트하거나, switch 단독, photodiode 단독으로 각각 +1 ms를 주입한다. 새로 드러난 앞 구간에는 각 채널의 시작 표본을 반복하며 wrap-around를 금한다. Optical pixel·실제 변형은 고정한다. 4개의 timing cell에서 valid 비중, 판독된 active pair의 mismatch 오류율, 원래 dual-reader와 행동이 바뀐 경우를 계산한다. 물리적으로 다른 경로가 같은 방향으로 지연되면 두 edge 차이가 유지되지만, 차등 지연은 상대 time origin을 바꾼다고 예측한다. Raw fixture는 catalog당 제한된 pilot이므로 보조 진단으로 쓰고 primary loss 평가는 전체 pilot으로 진행한다.
+3. 분석 및 그림과 primary·문헌 심사를 종합한다. 실험 단위는 새 synthetic board와 catalog다. 한 pilot의 counterfactual을 독립적인 여러 실제 충돌로 합산하지 않는다.

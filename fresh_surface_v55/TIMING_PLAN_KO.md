@@ -1,0 +1,7 @@
+# v55 GPU 측정 계획
+
+새 catalog 24개 전체에서 4개 environment에 대해 각각 1개의 새 calibration prefix와 128개 deployment 물체를 뽑는다. 이 96개 session은 Brier 평가 모집단을 대표하도록 후처리로 고르지 않는다. Named seed와 catalog index로 pre-retention, drift event, sensor mismatch와 prefix index를 정한다. 각 catalog의 네 session을 512개 물체의 한 batch로 묶어, 미래 outcome과 독립적인 6개 순열로 3개 정책을 교차 측정한다. Catalog·정책마다 첫 1회는 warmup으로 제외하고 각 정책 144개 실측 latency를 남긴다. 두 비교는 gate−fixed 3R+I와 gate−random이다. 비교마다 동일한 catalog를 함께 resampling한 16,000회 bootstrap 및 2개 대조를 위한 Bonferroni simultaneous 95% interval을 사용한다.
+
+Frozen v54 source-risk gate는 교체 후 이미 지불한 weak/reference 세 쌍만 받는다. Fixed 3R+I는 항상 네 번째 impact를 구입한다. Random은 모든 fixture의 gate route에서 impact 총수만 가져온다. 다음으로 독립 난수의 순위를 사용해 96개 session 중 정확히 같은 개수에 impact를 준다. 같은 quota의 새 독립 무작위 배정을 6회 준비한다. Timed call에서도 session 배정용 난수를 생성하고, 정해진 순위 경계와 비교한다. 미래 두 판독값, calibration의 실제 방향 유지율, 각 session의 gate route, deployment outcome은 random의 개별 배정에 들어가지 않는다. Population Brier 평가의 random은 population 구매율에 맞춘다.
+
+Online timing에는 판독 완료된 세 쌍을 받아 네 번째 센서를 고르는 연산, 산 판독값으로 nominal continuous joint를 갱신하는 연산, 512개 새 물체의 paid measurement에 대한 GPU physics decoder와 최종 forecast를 포함한다. Simulator가 sensor readout과 target label을 생성하는 시간, 실제 기계동작·camera exposure·reset은 별도다. 매 timed call 전후 CUDA를 동기화하고 GPU의 다른 PID를 감시한다. Session당 교체 후 8 contacts와 8 resets를 세고, 모델링한 소요 시간은 impact부터 reset까지의 T초에 대해 표시한다. 이 계획은 v55 timing과 Brier 결과를 읽기 전에 기록했다.

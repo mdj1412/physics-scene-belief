@@ -1,0 +1,13 @@
+{
+  "selection": [
+    1.0,
+    0.0
+  ],
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition, GPU-f211384e-b912-0665-40db-63f426b97d79, 0, 0",
+  "node": "node56",
+  "job": "2744471",
+  "step": "324",
+  "torch": "2.7.1+cu128",
+  "script_sha256": "4d79a60d9ff09568a44efe0978be40bd1f9564961d15c267e56bd9ff3da9da18",
+  "design_sha256": "e4abf92de13db0e350973c42b436e126582b2644105bc7614bcebaa3198edcd9"
+}

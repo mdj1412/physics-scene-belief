@@ -1,8 +1,10 @@
 # Physics Scene Belief
 
-관측과 접촉 실험으로 새로운 물체의 충돌 결과를 예측하는 연구다. 최신 v40에서는 같은 local tangent를 가진 contour와 두 unseen contact law에서 v38 optimizer와 고정 32.5% shrinkage의 held-out Brier loss 및 GPU p90을 비교했다. [v40 보고서](tangent_transfer_v40/REPORT_KO.md) · [실행 전 예측표](tangent_transfer_v40/PREDICTIONS_KO.md) · [재현 방법](tangent_transfer_v40/REPRODUCE_KO.md)
+관측과 접촉 실험으로 새로운 물체의 충돌 결과를 예측하는 연구다. v40에서는 같은 local tangent를 가진 contour와 두 unseen contact law에서 v38 optimizer와 고정 32.5% shrinkage의 held-out Brier loss 및 GPU p90을 비교했다. [v40 보고서](tangent_transfer_v40/REPORT_KO.md) · [실행 전 예측표](tangent_transfer_v40/PREDICTIONS_KO.md) · [재현 방법](tangent_transfer_v40/REPRODUCE_KO.md)
 
-Git에는 연구 코드, 보고서, v40의 사전 예측·집계 통계와 동결한 보정 모델을 보관한다. 개별 시행의 원자료는 실험 서버의 각 버전 폴더에 있다. v40 원자료 구조와 생성 명령은 [재현 방법](tangent_transfer_v40/REPRODUCE_KO.md)에 정리했다.
+v74에서는 빠른 anti-spin 충돌에서 elastic impulse가 이탈 방향을 잘못 예측하는 이유와 4회·8회 calibration의 효과를 분석했다. [v74 보고서](racket_release_v74/REPORT_KO.md) · [원인 분해](racket_release_v74/mechanism/MECHANISM_KO.md) · [v73 비교 실험](racket_video_v73/REPORT_KO.md)
+
+Git에는 v74까지의 연구 코드와 보고서, 선별한 집계 결과와 재현 자료를 보관한다. 개별 시행의 원자료는 실험 서버의 각 버전 폴더에 있다. v40 원자료 구조와 생성 명령은 [재현 방법](tangent_transfer_v40/REPRODUCE_KO.md)에 정리했다.
 
 ## 첫 번째 PyBullet 실험
 

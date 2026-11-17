@@ -1,0 +1,5 @@
+# v58 GPU timing 사전 계획
+
+Forecast worker 종료 확인 후 0 MiB·0%·compute PID 없음으로 재검사된 node55 allocation 2744468의 단일 GPU에서 fresh surface 24 catalog × 512 deployment object를 계산한다. 두 probe 설계는 같은 여덟 물체에 독립 sensor 두 쌍의 reference/impact를 동시에 읽고, 입력은 네 개의 signed channel 값이다. Node56에서 시작하려던 최초 timing 실행은 자동 review에서 점유 위험을 지적해 launch가 이루어지지 않았다. 이미 이 실험의 forecast를 계산하고 완전히 반환된 node55 GPU를 사용한다. 실제 sensor readout 획득과 reset은 별도로 계산한다. Memory에 준비된 raw sign에서 encode, route, 선택된 v54 acquisition, frozen joint terminal 및 실제 GPU prediction까지 한 host call로 측정하고 양 끝에서 synchronize한다. 상수 정책은 pilot parsing을 생략한다. 동일 paired terminal output을 검산한다.
+
+정책 여섯 개는 dual4_map, dual8_map, dual4_risk, single4_naive, gate, fixed이다. Catalog마다 1 warmup/정책 후 3 measured/정책, 인접한 두 catalog에 6개 Williams crossover order를 나눠 실행한다. 24개의 catalog에서 순서·preceding effect는 모든 정책에 대해 균형이다. 72개 GPU wall clock sample/정책과 512-object batch 지연시간의 p90을 보고한다. 16,000회 paired catalog bootstrap, primary dual4_map−dual8_map의 pointwise 95% CI 및 다른 네 정책 포함 다섯 비교의 Bonferroni 동시 95% CI를 병기한다. Rare branch route는 실제 표본에 나타난 횟수를 보고한다. Pilot 생성·파일 읽기·physics label solver는 online 지연시간에서 제외한다.

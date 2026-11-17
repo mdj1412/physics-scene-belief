@@ -1,0 +1,3 @@
+# 전체 해상도 민감도 분석
+
+17 support와 절반의 time step으로 과거 결과의 이산화 민감도를 검증한다. 9 support에서 같은 물체가 받은 calibration/factual/probe뿐 아니라 17 support에서 만들어진 모든 동일 측정으로 v68 predictor를 다시 실행한다. Source fit, acquisition, 네 calibration pair, shared noise, 12 catalog와 source seed 네 개를 유지한다. 처음 32 prototype의 일부 terminal fine endpoint와 원래 v68 결과를 본 뒤 추가한 수치 민감도다. Fine history와 전체 fine terminal label 조합의 Brier를 보기 전에 full forecast를 봉인하고, fine 이력 생성 과정에서 target label을 읽지 않는다. 두 resolution 각각의 tape × terminal label 전체 교차, 같은 여섯 primary contrasts와 해상도 간 paired difference, 절대 loss, seed별 반복, unresolved worst-case bounds를 보고한다. 해상도에 따라 판정이 달라지면 수치적으로 안정한 결론으로 취급하지 않는다.

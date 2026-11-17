@@ -1,0 +1,5 @@
+# Preston optical audit criteria
+
+각 Image Ref에서 최초 continuous motion만 사용하고, 정지·반복 재생을 제외한다. Side spin은 2D 추정 가정이 달라 제외한다. Anti Spin은 좌상단 panel이다. 위·아래·가장자리·blade로부터 떨어진 foreground 중심을 쓰고, impact 앞뒤에 각각 단조로운 free-flight 구간을 잡는다. 각 구간은 9 frame 이상, foreground contrast 25/255 이상, linear trajectory residual RMS 2.0 px 이하, tilt 및 추적 오차 sensitivity를 공개한다. 근접한 frame의 angular texture를 등록할 때 안정적인 중앙부와 바깥쪽 annulus를 쓰며 multi-lag peak correlation 0.45 이상, 두 annulus 간 추정 angular speed 차이 0.10 rad/frame 이하를 기본 판독 기준으로 한다. Ball radius는 ring contrast의 바깥쪽 경계에서 판독하고 짧은·긴 radius sensitivity를 병기한다. Downward tangential velocity가 양수이고, 접촉 쪽 rim을 위로 움직이는 counterclockwise rotation이 양수다. 따라서 sign(v_t−Rω)는 유효한 pixel/frame scale에서 판별된다. Apparent video cadence와 shooting rate가 달라 절대 SI는 원 영상의 time scale이 확인될 때만 사용한다.
+
+규칙을 실제 영상의 고유 planar impact 24개에 적용한 결과 10개가 남았다. 이 기준은 v72에서 정한 탐색적 quality filter다. 원시 영상은 640×480, final playback 30000/1001 fps이고 absolute shooting rate는 미확인이다. 별도 sensitivity에서 outgoing contact velocity 부호가 모든 perturbation에서 유지된 것은 #1과 #17이었다. [전체 선별 장부](all_tracks.csv) · [최종 입력](anti_eligible.csv) · [재현 절차와 검토](README_KO.md) · [원 영상 SHA-256](source.json)

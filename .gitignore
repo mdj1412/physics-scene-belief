@@ -28,3 +28,12 @@
 .venv-*/
 __pycache__/
 vendor/
+
+# Published v74 summaries and figures referenced by the report.
+!racket_release_v74/**/*.json
+!racket_release_v74/model/source_validation.csv
+!racket_release_v74/model/result/*/metrics.csv
+!racket_release_v74/mechanism/fast_response.png
+!racket_release_v74/mechanism/fast_impacts.csv
+!racket_video_v73/gpu/control/metrics.csv
+!racket_transfer_v70/data/upstream/LICENSE

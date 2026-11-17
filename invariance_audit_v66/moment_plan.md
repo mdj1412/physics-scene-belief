@@ -1,0 +1,7 @@
+# v66 · 저차 geometry readout 보조 실험
+
+범위는 기존 v45 source와 v46 archive의 새로운 retrospective 분석이다. 참 inertia, solver state, pressure, 실제 contact point와 law/family 이름을 주지 않는다. 새 locked holdout의 label과 forecast는 이 실험에 사용하지 않는다. Source에서 유용한 rank-one 축을 지우면 손해가 난다는 관찰을 알고 정한 대조이며 새 family의 독립 재현이 아니다.
+
+같은 seven-point paid range profile(2 mm 간격)에 q_j=b0+b1 x_j+½ b2 x_j²+ε_j를 ordinary least squares로 적합한다. x는 nominal site로부터 −6…+6 mm, q는 mm다. b0는 fitted center ordinate, b1은 국소 slope, b2는 profile second derivative(1/mm)다. b2는 정확한 기하학적 curvature 또는 pressure를 측정하지 않는다. 세 계수에 상수 0 네 개를 붙인다. 모든 조건에 같은 11개 factual channel, nominal height, hard-projected physics log odds를 준다. 압축되는 입력은 추가적인 geometry branch이며 공유 physics prediction에는 원래의 projected profile이 이미 반영되어 있다. Probe arm은 기존 forecast를 유지한다.
+
+Primary contrasts는 moment−full, moment−dropped의 complete-policy held-out Brier. 12개 v46 target catalog를 독립 단위로 하는 Bonferroni simultaneous 95% paired t interval, source seed별 loss 평균. Source에서 유용한 저차 성분이 보존되면 moment가 dropped보다 낮을 것으로 예상한다. Full 대비 방향과 실용적 equivalence margin은 미지정이다. 각 family·query-only는 기술용이다. V66 exp_readout과 같은 v45 source panel 0–7 fit/8–11 epoch 선택, seeds 66101–3, 64-unit SiLU head, AdamW, batch 4096, epochs 4/8/16 선택. 동일 CPU PRNG 및 optimizer 환경에서 full/dropped/moment 세 조건을 모두 재학습한다. 과거 GPU 결과와는 구현 차이에 대한 민감도만 비교한다. Target probability file hash를 먼저 봉인한 후 score한다. Fazeli et al.의 물리적 feature 설계에서 동기를 얻었으며 GP·contact inertia·impulse 모델을 재현하는 대조는 아니다.

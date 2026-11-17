@@ -1,0 +1,7 @@
+# v61 · 독립 sensor board에서의 raw pixel·waveform-to-GPU latency
+
+24개 fresh catalog에서 각 2개 surface, 512개 deployment object에 실제 paid readout을 적용한다. 8개 holdout board는 catalog별 첫 타이밍 episode를 catalog index modulo 8로 정해 각각 3개 catalog에 넣는다. Loss와 같이 P/C, target A/B, C에서 fault high/low를 균등 배정한다. LED 지연 0/2 ms × camera trigger 지연 0/2 ms의 4개 조건마다 24개 catalog 전부를 평가한다. 각 catalog에 두 surface가 있고 네 timing cell을 모두 방문한다. 재사용하는 물체·센서 noise에 맞추어 조건을 짝짓는다. 같은 surface의 electronics는 reset vs sham에서 둘째 물체 전 조치만 바꾼다.
+
+6개 arm은 (1) switch + photodiode 보정 reset, (2) 동일 보정 sham, (3) 상시 v54 gate, (4·5) 보정을 LED-only로 바꾼 reset/sham, (6) nominal window를 쓰는 reset이다. 모든 outer policy는 source의 loss-weighted rule을 유지한다. 한 호출의 입력은 두 표면의 32개 8-frame uint8 clips, 32×2개 raw timing waveform, 같은 예산의 전자센서 부호와 deployment 센서다. 사람에게 기계를 넘기는 시간·촬영 대기·디스크 I/O를 제외하고 동기화 표식 검출, timing waveform 판독, sign estimation, outer routing, 필요하면 네 번째 v54 관측 결정, terminal mixture 선택과 GPU prediction을 모두 host elapsed time으로 잰다. 상시 v54 gate는 pilot을 동일 물리 예산으로 받지만 사용하지 않는 waveform이나 영상을 online에서 읽지 않는다.
+
+Catalog마다 6개 warmup을 하고, 24×4 paired complete blocks = 96 measured 호출/arm을 실행한다. 3개 catalog 단위의 randomized Williams order로 상대 실행 위치·직전 정책을 균형화한다. 24개 fresh catalog paired bootstrap 16,000회로 primary two 대비 동시 95% CI를 산출한다. Board·cell별 p90은 기술통계로 남긴다. 코드는 device/board/cell truth를 selector에 주지 않는다. 사후 audit에서만 pilot archive의 동일 episode code를 검산하고 terminal forecast를 독립 저장값과 비교한다. 첫 timing 전에 코드를 동결한다.

@@ -1,0 +1,66 @@
+# v67 · 같은 contour에서 terminal contact law와 source projection axis를 바꾸면 무엇이 재현되는가?
+
+[사전 설계](PLAN_KO.md) · [Catalog별 원자료](score.json) · [기존 axis 대조](reference_axis.json) · [GPU prediction seal](forecast_seal.json) · [문헌과 후속 질문](LITERATURE_KO.md)
+
+## 1. 실험 단위와 판정
+
+v66의 Wendland·Dispersive 형상, 12개 catalog와 6,144번의 prototype draw(서로 다른 5,945 prototype), 두 surface, 두 접촉 높이, 세 contour variant, 두 양의 pressure radius와 세 contact offset을 그대로 썼다. 각 조건에서 기존 두 acquisition law로 수집된 데이터를 동일 빈도로 재생하고, 각 tape에 네 terminal contact law를 전부 적용했다. Factual/paid evidence, camera route, sensing budget과 noise replay가 고정돼 한 tape의 prediction은 terminal law와 무관하다. Deployment의 법칙 전체를 바꾸면 factual tape도 변할 수 있다. 본 실험이 식별하는 것은 마지막 impact에 한정한 one-step material intervention이다.
+
+새 law는 같은 rational material의 surface·directional multiplier를 유지하고 static rate factor만 1 ± 0.22 tanh((|vₜ|−0.40)/0.19)로 교체했다. 두 곡선은 0.40 m/s에서 만나며 기울기가 반대다. 탄성, pressure trajectory, 계산 solver, stick criterion(terminal residual ≤0.020 m/s)이 같다. 이 두 곡선과 0.002 Brier의 실용 기준은 연구 설계에서 정했다. 두 곡선은 실측 friction curve가 아니다.
+
+Source-only axis는 각 seed에서 fold와 ripple 64쌍씩, 높이별 128쌍을 따로 생성해 normalized profile difference의 first principal component로 fit했다. Hollow와 bulge에 독립 측정 noise를 주었고, 공통 noise control도 재추정했다. 네 axis마다 원래 v66과 같은 head architecture와 학습·validation catalog, initialization seed 66101을 사용하여 dropped/restored 두 head를 새로 fit했다. 따라서 4개 seed가 바뀌는 대상은 source calibration이다. 평가 Brier에는 query를 사지 않은 경우의 공통 probe fallback도 포함한다. Location-routed likelihood에 α=0.75를 적용한 대조와 학습한 readout 대조는 별도 모델이다.
+
+12개 paired catalog에서 seed를 먼저 평균했다. 아래 6개 primary 비교에는 Bonferroni 동시 95% interval을 적용했다. 독립 단위는 12개 catalog이며 4개 source seed, 3개 offset, noise replay를 별도 독립 표본으로 세지 않았다.
+
+## 2. Held-out Brier loss와 primary 비교
+
+| Terminal law | Family | Full likelihood | Soft α=.75 | Hard | Dropped readout | Restored readout |
+|---|---|---:|---:|---:|---:|---:|
+| rational | wendland | 0.181800 | 0.178021 | 0.177357 | 0.170676 | 0.163874 |
+| rational | dispersive | 0.147737 | 0.155053 | 0.157244 | 0.142445 | 0.112941 |
+| gaussian_rate | wendland | 0.184824 | 0.181045 | 0.180382 | 0.173275 | 0.166677 |
+| gaussian_rate | dispersive | 0.150555 | 0.157847 | 0.160033 | 0.144317 | 0.116147 |
+| strengthening | wendland | 0.202432 | 0.198936 | 0.198335 | 0.189623 | 0.184733 |
+| strengthening | dispersive | 0.180131 | 0.186850 | 0.188901 | 0.167729 | 0.148525 |
+| weakening | wendland | 0.164483 | 0.160719 | 0.160052 | 0.155520 | 0.147858 |
+| weakening | dispersive | 0.126922 | 0.134294 | 0.136497 | 0.125145 | 0.090069 |
+
+| 새 terminal law | Wendland soft − full | Dispersive soft − full | 두 family 평균 restored − dropped |
+|---|---:|---:|---:|
+| strengthening | -0.003496 [-0.003887, -0.003105] | +0.006720 [+0.006003, +0.007437] | -0.012047 [-0.013587, -0.010506] |
+| weakening | -0.003764 [-0.004151, -0.003377] | +0.007372 [+0.006752, +0.007993] | -0.021369 [-0.022960, -0.019778] |
+
+## 3. Seed별 재현 및 axis 수집 방식
+
+| Source seed | 19/31 mm 기존 axis와의 절대 cosine | Strengthening W / D soft − full | Weakening W / D soft − full | Strengthening / weakening pooled restored − dropped |
+|---|---:|---:|---:|---:|
+| 670101 | 0.928 / 0.801 | -0.003962 / +0.005600 | -0.004293 / +0.006163 | -0.015779 / -0.025193 |
+| 670102 | 0.887 / 0.882 | -0.003546 / +0.010291 | -0.003805 / +0.011249 | -0.018934 / -0.028572 |
+| 670103 | 0.868 / 0.847 | -0.003295 / +0.007630 | -0.003527 / +0.008351 | -0.007685 / -0.017057 |
+| 670104 | 0.870 / 0.761 | -0.003181 / +0.003357 | -0.003432 / +0.003727 | -0.005789 / -0.014655 |
+
+동일한 source object에 공통 noise를 씌우면 noise가 소거된다. 높이별로 과거 axis와의 |cosine|은 모든 seed에서 반올림 오차 이내로 1이었다. 독립 noise 수집의 축은 기존 축과 체계적으로 달라질 수 있다. 아래는 동일한 tape와 label에 과거 axis 및 같은 head initialization 66101만 적용한 추가 대조다.
+
+| Law | 과거 axis Wendland soft − full | 과거 axis Dispersive soft − full | 과거 axis 평균 restored − dropped |
+|---|---:|---:|---:|
+| rational | -0.000486 | +0.019945 | -0.045293 |
+| gaussian_rate | -0.000495 | +0.019885 | -0.044657 |
+| strengthening | -0.000496 | +0.018467 | -0.037742 |
+| weakening | -0.000444 | +0.020059 | -0.046660 |
+
+## 4. 실제 label 변경과 계산 검산
+
+| Family | Strengthening↔weakening law만 교체한 stick/slip 전환율 | Strengthening에서 hollow↔bulge 전환율 | Weakening에서 hollow↔bulge 전환율 |
+|---|---:|---:|---:|
+| wendland | 9.27% [8.94, 9.61] | 30.34% [29.51, 31.17] | 34.73% [33.93, 35.54] |
+| dispersive | 10.94% [10.42, 11.46] | 8.04% [7.66, 8.41] | 6.48% [6.11, 6.84] |
+
+이 표의 interval은 pointwise 95%다. 고정된 prediction에서 두 law의 soft−full Brier 차이는 −2 E[(p_soft−p_full)(y_strength−y_weak)]와 같다. Catalog·family·seed 전체 최대 검산 오차는 9.35e-17였다. Fine quadrature로 첫 catalog의 양의 radius 결과 147,456개를 다시 계산했을 때 label 일치율은 99.99525%였고 최대 residual speed 차이는 0.000699 m/s였다.
+
+12개 forecast shard와 8개 source head를 새 label 생성 전에 고정했다. GPU는 datacenter3의 Slurm 2744471에 할당된 NVIDIA RTX PRO 6000이며 시작 시 0 MiB 및 0%였다. [Axis 벡터](axes.json) · [학습 및 checkpoint hash](fit.json) · [예측 코드](forecast67.py) · [채점 코드](score67.py) · [동일 axis 대조](reference67.py) · [결과 checksum](result.sha256)
+
+## 5. 연구 주장에 주는 의미
+
+같은 Wendland·Dispersive와 같은 유료 관측에서 새 두 terminal law 모두 네 번의 axis 재추정 뒤에도 soft suppression의 손익 방향이 갈렸다. 좌표를 복원한 head는 두 law의 모든 seed에서 평균 손실을 낮췄고, pooled interval은 사전 지정한 최소 0.002 개선을 넘었다. 그 크기는 axis를 어떻게 측정하느냐에 민감했다. 예컨대 strengthening에서 과거 axis의 Dispersive 손해는 0.018467이었지만, 독립 noise source refit의 평균은 0.006720이었다. 물리 label이 바뀌는 world가 많다는 사실만으로 projection 정책 간 Brier 차이를 예측하기 어려운 이유는 그 world에 실제로 두 예측기의 확률차가 있어야 하기 때문이다.
+
+두 새 law는 touchdown 속도에 따른 coefficient 변화의 기울기를 서로 반대로 설계했다. 독립적으로 측정한 마찰 곡선, contact solver 교체, 전체 이력을 바꾸는 intervention, 독립 실물에서의 재현은 남아 있다. 또한 source head 초기값 하나를 고정했으므로 source axis × head initialization의 분산까지 추정할 수는 없다. 이번 결과는 두 형상과 이 simulator에서 조건부 확률 차이의 방향과 범위를 정량화한다.

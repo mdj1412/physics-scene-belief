@@ -1,0 +1,19 @@
+{
+  "frozen_sha256": "a45ba8088808efd21e35411ddf533d3917a705659fce10bcc0d5458e1a320fa4",
+  "exact_v73": {
+    "elastic_k4": 0.0,
+    "majority_k4": 0.0,
+    "single_affine_eb_k4": 0.0,
+    "elastic_k8": 0.0,
+    "majority_k8": 0.0,
+    "single_affine_eb_k8": 0.0
+  },
+  "fast_cut_mps": 8.079025256745311,
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition, GPU-f211384e-b912-0665-40db-63f426b97d79, 0, 0",
+  "node": "node56",
+  "job": "2744471",
+  "step": "325",
+  "torch": "2.7.1+cu128",
+  "script_sha256": "4d79a60d9ff09568a44efe0978be40bd1f9564961d15c267e56bd9ff3da9da18",
+  "design_sha256": "e4abf92de13db0e350973c42b436e126582b2644105bc7614bcebaa3198edcd9"
+}

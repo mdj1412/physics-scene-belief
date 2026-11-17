@@ -1,0 +1,77 @@
+{
+  "groups": {
+    "v73_absolute_k4": {
+      "all": {
+        "n": 158,
+        "resolved": 106,
+        "accuracy": 0.5198260613207547,
+        "velocity": 0.6160104755320884,
+        "spin": 32.670658518283
+      },
+      "fast": {
+        "n": 37,
+        "resolved": 22,
+        "accuracy": 0.375,
+        "velocity": 0.441111916906417,
+        "spin": 21.145589435797277
+      }
+    },
+    "v73_absolute_k8": {
+      "all": {
+        "n": 158,
+        "resolved": 106,
+        "accuracy": 0.5947449882075472,
+        "velocity": 0.4728893540047728,
+        "spin": 24.721421947548098
+      },
+      "fast": {
+        "n": 37,
+        "resolved": 22,
+        "accuracy": 0.3517400568181818,
+        "velocity": 0.3776244915466993,
+        "spin": 17.76494919524851
+      }
+    },
+    "speed_ratio_k4": {
+      "all": {
+        "n": 158,
+        "resolved": 106,
+        "accuracy": 0.5495283018867925,
+        "velocity": 0.565308391611212,
+        "spin": 29.15198938250274
+      },
+      "fast": {
+        "n": 37,
+        "resolved": 22,
+        "accuracy": 0.40589488636363635,
+        "velocity": 0.4140335739430961,
+        "spin": 18.606192041438277
+      }
+    },
+    "speed_ratio_k8": {
+      "all": {
+        "n": 158,
+        "resolved": 106,
+        "accuracy": 0.6425044221698113,
+        "velocity": 0.4072986123902755,
+        "spin": 19.978998050564478
+      },
+      "fast": {
+        "n": 37,
+        "resolved": 22,
+        "accuracy": 0.49058948863636365,
+        "velocity": 0.3422862495567924,
+        "spin": 13.804912642859922
+      }
+    }
+  },
+  "checks": {
+    "v73_absolute_k4": 1.9539925233402755e-14,
+    "v73_absolute_k8": 1.9539925233402755e-14
+  },
+  "host": "node56",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition, GPU-f211384e-b912-0665-40db-63f426b97d79, 0, 0",
+  "torch": "2.7.1+cu128",
+  "job": "2744471",
+  "step": "326"
+}

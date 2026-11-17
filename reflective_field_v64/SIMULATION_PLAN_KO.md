@@ -1,0 +1,9 @@
+# v64 보조 simulation의 사전 명세
+
+실물에서 추정할 effect와 별도로, 조명에 따라 같은 물체의 ghost 강도만 변하는 counterfactual을 만든다. 동일한 2.0 N reference 8회, impact 8회, mechanical reset 16회, reset selector는 전자 reset 4회를 사용한다. 각 arm은 전체 8회에 −30° 또는 +30°의 조명 한 방향을 사전 배정받는다. 두 방향 결과를 비교할 때 같은 물체·timebase·전자센서·noise·strain을 재사용한다. 두 방향 중 좋은 쪽을 target으로 고르거나 두 영상을 결합하지 않는다. 네 조건은 조명 두 방향과 Gaussian specular lobe 폭 8°·26°의 교차다. Surface별 평균 facet tilt를 −18°에서 +18° 사이에 뽑고 impact마다 표준편차 9°를 더한다. 두 조명이 같은 facet과 ghost opportunity(35%)를 공유한다. 그중 실제 ghost blend는 0.96 × exp[−(facet tilt − 조명 half-angle)²/(2 × 폭²)]다. 15% 확률의 한 frame 3-pixel tracking error를 독립적으로 양쪽에 공통 배치한다. 정상 marker, 타이밍과 전자센서는 같다. 이 수치는 실물 빈도·BRDF fit에서 유도하지 않았다.
+
+24 catalog × 2 surfaces × 256 새 calibration pilot에서 v63 frozen reader, same-count random, 상시 v54 gate를 평가한다. Deployment는 이전 v63의 12,288 held-out 물체와 frozen potential losses를 고정해 illumination만 바꾼다. 새 외부 holdout이라고 해석하지 않는다. 같은 수의 무작위 보류는 각 pilot의 k에 맞게 가능한 모든 subset의 realized action loss를 적분한다. 어느 lamp로도 촬영 가능하다는 가정 아래 사전 가중치는 네 조건 각각 1/4이다. Primary simulation contrasts는 confidence − random, confidence − v54 gate이고, 24 catalog × 8 board paired bootstrap으로 두 비교를 보정한다. 단일 lamp의 Brier도 모두 보고한다.
+
+Lamp를 바꾸어 confidence가 추천한 상위 policy가 바뀐 비율과 이후 네 번째 probe의 실제 구매가 달라진 비율을 따로 보고한다. 후자는 같은 deployment 세션에 두 선택을 적용하며 fixed 3R+I 대 gate가 갈리고 그 세션의 v54가 R을 골라야 달라진다. P/C와 장치 fault의 관계는 v63 primary처럼 C의 hazard와 target regime을 독립시킨다. Simulated strain은 정확한 label로 사용하지 않고 검증 범위와 음성/양성 오류를 별도 검사한다. Coherent marker 오인식의 operational endpoint는 강한 ghost(alpha>0.5)가 생기고 transient가 없으며 원래 reader가 적격 쌍을 판독했으나 binary mismatch가 틀린 사건이다. 8 impacted objects 중 active/accepted 별 분모를 구분한다.
+
+GPU benchmark는 세 정책, 같은 fixture, 24 catalog × 4조건의 96 paired block에 각 512개 물체로 제한한다. Raw frames에서 시작해 waveform 판독, confidence 또는 exact-k 단일 lottery, 선택과 common GPU forecast까지 동기화한 시간을 잰다. 3가지 방법의 순서와 위치를 균형 배치하고 두 p90 차이를 보정한다. 실제 장비의 촬영·전송시간이 포함되지 않는다.

@@ -1,0 +1,9 @@
+# v72 fixed-budget protocol
+
+외부 target은 v71의 여섯 제품에 속하지 않는 long-pips 또는 anti-spin rubber로 한정한다. 단위·축·radius를 일치시킬 수 있는 실측 planar incident/outgoing velocity와 signed spin이 impact 단위에서 연결돼야 한다. 외부 target의 configuration, 시편·날짜·session이 있는 경우 group-disjoint calibration/test를 먼저 고정한다. 공개 원자료가 없으면 external 결과를 비워 두고, v71 여섯 leave-one-product-out fold는 retrospective diagnostic으로 구분한다.
+
+1. K=4, 8. 모든 방법이 같은 prefix를 구매하며 impact를 한 draw 안에서 재사용하지 않는다. 256개 draw는 같은 calibration pool의 반복 표집이다. v71의 32개 순열에서 4/8번째 prefix를 그대로 사용한다. 독립 external에서는 calibration pool 크기 8 이상을 요구하며 256개 8개 순열과 seed 720072를 쓴다. 기존 여섯 제품 모두의 공식 train을 source로 사용한다.
+2. Majority와 continuous-loss gate는 두 frozen expert와 동일한 source logistic routing을 공유한다. 전자는 구매한 부호와 불일치가 절반을 초과하면 routing을 뒤집는다. 후자는 각 routing이 calibration에서 내는 mean planar velocity error + 0.020 m × spin MAE를 계산해서 작은 쪽을 고른다. 이 두 항은 m/s이며 가중치는 ball radius로 미리 고정한다. 동률은 original에 둔다. Target에서 expert coefficient를 갱신하지 않는다.
+3. Single affine EB는 v71에서 모든 source-only inner fold가 선택한 precision multiplier 0.1로 고정한다. Elastic impulse는 v71의 같은 네 계수, 동일한 covariance floors와 clip을 사용한다. External에서 target calibration 이외의 결과를 이용해 prior나 gate의 threshold를 조정하지 않는다.
+4. 제품별 release 감지와 impact별 이탈 예측을 구별한다. Source logistic route와 held label이 절반 초과 불일치하면 해당 제품을 flipped로 사후 진단한다. 정확히 동률이면 ambiguous이며 orientation accuracy 분모에서 제외한다. 두 gate의 flip 빈도, held truth에 대한 selected route sign accuracy, 모든 방법의 최종 연속 출력에서 계산한 release sign accuracy, 실제 velocity·spin MAE를 기록한다. Continuous model에는 explicit deployment flip이 없다.
+5. Held velocity는 각 impact의 XZ vector error 평균(m/s), held spin은 Y-axis absolute error 평균(rad/s). Retrospective target test는 v70·v71에서 이미 조사하였다. Product-macro와 paired calibration draw의 변동을 제시하고 이를 신규 시편의 confidence interval로 해석하지 않는다. Continuous gate가 held composite loss가 작은 routing을 고른 빈도도 평가자 진단으로 기록한다.

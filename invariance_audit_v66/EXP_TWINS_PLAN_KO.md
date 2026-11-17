@@ -1,0 +1,5 @@
+# 완전히 겹치는 projected twins의 conditional Brier floor
+
+V47의 원래 0.1/0.9 optical alignment와 별도로, frozen axis에 완전히 평행한 ±1.20 mm의 새 optical perturbation을 같은 paid-query midpoint에 가한다. V47 기존 pressure solver는 optical axis를 입력으로 받지 않으므로 같은 hollow/bulge outcome을 재사용한다. 이 benchmark는 이미 공개됐으며 독립 confirmatory holdout은 아니다.
+
+같은 catalog·object·family·height·coupling·radius·offset과 sensor noise를 pair의 context로 고정하고 두 variant를 균등하게 둔다. Projected coordinate는 두 variant에 동일한 하나의 배열로 생성한다. Software 부동소수점 찌꺼기가 variant ID를 인코딩하지 않도록 계산한 두 projection과 canonical shared coordinate의 최대 차이를 검산한다. 주 평가 단위는 사전에 query를 구매한 object pair이고 반복 노이즈는 별개 물리 case로 세지 않는다. Inert/strong별 variant-label disagreement와 0.25×disagreement를 같은 가중치로 12 catalog에서 집계한다. Pair identity를 알려준 privileged empirical decision problem에서는 projected predictor의 최소 loss가 이 floor이며, full signed coordinate의 두 값이 분리돼 각 member의 deterministic label을 lookup할 때 최소는 0이다. Pair identity를 숨긴 운영 상황에서 projected predictor의 absolute risk 하한은 여전히 성립하지만 두 실제 시스템 Brier gap의 하한은 아니다.
